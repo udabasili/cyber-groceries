@@ -1,4 +1,3 @@
-const Models = require('../models')
 const { db } = require('../loaders/firebase')
 const productsRef = db.ref('/products')
 class Product {

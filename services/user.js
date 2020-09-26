@@ -1,12 +1,8 @@
-const { User, UserModel } = require("../models");
 const loggerFunction = require("../loaders/logger");
 const generateToken = require('../loaders/token');
 const { db, auth, adminControl } = require("../loaders/firebase");
 const userRef = db.ref('/users')
-const bcrypt = require('bcrypt');
-const { AdminService } = require(".");
 const { setUserChartData } = require("./admin");
-// const { database } = require("firebase-admin");
 
 class UserService{
     constructor(user=null, userId=null){
@@ -14,14 +10,6 @@ class UserService{
         this.userId = userId
     }
 
-    async encryptPassword(password) {
-        try {
-            let hashedPassword = await bcrypt.hash(password, 10)
-            return hashedPassword
-        } catch (error) {
-        }
-
-    }
     async signUp(){
         let admin = false
         if (this.user.username.split('__')[1] === 'admin' && this.user.email.split('@')[1] === 'highway420canna.ca') {
