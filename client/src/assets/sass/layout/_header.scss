@@ -68,7 +68,7 @@
 
     &__right{
         position: absolute;
-        top: 20%;
+        top: 26vh;
         width: 50%;
         z-index: 10;
         float: right;
@@ -79,6 +79,9 @@
             display: none;
         }
 
+        @include response(tab-port) {
+            display: none;
+        }
         @include response(tab-port) {
             display: none;
         }

@@ -15,7 +15,7 @@
         @include response(tab-land) {
             position: relative;
             width: 30vw;
-            height: 30vh;
+            height: 26vh;
             box-shadow: 0 1.5rem 3rem rgba(black, .2);
         }
 
@@ -24,7 +24,7 @@
             top: 30%;
 
             @include response(tab-land)  {
-                top: 40%;
+                top: 12rem;
                 right: 0%;
             }
         }
@@ -43,7 +43,7 @@
             top: 20%;
 
             @include response(tab-land) {
-                top: -10%;
+                top: -17rem;
                 right: 0%;
             }
 
