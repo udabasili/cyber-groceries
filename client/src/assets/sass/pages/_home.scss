@@ -1,0 +1,368 @@
+.home{
+    min-height: 100vh;
+    width: 100%;
+}
+
+.section-about{
+    text-align: center;
+
+    .row {
+        display: grid;
+        width: 90%;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 8rem;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+
+        @include response(mobile){
+            grid-template-columns: 1fr;
+            column-gap: 2rem ;
+            width: 80%;
+            row-gap: 2rem;
+        }
+
+        @include response(tab-port) {
+            column-gap: 2rem;
+            width: 90%;
+            grid-template-columns: 1fr;
+            height: 80vh;
+            row-gap: 2rem;
+        }
+
+        @include response(tab-land) {
+            column-gap: 2rem;
+            width: 50%;
+            grid-template-columns: 1fr;
+            height: 80vh;
+            row-gap: 2rem;
+        }
+    }
+
+    .about-box{
+
+        text-align: center;
+        height: 50vh;
+        box-shadow: $box-shadow;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+
+         @include response(mobile) {
+             margin: 2rem auto;
+             width: 100%;
+             justify-content: center;
+             height: 50vh;
+
+         }
+        @include response(tab-port) {
+            margin: 2rem auto;
+            width: 70%;
+            justify-content: center;
+            height: 50vh;
+
+        }
+
+        .icon-box{
+            width: 17rem;
+            background-color: $color-secondary;
+            overflow: hidden;
+            height: 17rem;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        &__icon{
+            font-size: 6rem;
+            width: 10rem;
+            height: 10rem;
+            
+
+            @include response(tab-port) {
+                margin-bottom: 0;
+            }
+        }
+
+        &__text{
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            padding: 0 2rem;
+            color: black;
+            font-weight: 400;
+            text-align: center;
+
+            @include response(tab-port) {
+                font-size: 1.6rem;
+            }
+
+            @include response(tab-land) {
+                font-size: 1.9rem;
+            }
+
+            @include response(mobile) {
+                font-size: 1.6rem;
+                padding: 0 2.4rem;
+            }
+        }
+
+
+    }
+
+    .about-box:nth-child(even){
+        background-color: $color-primary-dark;
+    }
+
+    .about-box:nth-child(odd){
+        background-color: $color-primary-light;
+    }
+
+    
+    
+}
+
+.section-categories{
+
+    text-align: center;
+    margin-top: 20rem;
+
+    .row {
+        display: grid;
+        width: 70%;
+        margin: 0 auto;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 5rem;
+        row-gap: 2rem;
+
+        @include response(mobile) {
+            width: 90%;
+            grid-template-columns: 1fr;
+            column-gap: 2rem;
+            row-gap: 2rem;
+        }
+
+        @include response(tab-port) {
+            width: 95%;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 2rem;
+            row-gap: 2rem;
+        }
+    }
+    .categories-box {
+        text-align: center;
+        height: 60vh;
+        box-shadow: $box-shadow;
+        background-color: white;
+
+        @include response(mobile) {
+            height: 55vh;
+        }
+
+        @include response(tab-port) {
+            height: 35vh;
+        }
+
+        &__header{
+            height: 30%;
+            width: 100%;
+            background-color: $color-primary-dark;
+            display: flex;
+            color: white;
+            justify-content: center;
+            align-items: center;
+
+            @include response(mobile) {
+                height: 20%;
+            }
+
+            @include response(tab-port) {
+                height: 20%;
+            }
+        }
+
+        &__icon {
+            margin-bottom: .5rem;
+            display: inline-block;
+            background-color: $color-primary-dark;
+            padding: 1px ;
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            position: relative;
+
+            .icon{
+                font-size: 3rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                stroke: black;
+            }
+            @include response(tab-port) {
+                margin-bottom: 0;
+            }
+        }
+
+        &__text {
+            font-size: 1.6rem;
+            text-align: center;
+            width: 60%;
+            margin: 7rem auto 2rem auto;
+        }
+
+        &__button{
+
+            &,
+            &:link{
+                font-size: 2rem;
+                margin-top: 4rem;
+                padding: 2rem 3rem;
+                display: inline-block;
+                background-image: linear-gradient(120deg, $color-primary-dark 0%, $color-primary-dark 50%, $color-secondary 50%);
+                background-size:230%;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                transition: all .5s;
+            }
+
+            &:hover{
+                 background-position: 100%;
+                 color: black;
+            }
+        }
+    }
+
+    
+}
+
+.section-best-products {
+    text-align: center;
+
+    .row {
+        display: grid;
+        box-shadow: $box-shadow;
+        width: 80%;
+        margin: 0 auto;
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        justify-content: center;
+
+        @include response(mobile){
+            width: 90%;
+            justify-content: unset;
+        }
+       
+    }
+
+    .best-products-box{
+        text-align: center;
+        height: 60vh;
+        background-color: white;
+        border: .6px solid rgb(224, 221, 221);
+        padding-top: 4rem;
+
+        @include response(mobile){
+            width: 100%;
+            height: 55vh;
+            
+        }
+
+        @include response(tab-port) {
+            height: 60vw;
+
+        }
+
+    
+        &__header {
+            color: white;
+
+            span{
+                display: block;
+            }
+        }
+        &__text{
+            color: black;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+         &__button {
+
+             &,
+             &:link {
+                 font-size: 2rem;
+                 margin-top: 6rem;
+                 padding: 1rem 2.5rem;
+                 display: inline-block;
+                 text-decoration: none;
+                 color: black;
+                 background-color: white;
+                 font-weight: bold;
+                 transition: all .5s;
+                 border-radius: 3rem;
+                 border: 10px solid black;
+
+                @include response(mobile) {
+                    font-size: 1.4rem;
+                    margin-top: 6rem;
+                    padding: 1rem 1.5rem;
+                    border: 4px solid black;
+
+                }
+
+                @include response(tab-port) {
+                    font-size: 1.8rem;
+                    margin-top: 6rem;
+                    padding: 1rem 2rem;
+                    border: 7px solid black;
+
+                }
+            }
+
+            
+
+            &:hover {
+                color: black;
+                border: 10px solid black;
+                background-color: $color-secondary;
+
+            }
+        }
+
+        .content{
+            &__image{
+                width: 25rem;
+                height: 25rem;
+                border-radius: 50%;
+                border: 10px solid $color-primary-light;
+
+                .image{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            &__header{
+                font-size: 2.2rem;
+                margin:2rem 0;
+                height: 10%;
+                width: 100%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    .best-products-box:first-child{
+        background-color: $color-primary-dark;
+        flex-direction: column;
+        align-items: center;
+
+        
+    }
+}

@@ -1,0 +1,51 @@
+.cart-icon{
+    position: relative;
+    margin-right: 3rem;
+    cursor: pointer;
+    left: 30%;
+
+    @include response(mobile){
+        margin-right: 0;
+        left: 32%;
+
+    }
+
+    @include response(tab-port) {
+        margin-right: 0;
+        left: 25%;
+
+    }
+
+    .icon{
+        font-size: 3rem;
+        color: black;
+        position: relative;
+
+        @include response(mobile) {
+            font-size: 2rem;
+
+        }
+
+        @include response(tab-port) {
+            
+
+        }
+    }
+
+    .cart-count{
+        background-color: $color-primary-dark;
+        position: absolute;
+        color: white;
+        top: -5px;
+        padding: 3px 6px;
+        border-radius: 50%;
+        z-index: 30;
+        left: 85%;
+    }
+}
+
+.user-icon{
+    position: relative;
+    left: 50%;
+    font-size: 2rem;
+}

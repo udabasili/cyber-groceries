@@ -1,0 +1,173 @@
+.form {
+    display: flex;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 4rem;
+
+    &__component {
+        display: flex;
+        margin: 3rem auto 0 auto;
+        width: 80%;
+    }
+
+    &__group {
+        position: relative;
+        width: 100%;
+
+        .form__select{
+            margin: 0;
+            width: 30%;
+
+            select{
+                width: 100%;
+            }
+        }
+
+        &__icon {
+            margin-right: 30px;
+
+            @include response(phone) {
+                font-size: 1.5rem;
+                display: none;
+
+            }
+
+        }
+    }
+
+    &__group-image {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        width: 80%;
+        margin: 30px auto 0 auto;
+        height: 5vh;
+
+        @include response(phone) {
+            font-size: 2rem;
+
+        }
+
+        .image-upload {
+
+            &__input {
+                display: none;
+            }
+
+            &__message {
+                width: 60%;
+                color: black;
+                font-size: 1.5rem;
+            }
+
+            &__button {
+                border: 1px solid gray;
+                padding: 0 2rem;
+                cursor: pointer;
+                font-size: 1.3rem;
+                color: black;
+                background-color: $color-primary-dark;
+
+                @include response(phone) {
+                    padding: 1px 2px;
+                }
+            }
+
+        }
+
+    }
+
+    &__divide{
+        display: flex;
+        justify-content: center;
+    }
+    &__input {
+        border: none;
+        position: relative;
+        background-color: transparent;
+        border: 3px solid $color-primary-dark;
+        width: 100%;
+        height: 7vh;
+        margin-bottom: 10px;
+        padding: 2px 10px;
+        font-size: 1.6rem;
+
+        &:disabled{
+             background-color: #cccccc;
+             color: #666666;
+             pointer-events: none;
+             cursor: all-scroll;
+
+            
+        }
+
+        @include response(phone) {
+            font-size: 1.5rem;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &::placeholder {
+            color: black;
+        }
+
+    }
+
+    &__label {
+        position: absolute;
+        font-size: 1.2rem;
+        left: 0;
+        top: -2.2rem;
+
+        @include response(phone) {
+            display: none;
+
+        }
+    }
+
+    &__select{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin: 2rem;
+
+        select{
+            width: 12rem;
+            height: 5rem;
+            border: 2px solid $color-primary-dark;
+        }
+        
+
+        
+    }
+
+    .btn{
+        font-size: 1.5rem;
+        margin: 2rem auto;
+    }
+
+}
+
+
+.alert-error {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    width: 60%;
+    margin: 0 auto;
+    font-size: 1.5rem;
+
+    @include response(phone) {
+        margin: 2rem auto;
+        font-size: 1rem;
+    }
+}
+
+select {
+    
+}
+

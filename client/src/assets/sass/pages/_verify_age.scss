@@ -1,0 +1,45 @@
+.verify-age{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+
+    .upload{
+        background-color: white;
+        height: 50%;
+        width: 30%;
+
+        &__header{
+            height: 30%;
+            width: 100%;
+            background-color: $color-primary-dark;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & > *{
+                color: white;
+                margin-left: 10px;
+            }
+
+        }
+
+        &__body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70%;
+
+            &>* {
+                font-size: 2rem;
+            }
+
+        }
+    }
+
+    .progress{
+        width: 4rem;
+        height: 4rem;
+    }
+}

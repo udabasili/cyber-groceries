@@ -1,0 +1,39 @@
+/**FONT**/
+// Google Fonts
+@import url(https://fonts.googleapis.com/css?family=Russo+One|Open+Sans:400italic,700italic,400,700);
+
+//Font Variables
+$open-sans: 'Open Sans', sans-serif;
+$russ-one: 'Russo One', sans-serif;
+
+
+$default-font-size: 1.6rem;
+
+
+/**COLOR **/
+$color-primary-light: #77df78 ;
+$color-primary-dark: rgb(4, 167, 4);
+$color-secondary: #ff8800;
+$color-background: rgb(243, 242, 242);
+
+/**OTHERS **/
+$box-shadow: 0 1.5rem 4rem rgba(black, .15);
+$left-nav: 20vw;
+$default-margin-top: 26vh;
+
+@include response(mobile) {
+    $default-margin-top: 16vh;
+
+}
+
+@include response(tab-port) {
+    $default-margin-top: 16vh;
+
+
+}
+@include response(tab-land) {
+    $default-margin-top: 16vh;
+
+
+}
+  

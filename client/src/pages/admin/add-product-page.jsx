@@ -1,0 +1,364 @@
+import React, { Component } from 'react';
+import { addProduct, editProduct, editProductWithUrl } from '../../redux/actions/product.action';
+import { connect } from 'react-redux'
+import { NavLink, Redirect } from 'react-router-dom';
+import { addError } from '../../redux/actions/error.action';
+import Loading from '../../components/loading.componet';
+
+class AddProduct extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			data:{
+				name:'',
+				price:'',
+				category:'edibles',
+				type:props.type,
+				strain: 'hybrid',
+				quantity: '',
+				
+			},
+			type: props.type,
+			imageFile:'',
+			imageUrl: null,
+			imageUploaded: false,
+			isLoading: false
+		}
+  }
+  
+  componentDidMount(){
+		if(this.props.editing){
+			let filePath = document.querySelector(".image-upload__message");
+			let item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
+			const imageFileName = item.imageUrl.slice(item.imageUrl.lastIndexOf('/')+ 1)
+			filePath.value = imageFileName;
+			if(item){
+				this.setState((prevState) => ({
+					...prevState,
+					data: {
+						name: item.name,
+						price: item.price,
+						category: item.category,
+						type: item.type,
+						strain: item.strain,
+						quantity: item.quantity,
+					},
+					imageUrl: item.imageUrl,
+				})
+			);
+					
+			}
+		}
+  }
+
+	onImageUploadHandler = () => {
+		let fileUpload = document.querySelector(".image-upload__input");
+		let filePath = document.querySelector(".image-upload__message"); 
+		fileUpload.click()
+		fileUpload.onchange = () => {
+			let fileName = fileUpload.value.split("\\")[
+				fileUpload.value.split("\\").length - 1
+			];
+			filePath.value = fileName;
+			this.setState((prevState, props) => ({
+				...prevState,
+				imageFile: fileUpload.files[0],
+				imageUploaded: true,
+				imageUrl: null
+			}));
+			
+		}
+	}
+
+	onChangeHandler = (e) =>{
+		const name = e.target.name
+		const value = e.target.value
+		this.setState((prevState) => ({
+			...prevState,
+			data:{
+				...prevState.data,
+				[name]: value
+			}
+		}))
+	}
+
+	onSubmitHandler = (e) => {
+		e.preventDefault()
+		this.setState((prevState) =>({
+			...prevState,
+			isLoading: true
+		}))
+		const data = {
+			...this.state.data,
+			type: this.props.type
+		}
+		const image = this.state.imageFile
+		if(this.props.editing){
+			if(this.state.imageUrl){
+				data.imageUrl = this.state.imageUrl
+				this.props.editProductWithUrl(
+					data,
+					this.props.match.params.itemId
+				).then((result) => {
+					this.setState((prevState) => ({
+						...prevState,
+						isLoading: false
+					}))
+					this.props.history.push({
+						pathname: '/admin/products',
+						state: {
+							message: 'Product edited successfully'
+						}
+					});
+				}).catch((err) => {
+					this.setState((prevState) => ({
+						...prevState,
+						isLoading: false
+					}))
+					alert(this.props.error.message)
+				})
+			}else{
+				this.props.editProduct(
+					data,
+					image,
+					this.props.match.params.itemId
+				).then((result) => {
+					this.setState((prevState) => ({
+						...prevState,
+						isLoading: false
+					}))
+					this.props.history.push({
+						pathname: '/admin/products',
+						state: {
+							message: 'Product edited successfully'
+						}
+					});
+				}).catch((err) => {
+					this.setState((prevState) => ({
+						...prevState,
+						isLoading: false
+					}))
+					alert(this.props.error.message)
+				})
+			}
+			
+        
+		}else{
+			
+			this.props.addProduct(data, image)
+				.then((result) => {
+					this.setState((prevState) => ({
+						...prevState,
+						isLoading: false
+					}))
+					this.props.history.push({
+					pathname: '/admin/products',
+					state:{message: 'Product added successfully'}
+				});
+				})
+        		.catch((err) =>{
+					this.setState((prevState) => ({
+						...prevState,
+						isLoading: false
+					}))
+				alert(this.props.error.message)
+			})
+
+		}
+		
+	}
+
+	render() {
+	const {data} = this.state
+	const type = this.props.type
+	const {title, editing} = this.props
+	let item
+	if (this.props.products !== null){
+		item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
+
+	}
+	let components = ( 
+		<div className="add-product">
+			{this.state.isLoading && <Loading/>}
+			<h2 className="heading-secondary">{title}</h2>
+			<form className="form " onSubmit={this.onSubmitHandler}>
+				<nav className="form-nav">
+                <ul className="form-nav__list">
+                  <li className="form-nav__item">
+                    <NavLink
+                      className="form-nav__link"
+                      activeClassName="active-auth"
+                      to="/admin/add-product/grams"
+                    >
+                      grams{" "}
+                    </NavLink>
+                  </li>
+                  <li className="form-nav__item">
+                    <NavLink
+                      className="form-nav__link"
+                      activeClassName="active-auth"
+                      to="/admin/add-product/millimeter"
+                    >
+                      millimeter{" "}
+                    </NavLink>
+                  </li>
+                </ul>
+              </nav>
+				<div className="form__component">
+					<div className="form__group">
+						<input
+							type="text"
+							name="name"
+							id="name"
+							value={data.name}
+							onChange={this.onChangeHandler}
+							className="form__input"
+							required
+						/>
+						<label htmlFor="name" className="form__label">
+							Name
+						</label>
+						</div>
+					</div>
+					<div className="form__component">
+						<div className="form__group">
+						<input
+							type="number"
+							name="price"
+							onChange={this.onChangeHandler}
+							value={data.price}
+							pattern="[0-9]"
+							id="price"
+							className="form__input"
+							required
+						/>
+						<label htmlFor="price" className="form__label">
+							Unit Price
+						</label>
+						</div>
+					</div>
+					{ type === 'grams' ?
+					<div className="form__component">
+						<div className="form__group">
+								<input
+									type="number"
+									name="quantity"
+									onChange={this.onChangeHandler}
+									value={data.quantity}
+									pattern="[0-9]"
+									placeholder='Total amount in grams'
+									id="quantity"
+									className="form__input"
+									required
+								/> 
+						
+						<label htmlFor="quantity" className="form__label">
+							Quantity
+						</label>
+						</div>
+					</div> 
+					:
+					<div className='form__component'>
+						<div className="form__group">
+
+						<div className="form__select">
+						<select
+							className="card__select"
+							name="quantity"
+							value={data.quantity}
+							id="quantity"
+							onChange={this.onChangeHandler}
+						>
+							<option value="100">50ml</option>
+							<option value="150">150ml</option>
+							<option value="450">250ml</option>
+						</select>
+						<label htmlFor="quantity" className="form__label">
+							Quantity
+						</label>
+						</div>
+					</div>
+					</div>
+					
+					}
+					<div className="form__group-image">
+						<input
+						type="file"
+						className="image-upload__input"
+						name="image"
+						accept="image/*"
+						/>
+						<input
+						type="text"
+						className="image-upload__message"
+						disabled
+						placeholder="Upload Product Image"
+						/>
+						<button
+						className="image-upload__button"
+						type="button"
+						onClick={this.onImageUploadHandler}
+						>
+						{" "}
+						Browse
+						</button>
+					</div>
+					<div className="form__divide">
+						<div className="form__select">
+						<select
+							className="card__select"
+							name="category"
+							value={data.category}
+							id="category"
+							onChange={this.onChangeHandler}
+						>
+							<option value="edibles">Edibles</option>
+							<option value="topicals">Topicals</option>
+							<option value="buds">Buds</option>
+							<option value="extracts">Extracts</option>
+						</select>
+						</div>
+						<div className="form__select">
+						<select
+							className="card__select"
+							name="strain"
+							value={data.strain}
+							id="strain"
+							onChange={this.onChangeHandler}
+						>
+							<option value="hybrid">Hybrid</option>
+							<option value="indica">Indica</option>
+							<option value="sativa">Sativa</option>
+						</select>
+						</div>
+						<div className="form__select">
+						</div>
+					</div>
+					<input type="submit" className="btn" value="Submit" />
+				</form>
+		</div>
+	)
+	return (
+		!editing ?
+			components :
+				item ?
+			components :
+				<Redirect to='/404'/>			
+		);
+	}
+}
+
+
+const mapStateToProps = (state) => ({
+  products: state.product.products,
+  error: state.error.error
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	addProduct: (product, imageUrl) => dispatch(addProduct(product, imageUrl)),
+	editProduct: (product, imageUrl, productId) => dispatch(editProduct(product, imageUrl, productId)),
+	editProductWithUrl: (product, productId) => dispatch(editProductWithUrl(product, productId)),
+	addError: (error) => dispatch(addError(error))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);

@@ -1,0 +1,5 @@
+module.exports.ProductRoute = require('./product') 
+module.exports.UserRoute = require('./user')
+module.exports.AdminRoute = require('./admin')
+module.exports.PublicRoute = require('./public')
+module.exports.CartRoute = require('./cart')

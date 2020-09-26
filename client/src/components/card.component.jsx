@@ -1,0 +1,122 @@
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import {deleteProduct} from '../redux/actions/product.action';
+import { addItemToCart } from '../redux/actions/cart.action';
+
+function Card({
+    item,
+    addItemToCart,
+    deleteProduct, 
+    isAdmin,
+    setToastMessage,
+  }) {
+    const [size, setSize] = useState(item.type !== 'millimeter'? '3.5':'50')
+    const setSizeHandler = (e) =>{
+      const {name, value} = e.target;
+      setSize(value)
+    }
+    const deleteProductHandler = (id) =>{
+      deleteProduct(id)
+        .then((result) => {
+          setToastMessage('Deleted Successfully')
+        }).catch((err) => {
+          
+        });
+    }
+
+    const addItemToCartHandler = (id) =>{
+      try {
+        
+        addItemToCart(id, size)
+        setToastMessage('Item added to Cart')
+
+      } catch (error) {
+        setToastMessage('Something went wrong')
+
+      }
+    }
+
+
+    return (
+      <div className="card" id={item._id}>
+
+        <div
+          className="card__image"
+          style={{ backgroundImage: `url(${item.imageUrl})` }}
+        ></div>
+        <div className="card__heading">{item.name}</div>
+        <div className="card__details">
+          <div className="price item">
+            <span className="label">Price: </span>
+            <span className="value">${item.price}</span>
+
+            {item.type !== 'millimeter' &&
+              <span className="value">/gram</span>
+             
+            }
+          </div>
+          <div className="category item">
+            <span className="label">Category: </span>
+            <span className="value">{item.category}</span>
+          </div>
+          <div className="strain item">
+            <span className="label">Strain: </span>
+            <span className="value">{item.strain}</span>
+          </div>
+        </div>
+        {!isAdmin && (
+          <div className="card__purchase">
+            <div className="card__icon" onClick={()=>addItemToCartHandler(item)}>
+              <FontAwesomeIcon icon={faCartPlus} className="icon"  />
+            </div>
+            {item.type !== 'millimeter' ?
+              <select type="text" className="card__select" value={size} onChange={setSizeHandler}>
+                <option value="1">1g</option>
+                <option value="2">2g</option>
+                <option value="3.5">3.5g</option>
+                <option value="7">7g</option>
+                <option value="14">14g</option>
+                <option value="28">28g</option>
+              </select> :
+            <select type="text" className="card__select" value={size} onChange={setSizeHandler}>
+              <option value="50">50ml</option>
+              <option value="150">150ml</option>
+              <option value="250">250ml</option>
+            </select>
+             
+            }
+            
+          </div>
+        )}
+
+        {isAdmin && (
+          <div className="button-container">
+            <a className="btn" href={`/admin/edit-product/${item._id}`}>
+              Edit
+            </a>
+            <p className="btn" onClick={() => deleteProductHandler(item._id)}>
+              Delete
+            </p>
+          </div>
+        )}
+      </div>
+    );
+}
+
+Card.propTypes = {
+
+}
+
+
+
+
+const mapDispatchToProps = (dispatch) => ({
+  deleteProduct : (productId) => dispatch(deleteProduct(productId)),
+  addItemToCart: (product, size) => dispatch(addItemToCart(product, size)),
+
+})
+
+export default connect(null, mapDispatchToProps)(Card);
+

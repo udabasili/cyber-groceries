@@ -1,0 +1,20 @@
+.chart{
+    background-color: white;
+    border: 1px solid $color-primary-light;
+    display: flex;
+    height: 70vh;
+    padding-top: 5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h3{
+        text-align: center;
+        padding-bottom: 2rem;
+    }
+    @include response(mobile) {
+        width: 100vw;
+
+
+    }
+}

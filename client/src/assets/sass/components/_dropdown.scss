@@ -1,0 +1,165 @@
+.dropdown{
+    display: block;
+    position: absolute;
+    z-index: 40;
+    top: 16vh;
+    right: 0;
+    width: 30vw;
+    height: 50vh;
+    text-align: center;
+    background-color: white;
+    border: 2px solid $color-primary-light;
+
+    @include response(mobile) {
+        height: 30vh;
+    }
+
+
+    @include response(tab-port) {
+        height: 30vh;
+    }
+
+    @include response(tab-land) {
+        height: 30vh;
+    }
+
+    &--1{
+        right: 7vw;
+        top: 16vh;
+        height: 20vh;
+        position: fixed;
+        padding: 3rem;
+
+
+        @include response(mobile) {
+            width: 50vw !important;
+            right: 3vw;
+            height: 20vh;
+        }
+
+        
+        @include response(tab-port) {
+            width: 35vw !important;
+            right: 3vw;
+        }
+
+        @include response(tab-land) {
+            right: 3vw;
+            width: 23vw !important;
+        }
+
+        .close-button{
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: red;
+
+            @include response(mobile) {
+                display: none;
+            }
+        }
+        
+    }
+
+    @include response(mobile){
+        width: 70vw;
+    }
+
+    @include response(tab-port) {
+        width: 50vw;
+    }
+
+    &__list{
+        height: 65%;
+        width: 80%;
+        border: 1px black solid;
+        margin: 2rem auto 0 auto;
+        list-style: none;
+        overflow-y: auto;
+
+        &--1{
+            list-style: none;
+            color: black;
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                text-transform: uppercase;
+
+                @include response(mobile){
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+
+    &__item{
+        background-color: rgb(233, 233, 233);
+        height: 40%;
+        display: flex;
+        color: black;
+
+        @include response(mobile) {
+            height: 35%;
+        }
+
+        @include response(tab-port) {
+            height: 35%;
+
+        }
+
+        &--1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            
+
+            .label {
+                font-weight: bold;
+                font-size: 1.8rem;
+                @include response(mobile) {
+                    font-size: 1.4rem;
+                }
+            }
+            .value{
+                font-size: 1.8rem;
+                padding-left: 10px;
+                @include response(mobile) {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+
+        .image{
+            height: 100%;
+            width: 30%;
+        }
+
+        .detail{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem;
+
+            &__name{
+                font-size: 1.5rem;
+                font-weight: bolder;
+                text-transform: capitalize;
+            }
+
+            &__quantity{
+
+                .price{
+                    margin: 0 10px 0 0;
+                }
+            }
+        }
+    }
+
+    &__item:not(:first-child){
+        margin-top: 10px;
+    }
+
+}

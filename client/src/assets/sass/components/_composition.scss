@@ -1,0 +1,60 @@
+.composition {
+    position: relative;
+
+    &__photo {
+        width: 30vw;
+        height: 40vh;
+        box-shadow: 0 1.5rem 4rem rgba(black, .4);
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+        transition: all .2s;
+        outline-offset: .3rem;
+
+
+        @include response(tab-land) {
+            position: relative;
+            width: 30vw;
+            height: 30vh;
+            box-shadow: 0 1.5rem 3rem rgba(black, .2);
+        }
+
+        &--p1 {
+            right: 40%;
+            top: 30%;
+
+            @include response(tab-land)  {
+                top: 40%;
+                right: 0%;
+            }
+        }
+
+        &--p2 {
+            left: 20%;
+            top: 40%;
+             @include response(tab-land) {
+                 top: 0%;
+                 right: 0%;
+             }
+        }
+
+        &--p3 {
+            left: 15%;
+            top: 20%;
+
+            @include response(tab-land) {
+                top: -10%;
+                right: 0%;
+            }
+
+            @include response(tab-port)  {
+                top: 1rem;
+                left: 0;
+                transform: scale(1.1);
+            }
+        }
+
+
+    }
+
+}

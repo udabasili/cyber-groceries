@@ -1,0 +1,128 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    height: 100%;
+    background-color: rgba($color: black, $alpha: .7);
+    z-index: 40;
+
+    &__content{
+        position: absolute;
+        width: 50%;
+        height: 70%;
+        background-color: white;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        overflow: hidden;
+        left: 50%;
+        box-shadow: $box-shadow;
+        top: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        @include response(mobile) {
+            width: 90%;
+
+
+        }
+        @include response(tab-port) {
+            width: 80%;
+
+        }
+
+        .close-button{
+            position: absolute;
+            cursor: pointer;
+            top: 10px;
+            left: 93%;
+        }
+
+        .paragraph {
+            padding: 5rem 4rem 0rem 4rem;
+
+        }
+        
+    }
+}
+
+.check-consent{
+    &__header{
+        padding-top: 2%;
+
+        .heading-secondary{
+            color: black;
+            padding-top: 10%;
+        }
+        .logo-box {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            @include response(tab-port) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+            @include response(tab-land) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+            .logo {
+                img {
+                    width: 5rem;
+                    height: 5rem;
+                }
+            }
+        }
+        .app-name {
+            color: rgb(0, 0, 0);
+            backface-visibility: hidden;
+            font-family: $russ-one;
+            text-transform: uppercase;
+            font-size: 2rem;
+            font-weight: bolder;
+
+            @include response(mobile) {
+                font-size: 1.6rem;
+                font-weight: bolder;
+            }
+
+            @include response(tab-port) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+            @include response(tab-land) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+        }
+
+        .app-name span:nth-child(odd) {
+            color: $color-primary-dark;
+
+        }
+
+        
+       
+    }
+    &__content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__label{
+        font-size: 1.6rem;
+        padding-left: 1rem;
+    }
+
+    
+}

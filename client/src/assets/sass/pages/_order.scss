@@ -1,0 +1,60 @@
+.order{
+    &__header {
+        padding: 5% 0;
+        width: 100%;
+        background-color: rgb(197, 197, 197);
+
+        .heading-secondary {
+            color: black;
+            padding-top: 10%;
+        }
+
+        .logo-box {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            @include response(tab-port) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+            @include response(tab-land) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+            .logo {
+                img {
+                    width: 5rem;
+                    height: 5rem;
+                }
+            }
+        }
+
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+
+        .total{
+            font-size: 2rem;
+            padding-top: 2rem;
+        }
+
+        .form{
+            padding-top: 1rem;
+        }
+    }
+
+    &__label {
+        font-size: 1.6rem;
+        padding-left: 1rem;
+    }
+
+}

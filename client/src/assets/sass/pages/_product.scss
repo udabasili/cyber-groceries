@@ -1,0 +1,24 @@
+.product {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+
+    .product-section {
+        width: 100%;
+        padding-left: $left-nav;
+    }
+}
+
+.product-overview{
+    margin: 25vh auto;
+    width: 90%;
+    min-height: 100vh;
+    padding-left: $left-nav;
+
+    @include response(mobile) {
+        padding-left: 0;
+    }
+
+     @include response(tab-port) {
+     }
+}

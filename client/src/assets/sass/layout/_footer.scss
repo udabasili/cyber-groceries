@@ -1,0 +1,80 @@
+.footer{
+    background-color: $color-primary-light;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    position: relative;
+    align-items: center;
+    justify-content: space-around;
+    bottom: 0;
+
+    .logo-box {
+        align-self: center;
+        display: flex;
+        align-items: center;
+
+        @include response(mobile) {
+            justify-content: start;
+        }
+
+        @include response(tab-port) {
+            font-size: 2rem;
+            font-weight: bolder;
+        }
+
+        @include response(tab-land) {
+            font-size: 2rem;
+            font-weight: bolder;
+        }
+
+
+
+        .logo {
+            img {
+                width: 5rem;
+                height: 5rem;
+            }
+        }
+
+        .app-name {
+            color: rgb(0, 0, 0);
+            backface-visibility: hidden;
+            font-family: $russ-one;
+            text-transform: uppercase;
+            font-size: 2rem;
+            font-weight: bolder;
+
+            @include response(mobile) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+            @include response(tab-port) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+            @include response(tab-land) {
+                font-size: 2rem;
+                font-weight: bolder;
+            }
+
+        }
+
+        .app-name span:nth-child(odd) {
+            color: $color-primary-dark;
+
+        }
+
+    }
+
+
+
+    &__copyright{
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        color: black;
+        text-transform: uppercase;
+    }
+}

@@ -1,0 +1,59 @@
+.access-denied-page {
+    position: relative;
+    height: 100vh;
+
+    .access-denied {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        text-align: center;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+         &__main-header {
+             font-family: montserrat, sans-serif;
+             position: absolute;
+             left: 50%;
+             top: 50%;
+             -webkit-transform: translate(-50%, -50%);
+             -ms-transform: translate(-50%, -50%);
+             transform: translate(-50%, -50%);
+             font-size: 24rem;
+             font-weight: 900;
+             margin: 0;
+             color: red;
+             text-transform: uppercase;
+             letter-spacing: -40px;
+             margin-left: -20px;
+         }
+
+         &__main-header>span {
+             text-shadow: -8px 0 0 black;
+         }
+
+         &__secondary-header {
+             font-family: cabin, sans-serif;
+             font-size: 2rem;
+             font-weight: 400;
+             color: black;
+             text-transform: uppercase;
+             margin-top: 0;
+             margin-bottom: 25px;
+
+             @include response(mobile) {
+                 font-size: 1.4rem;
+             }
+         }
+
+        .access-denied-icon{
+            font-size: 15rem;
+        }
+        .access-denied-403 {
+            position: relative;
+            height: 240px;
+
+           
+        }
+    }
+}

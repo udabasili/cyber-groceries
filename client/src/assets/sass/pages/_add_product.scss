@@ -1,0 +1,22 @@
+.add-product{
+     padding-left: $left-nav;
+     width: 70%;
+     margin: 25vh auto;
+     min-height: 100vh;
+     text-align: center;
+
+     @include response(mobile){
+         padding-left: 0;
+         width: 96%;
+     }
+
+      @include response(tab-port) {
+          width: 95%;
+      }
+
+     .form{
+        background-color: white;
+        box-shadow: $box-shadow;
+        min-height: 60vh;
+     }
+}

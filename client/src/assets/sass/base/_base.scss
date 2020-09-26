@@ -1,0 +1,57 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    background-color: $color-background;
+    color: rgb(48, 47, 47);
+    font-family: $open-sans;
+
+    @include response(mobile){
+        font-size: 50%;
+    }
+
+    @include response(tab-port) {
+        font-size: 50%;
+    }
+    @include response(tab-land) {
+        font-size: 50%;
+    }
+
+}
+
+section{
+    padding: 25rem 0 ;
+    margin-top: -10rem;
+
+    @include response(mobile){
+        padding: 35rem 0;
+    }
+
+    @include response(tab-land) {
+        padding: 45rem 0;
+    }
+
+    @include response(tab-port) {
+        padding: 45rem 0;
+    }
+
+
+}
+
+.empty-list{
+    font-size: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+:required{
+    outline: none;
+    border: none;
+}

@@ -1,0 +1,146 @@
+.heading-primary {
+    color: rgb(0, 0, 0);
+    backface-visibility: hidden;
+    margin: 3rem;
+    font-family: $russ-one;
+    text-align: center;
+
+    @include response(mobile) {
+        margin: 4rem 0;
+    }
+
+    @include response(tab-port) {
+        margin: 3rem 0;
+
+    }
+  
+
+    &__main {
+        display: block;
+        line-height: 1.4;
+        font-size: 9rem;
+        text-transform: uppercase;
+        word-spacing: .7rem;
+        line-height: 1;
+        font-weight: 400;
+
+         @include response(mobile) {
+            padding: 0 1rem;
+            font-size: 4.3rem;
+            font-weight: bolder;
+         }
+
+        @include response(tab-port) {
+             font-size: 8rem;
+             font-weight: bolder;
+             padding-bottom: 2rem;
+
+        }
+
+       
+
+        span{
+            padding-left: 2rem;
+            color: $color-primary-dark;
+
+            @include response(mobile) {
+                color: black;
+            }
+
+            @include response(tab-port) {
+                color: black;
+
+            }
+
+            @include response(tab-land) {
+                color: black;
+            }
+
+        }
+
+    }
+
+
+    &__sub {
+        font-size: 3rem;
+        display: block;
+        font-weight: 300;
+        color: black;
+        font-family: $russ-one;
+
+        @include response(mobile) {
+            font-weight: 700;
+            font-size: 2rem;
+            color: black;
+        }
+    }
+}
+
+.heading-secondary {
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-weight: bolder;
+    display: inline-block;
+    color: $color-primary-dark;
+    letter-spacing: .2rem;
+    padding-bottom: 1rem;
+
+     @include response(mobile) {
+         font-size: 3rem;
+
+     }
+     @include response(tab-port) {
+         font-size: 4rem;
+
+     }
+
+}
+
+.heading-secondary-underline{
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-column-gap: 1.5rem;
+    align-items: center;
+    font-size: 1.5rem;
+    margin: 0 auto;
+    width: 40%;
+
+    @include response(tab-port) {
+        width: 70%;
+    }
+
+    @include response(mobile) {
+        width: 80%;
+    }
+
+    &::before,
+    &::after{
+        content: '';
+        display: block;
+        background-color: $color-primary-dark;
+        height: 4px;
+    }
+}
+.heading-tertiary {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: black;
+    font-size: 3.5rem;
+}
+
+.paragraph {
+    font-size: 2rem;
+
+     @include response(mobile) {
+         font-size: 1.5rem;
+
+     }
+
+     @include response(tab-port) {
+         font-size: 1.7rem;
+
+     }
+    &:not(:last-child) {
+        margin-bottom: 3rem;
+    }
+}
