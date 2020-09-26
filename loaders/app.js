@@ -8,8 +8,8 @@ const loggerFunction = require('./logger');
 const rateLimit = require("express-rate-limit");
 const xss = require("xss-clean")
 const mongoSanitize = require('express-mongo-sanitize')
-// app.set('trust proxy', 1);
-// app.disable('x-powered-by')
+app.set('trust proxy', 1);
+app.disable('x-powered-by')
 
 
 
@@ -41,9 +41,9 @@ require('./router')(app)
 
 /**STATIC FILES */
 if (process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, '../../build')))
+    app.use(express.static(path.join(__dirname, '../client/build')))
     app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../../build/index.html'))
+        res.sendFile(path.join(__dirname, '../client/build/index.html'))
     })
 }
     
