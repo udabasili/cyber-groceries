@@ -17,6 +17,7 @@ const upload = multer({
   },
 });
 
+
 var cpUpload = upload.fields([{
 	name: 'imageUrl',
 	maxCount: 1
