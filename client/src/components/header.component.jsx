@@ -2,7 +2,6 @@ import React from 'react'
 import Image from "../assets/images/slides/weed1.jpg";
 import Image2 from "../assets/images/slides/weed2.jpg";
 import Image3 from "../assets/images/slides/weed3.jpg";
-import "react-slideshow-image/dist/styles.css";
 import { useEffect, useState } from 'react';
 import CustomButton from './button.component';
 import { withRouter } from 'react-router-dom';
