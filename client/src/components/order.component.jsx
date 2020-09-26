@@ -5,32 +5,29 @@ import Modal from './modal.component'
 import { setOrderById } from '../redux/actions/admin.action'
 
 class Order extends Component {
-    state ={
-        orderFulfilled : false,
+    constructor(props){
+        super (props);
+        this.state = {
+            orderFulfilled: props.order.orderFulfilled
+        }
     }
 
+
     onChange = (e) => {
-        let orderFulfilled = false;
+        let orderFulfilled = e.target.checked;
         const order = {...this.props.order}
-        let {currentUser, cartItems,id} = order
-        cartItems.orderFulfilled = false;
-        if(e.target.checked === true){
-            order.orderFulfilled = true
-            
-            this.props.setOrderById(currentUser._id, order)
-                .then((result) => {
-                    this.props.setCheckedValue(this.state.orderFulfilled, id)
-                }).catch((err) => {
-                    
-                });
-            orderFulfilled = true
-            
-        }else {
-            orderFulfilled = false
-        }
-        this.setState({
+        let {currentUser, id} = order
+        order.orderFulfilled = true
+        this.setState(prevState =>({
+            ...prevState,
             orderFulfilled
-        })
+        }))
+        this.props.setOrderById(currentUser._id, order)
+            .then((result) => {
+                this.props.setCheckedValue(orderFulfilled, id)
+            }).catch((err) => {
+
+        });
     }
 
      onCloseHandler = () =>{
@@ -39,8 +36,8 @@ class Order extends Component {
     }
     
     render() {
-        const {orderFulfilled} = this.state
         const {order} = this.props
+        const {orderFulfilled} = this.state
         return (
             <Modal onClose={this.onCloseHandler}>
                 <div className='user-order__header'>
@@ -67,7 +64,7 @@ class Order extends Component {
                 </div>
                 <label className="user-order__label">
                         Orders Fulfilled
-                    <input type="checkbox" onChange={this.onChange} value={orderFulfilled}/>
+                    <input type="checkbox" onChange={this.onChange} checked={orderFulfilled}/>
                     <span className="check-mark"></span>
                 </label>      
         </Modal>

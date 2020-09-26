@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {
     FontAwesomeIcon
 } from '@fortawesome/react-fontawesome';
-import { faFacebook, faFacebookF, faFacebookSquare, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
-import { faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
+import {faFacebookSquare, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelopeOpen, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 console.log(process.env.REACT_APP_GOOGLE_MAP_API);
 export default class ContactPage extends Component {
@@ -19,11 +19,12 @@ export default class ContactPage extends Component {
                 <div className="communication">
                     <h3 className="contact__header">Communication</h3>
                     <span className="email">
+							<FontAwesomeIcon icon={faEnvelopeOpen} color='black' className='communication__icon' size='1x'/>
                             juliannapeterpaul@highway420canna.ca
                         </span>
                      <div>
                         <span className="phone">
-                            <FontAwesomeIcon icon={faPhoneSquare} color='black' size='1x'/>
+                            <FontAwesomeIcon icon={faPhone} color='black' className='communication__icon' size='1x'/>
                             5066252894
                         </span>
                         
@@ -31,6 +32,12 @@ export default class ContactPage extends Component {
               </div>
               <div className="hours">
                     <h3 className="contact__header">Hours</h3>
+					<span>Sunday: 11am -10pm</span>
+					<span>Monday: 11am -10pm</span>
+					<span>Tuesday: 11am -10pm</span>
+					<span>Wednesday: 11am -10pm</span>
+					<span>Thursday: 11am -10pm</span>
+					<span>Friday -Saturday: 11am -11pm</span>
 
               </div>
               <div className="location">

@@ -1,6 +1,6 @@
 import actionType from '../actionTypes'
 import { apiHandler, setTokenHeader, getToken } from '../../services/api'
-import { addError, removeError } from './error.action'
+import { removeError } from './error.action'
 import { storage } from '../../services/firebase';
 import axios from 'axios'
 export const setProducts = (products) => ({
@@ -51,8 +51,7 @@ export const addProduct = (product, imageUrl) =>{
                     dispatch(setProducts(result.data.message))
                     resolve()
                 }).catch((err) => {
-                    dispatch(addError(err.response.data))
-                    reject()
+                    reject(err.response.data)
                 });
         })
         
@@ -87,8 +86,7 @@ export const editProduct = (product, imageUrl, productId) => {
                 dispatch(setProducts(result.data.message))
                 resolve()
             }).catch((err) => {
-                dispatch(addError(err.response.data))
-                reject()
+                reject(err.response.data)
             });
         })
 
@@ -110,7 +108,7 @@ export const editProductWithUrl = (product, productId) => {
                     dispatch(setProducts(result))
                     resolve()
                 }).catch((err) => {
-                    dispatch(addError(err))
+                    reject(err)
                 });
         })
 
@@ -131,8 +129,7 @@ export const deleteProduct = (productId) => {
                     dispatch(setProducts(result))
                     resolve()
                 }).catch((err) => {
-                    dispatch(addError(err))
-                    reject()
+                    reject(err)
                 });
         })
         

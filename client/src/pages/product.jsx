@@ -7,7 +7,7 @@ import LeftNav from "../components/left-nav.compnent";
 
 const Product = (props) => {
   const { match } = props;
-  console.log(match)
+
   return (
     <div className="product">
 		<LeftNav />

@@ -1,7 +1,7 @@
 export const addToCart = (addedItem , size, cartItems) =>{
     try {
         const existingItem = cartItems.find((item) =>(
-            item._id === addedItem._id && item.size == size
+            item._id === addedItem._id && item.size === size
         ))
 
         if(existingItem ){

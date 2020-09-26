@@ -1,4 +1,4 @@
-import React, { useEffect, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom'
 import HomePage from './pages/home-page'
 import Navigation from './components/navigation.component'
@@ -20,7 +20,6 @@ import CheckConsent from './components/check-consent.component'
 import ChangePassword from './components/change-password.component';
 import ResetPassword from './pages/reset-password-page'
 import { analytics } from 'firebase'
-import axios from 'axios'
 
 
 class MainRoute extends PureComponent {
@@ -29,14 +28,6 @@ class MainRoute extends PureComponent {
         this.state = {
 
         }
-        axios.interceptors.response.use((response) => {
-            return response;
-        }, (error) => {
-            
-            return new Promise((resolve, reject) => {
-                reject(error);
-            })
-        })
 
     }
 
@@ -99,7 +90,7 @@ class MainRoute extends PureComponent {
                                     isAuthenticated={isAuthenticated}
                                     component={CheckOutPage}/>
                                 <Route  path='/products'  component={ProductPage}/>
-                                <Route exact path ='/Contact' component = {AboutPage}/>
+                                <Route exact path ='/contact' component = {AboutPage}/>
                                 <AdminProtectedRoute  
                                     path='/admin' 
                                     currentUser={currentUser} 

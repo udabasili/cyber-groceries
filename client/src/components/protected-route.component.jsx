@@ -85,7 +85,7 @@ export function AdminProtectedRoute({
         useEffect(() => {
             setCheckIfAdmin(isAdmin)
             
-        });
+        },[isAdmin]);
   return (
     <Route
       {...otherProps}

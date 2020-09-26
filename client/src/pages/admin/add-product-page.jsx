@@ -90,10 +90,10 @@ class AddProduct extends Component {
 		}))
 		const data = {
 			...this.state.data,
-			type: this.props.type
 		}
 		const image = this.state.imageFile
 		if(this.props.editing){
+			console.log(data)
 			if(this.state.imageUrl){
 				data.imageUrl = this.state.imageUrl
 				this.props.editProductWithUrl(
@@ -111,6 +111,8 @@ class AddProduct extends Component {
 						}
 					});
 				}).catch((err) => {
+										console.log(err)
+
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
@@ -134,6 +136,8 @@ class AddProduct extends Component {
 						}
 					});
 				}).catch((err) => {
+										console.log(err)
+
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
@@ -157,6 +161,7 @@ class AddProduct extends Component {
 				});
 				})
         		.catch((err) =>{
+					console.log(err)
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
@@ -188,7 +193,10 @@ class AddProduct extends Component {
                     <NavLink
                       className="form-nav__link"
                       activeClassName="active-auth"
-                      to="/admin/add-product/grams"
+					  to={ editing ?
+						`/admin/edit-product/grams/${item._id}`:
+						  "/admin/add-product/grams"
+						}
                     >
                       grams{" "}
                     </NavLink>
@@ -197,7 +205,10 @@ class AddProduct extends Component {
                     <NavLink
                       className="form-nav__link"
                       activeClassName="active-auth"
-                      to="/admin/add-product/millimeter"
+					  to={ editing ?
+						`/admin/edit-product/millimeter/${item._id}`:
+					  "/admin/add-product/millimeter"
+					  }
                     >
                       millimeter{" "}
                     </NavLink>

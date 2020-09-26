@@ -21,11 +21,10 @@ export default class UsersList extends Component {
 		if (!searchString){
 			return user
 		}
-		else if (
-			user.username.includes(searchString.toLowerCase()) || 
-			user.userId.includes(searchString.toLowerCase()) ||
-			user.name.includes(searchString.toLowerCase())){
-			return user
+		else {
+			return user.username.includes(searchString.toLowerCase()) ||
+				user.userId.includes(searchString.toLowerCase()) ||
+				user.name.includes(searchString.toLowerCase())
 		}
 	})
     return (

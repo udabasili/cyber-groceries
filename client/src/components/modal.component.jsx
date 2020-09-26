@@ -10,7 +10,9 @@ export default function Modal({children, onClose}) {
         <div className="modal">
             <div className='modal__content'>
                 {onClose && 
-                    <FontAwesomeIcon icon={faTimes} color='red' size='3x' onClick={onClose} className='close-button'/>
+                    <div className='close-button'  onClick={onClose}>
+                        <FontAwesomeIcon icon={faTimes}  className='icon'/>
+                    </div>
                 }
                 {children}
             </div>

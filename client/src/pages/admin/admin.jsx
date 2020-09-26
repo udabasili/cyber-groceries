@@ -27,13 +27,14 @@ function AdminRoute({
 
 		const history = useHistory()
 			useEffect(() => {
-				Promise.all([getAllUsersOrder(), getAllUsers(currentUser._id)])
-					.then((result) => {
-					}).catch((err) => {
+				const id = currentUser._id
+				Promise.all([getAllUsersOrder(), getAllUsers(id)])
+					.then(() => {
+					}).catch(() => {
 						alert('Some went wrong')
 				});
 
-			}, [])
+			}, [currentUser, getAllUsers, getAllUsersOrder])
 			history.listen(() => {
 				removeError()
 				toggleCartDropDown(true)
@@ -58,8 +59,15 @@ function AdminRoute({
           />
 		  
           <Route
-            exact
-            path={`${match.url}/edit-product/:itemId`}
+		  exact
+            path={`${match.url}/edit-product/grams/:itemId`}
+            render={(props) => (
+              <AddProduct title="Edit product" editing {...props} />
+            )}
+          />
+		  <Route
+		  exact
+            path={`${match.url}/edit-product/millimeter/:itemId`}
             render={(props) => (
               <AddProduct title="Edit product" editing {...props} />
             )}

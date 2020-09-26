@@ -105,21 +105,26 @@ router.put(
 					contentType: image.mimetype,
 				},
 			});
-			blobWriter.on('error', (err) => next(err));
+			blobWriter.on('error', (err) => {throw new Error(err)});
 			blobWriter.on('finish', async () => {
-				// Assembling public URL for accessing the file via HTTP
-				await storage.file(image.originalname).makePublic()
+				try {
+					await storage.file(image.originalname).makePublic()
 
-				const publicUrl = format(
-					`https://storage.googleapis.com/${storage.name}/${blob.name}`
-				);
-				productData.imageUrl = publicUrl
-				const ProductService = new Service.ProductService(productData, req.params.itemId);
-				const products = await ProductService.editProduct()
-				return res.status(200).json({
-					status: 200,
-					message: products
-				})
+					const publicUrl = format(
+						`https://storage.googleapis.com/${storage.name}/${blob.name}`
+					);
+					productData.imageUrl = publicUrl
+					const ProductService = new Service.ProductService(productData, req.params.itemId);
+					const products = await ProductService.editProduct()
+					return res.status(200).json({
+						status: 200,
+						message: products
+					})
+				} catch (error) {
+					throw new Error(error)
+				}
+				// Assembling public URL for accessing the file via HTTP
+				
 			})
 			blobWriter.end(image.buffer);
 			

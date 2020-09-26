@@ -1,12 +1,9 @@
 .order{
     &__header {
-        padding: 5% 0;
-        width: 100%;
-        background-color: rgb(197, 197, 197);
+        @include modalHeader;
 
         .heading-secondary {
             color: black;
-            padding-top: 10%;
         }
 
         .logo-box {

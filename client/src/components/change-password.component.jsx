@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 import formHandler from './change-password-form-handler';
 import { resetPassword } from '../redux/actions/user.action';
-import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const validator = (values) => {
 	let errors = {};
@@ -19,20 +18,13 @@ const validator = (values) => {
 		errors.password = 'Password must be 8 or more characters';
 	}
 	if (values.password !== values.confirmPassword) {
-		console.log(values)
 		errors.confirmPassword = 'Passwords must match';
 	}
 	return errors;
 }
 
 export default function ChangePassword(props) {
-	function login() {
-		console.log('No errors, submit callback called!');
-	}
-	const dispatch = useDispatch()
-	const resetPasswordHandler = () =>{
-		dispatch(resetPassword())
-	}
+
 	 const {
 	 	userInfo,
 	 	errors,

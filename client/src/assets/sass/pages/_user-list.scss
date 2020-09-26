@@ -8,7 +8,6 @@
     @include response(mobile) {
         margin: 5vh auto;
         padding-left: 0;
-        display: ruby;
         width: 100vw;
     }
 
@@ -20,7 +19,9 @@
         border-top: none !important;
 
         @include response(mobile) {
-            width: 70vw;
+            border-radius: 5px 5px 0 0;
+            width: 90%;
+            margin: 2rem auto;
         }
 
     }

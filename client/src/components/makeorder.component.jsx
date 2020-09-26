@@ -1,4 +1,4 @@
-import React, {useState, useEffect, } from "react";
+import React, {useState } from "react";
 import { connect } from "react-redux";
 import Modal from "./modal.component"
 import logo from '../assets/images/HWY420.png'
@@ -21,7 +21,7 @@ const MakeOrder = ({
   const [orderedSuccessful, setOrderedSuccessful] = useState(false)
   const history = useHistory() 
   const setEmailHandler = (e) =>{
-    const {name, value} = e.target; 
+    const { value} = e.target; 
     setEmail(value)
   }
   const orderSubmit = (e) => {
@@ -32,11 +32,12 @@ const MakeOrder = ({
     setOrdering(true)
     submitOrder(email, cartItems, total)
       .then((result) => {
-        console.log(result === 'success')
         if(result === 'success'){
           clearCart()
           setOrdering(false)
           setOrderedSuccessful(true)
+          history.push('/')
+
         }
       }).catch((err) => {
         alert(err)
@@ -48,7 +49,6 @@ const MakeOrder = ({
     setOrdering(false)
     setOrderedSuccessful(false)
     onClose()
-    history.push('/')
 
   }
     return(

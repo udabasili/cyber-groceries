@@ -44,7 +44,7 @@ function Header({history, products}) {
 		return () => {
 			clearInterval(intervalHandler)
 		}
-	}, [hoverAction])
+	}, [])
 
     return (
       <header className="header">

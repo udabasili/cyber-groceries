@@ -93,7 +93,7 @@ function Card({
 
         {isAdmin && (
           <div className="button-container">
-            <a className="btn" href={`/admin/edit-product/${item._id}`}>
+            <a className="btn" href={`/admin/edit-product/${item.type}/${item._id}`}>
               Edit
             </a>
             <p className="btn" onClick={() => deleteProductHandler(item._id)}>

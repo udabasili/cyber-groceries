@@ -6,12 +6,15 @@ import { clearAllItemsFromCart } from '../redux/actions/cart.action';
 
 class CheckOut extends Component {
   state = {
-    makeOrder: false
+    makeOrder: false,
+  
   }
   ;
   makeOrderHandler = () =>{
     this.setState({makeOrder: true})
   }
+
+  
 
   onClose = () =>{
     this.setState({
@@ -20,7 +23,7 @@ class CheckOut extends Component {
   }
 
   render() {
-    const { items, total, clearAllItemsFromCart } = this.props;
+    const { items, total, clearAllItemsFromCart, tax } = this.props;
     const {makeOrder} = this.state
     return (
       <div className="checkout">
@@ -43,7 +46,10 @@ class CheckOut extends Component {
             <CheckOutItem key={cartItem.id} item={cartItem} />
           ))}
         <div className="checkout__total">
-          <span>
+          <span className='tax'>
+            Tax: {(tax)  }
+          </span>
+          <span  className='total'>
             TOTAL: ${total}
           </span>
         </div>
@@ -55,11 +61,16 @@ class CheckOut extends Component {
 
 const mapStateToProps = (state) => ({
   items: state.cart.cart,
-  total: state.cart.cart.reduce(
+  total: (state.cart.cart.reduce(
     (previous, current) => (
-      previous + (current.quantity * current.price * current.size)
+      (previous + (current.quantity * current.price * current.size))
     ), 0,
-  ),
+  ) * 1.15).toFixed(2),
+  tax: (state.cart.cart.reduce(
+    (previous, current) => (
+      (previous + (current.quantity * current.price * current.size))
+    ), 0,
+  ) * .15).toFixed(2),
 });
 
 const mapDispatchToProps = (dispatch) => ({

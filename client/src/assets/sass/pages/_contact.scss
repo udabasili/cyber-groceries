@@ -58,6 +58,7 @@
     &__header{
         font-size: 2.7rem;
         text-transform: uppercase;
+        padding: .5rem 0;
         font-weight: bold;
         text-decoration: underline;
     }
@@ -73,6 +74,11 @@
         .email, .phone {
             font-size: 1.6rem;
         }
+
+        .communication__icon{
+            margin-right: .6rem;
+            transform: rotate(90deg);
+        }
     }
 
     .hours {
@@ -80,6 +86,10 @@
         margin: 2.5rem 0;
         flex-direction: column;
         align-items: center;
+
+        span {
+            font-size: 1.6rem;
+        }
 
 
     }

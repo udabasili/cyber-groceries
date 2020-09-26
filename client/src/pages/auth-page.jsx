@@ -184,229 +184,228 @@ class Auth extends Component {
     }
 
     render() {
-        const { error, history } = this.props;
+        const { error } = this.props;
         const { auth, registerData, loginData, isMobile, disableSubmitButton, isLoading } = this.state;
-        console.log(error)
         return (
           <div className="auth-page">
-			{isLoading && <Loading/>}
-            <div className="auth-page__left-section">
-              <nav className="form-nav">
-                <ul className="form-nav__list">
-                  <li className="form-nav__item">
-                    <NavLink
-                      className="form-nav__link"
-                      activeClassName="active-auth"
-                      to="/auth/login"
-                    >
-                      login{" "}
-                    </NavLink>
-                  </li>
-                  <li className="form-nav__item">
-                    <NavLink
-                      className="form-nav__link"
-                      activeClassName="active-auth"
-                      to="/auth/register"
-                    >
-                      signUp{" "}
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-              <form className="form" onSubmit={this.onSubmitHandler}>
-                {auth === "register" ? (
-                  <div className="form__inner">
-                    <div className="alert-error">{error && error}</div>
-                    <div className="form__component">
-                      <i className="form__group__icon">
-                        <FontAwesomeIcon icon={faUser} />
-                      </i>
-                      <div className="form__group">
-                        <input
-                          type="text"
-                          name="username"
-                          placeholder={isMobile ? "Username" : ""}
-                          onChange={this.onChangeHandlerRegister}
-                          style={{
-                            color: registerData.username.validated
-                              ? "black"
-                              : "red",
-                          }}
-                          value={registerData.username.value}
-                          className="form__input"
-                          required
-                        />
-                        <label htmlFor="username" className="form__label">
-                          Username
-                        </label>
+        {isLoading && <Loading/>}
+              <div className="auth-page__left-section">
+                <nav className="form-nav">
+                  <ul className="form-nav__list">
+                    <li className="form-nav__item">
+                      <NavLink
+                        className="form-nav__link"
+                        activeClassName="active-auth"
+                        to="/auth/login"
+                      >
+                        login{" "}
+                      </NavLink>
+                    </li>
+                    <li className="form-nav__item">
+                      <NavLink
+                        className="form-nav__link"
+                        activeClassName="active-auth"
+                        to="/auth/register"
+                      >
+                        signUp{" "}
+                      </NavLink>
+                    </li>
+                  </ul>
+                </nav>
+                <form className="form" onSubmit={this.onSubmitHandler}>
+                  {auth === "register" ? (
+                    <div className="form__inner">
+                      <div className="alert-error">{error && error}</div>
+                      <div className="form__component">
+                        <i className="form__group__icon">
+                          <FontAwesomeIcon icon={faUser} />
+                        </i>
+                        <div className="form__group">
+                          <input
+                            type="text"
+                            name="username"
+                            placeholder={isMobile ? "Username" : ""}
+                            onChange={this.onChangeHandlerRegister}
+                            style={{
+                              color: registerData.username.validated
+                                ? "black"
+                                : "red",
+                            }}
+                            value={registerData.username.value}
+                            className="form__input"
+                            required
+                          />
+                          <label htmlFor="username" className="form__label">
+                            Username
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form__component">
+                        <i className="form__group__icon">
+                          <FontAwesomeIcon icon={faUser} />
+                        </i>
+                        <div className="form__group">
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder={isMobile ? "Name" : ""}
+                            onChange={this.onChangeHandlerRegister}
+                            style={{
+                              color: registerData.username.validated
+                                ? "black"
+                                : "red",
+                            }}
+                            value={registerData.name.value}
+                            className="form__input"
+                            required
+                          />
+                          <label htmlFor="name" className="form__label">
+                            Name
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form__component">
+                        <i className="form__group__icon">
+                          <FontAwesomeIcon icon={faEnvelope} />
+                        </i>
+                        <div className="form__group">
+                          <input
+                            type="email"
+                            placeholder={isMobile ? "Email" : ""}
+                            onChange={this.onChangeHandlerRegister}
+                            value={registerData.email.value}
+                            style={{
+                              color: registerData.email.validated
+                                ? "black"
+                                : "red",
+                            }}
+                            name="email"
+                            className="form__input"
+                            required
+                          />
+                          <label htmlFor="email" className="form__label">
+                            Email
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form__component">
+                        <i className="form__group__icon">
+                          <FontAwesomeIcon icon={faKey} />
+                        </i>
+                        <div className="form__group">
+                          <input
+                            type="password"
+                            placeholder={
+                              isMobile
+                                ? "Password (Must be at least 8 characters)"
+                                : ""
+                            }
+                            name="password"
+                            onChange={this.onChangeHandlerRegister}
+                            title="Must be at least 8 characters"
+                            style={{
+                              color: registerData.password.validated
+                                ? "black"
+                                : "red",
+                            }}
+                            value={registerData.password.value}
+                            className="form__input"
+                            required
+                          />
+                          <label htmlFor="password" className="form__label">
+                            <span> Password </span>
+                            <span> ( Must be at least 8 characters)</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form__component">
+                        <i className="form__group__icon">
+                          <FontAwesomeIcon icon={faKey} />
+                        </i>
+                        <div className="form__group">
+                          <input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder={isMobile ? "Confirm password" : ""}
+                            onChange={this.onChangeHandlerRegister}
+                            style={{
+                              color: registerData.confirmPassword.validated
+                                ? "black"
+                                : "red",
+                            }}
+                            value={registerData.confirmPassword.value}
+                            className="form__input"
+                            required
+                          />
+                          <label
+                            htmlFor="confirm-password"
+                            className="form__label"
+                          >
+                            Confirm Password
+                          </label>
+                        </div>
                       </div>
                     </div>
-                    <div className="form__component">
-                      <i className="form__group__icon">
-                        <FontAwesomeIcon icon={faUser} />
-                      </i>
-                      <div className="form__group">
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder={isMobile ? "Name" : ""}
-                          onChange={this.onChangeHandlerRegister}
-                          style={{
-                            color: registerData.username.validated
-                              ? "black"
-                              : "red",
-                          }}
-                          value={registerData.name.value}
-                          className="form__input"
-                          required
-                        />
-                        <label htmlFor="name" className="form__label">
-                          Name
-                        </label>
+                  ) : (
+                    <div className="form__inner">
+                      <div className="alert-error">{error && error}</div>
+                      <div className="form__component">
+                        <i className="form__group__icon">
+                          <FontAwesomeIcon icon={faEnvelope} />
+                        </i>
+                        <div className="form__group">
+                          <input
+                            type="email"
+                            placeholder={isMobile ? "Email" : ""}
+                            onChange={this.onChangeHandlerLogin}
+                            value={loginData.email}
+                            name="email"
+                            className="form__input"
+                          />
+                          <label htmlFor="email" className="form__label">
+                            Email
+                          </label>
+                        </div>
+                      </div>
+                      <div className="form__component">
+                        <i className="form__group__icon">
+                          <FontAwesomeIcon icon={faKey} />
+                        </i>
+                        <div className="form__group">
+                          <input
+                            type="password"
+                            name="password"
+                            placeholder={isMobile ? "Password" : ""}
+                            onChange={this.onChangeHandlerLogin}
+                            value={loginData.password}
+                            className="form__input"
+                          />
+                          <label htmlFor="password" className="form__label">
+                            Password
+                          </label>
+                        </div>
                       </div>
                     </div>
-                    <div className="form__component">
-                      <i className="form__group__icon">
-                        <FontAwesomeIcon icon={faEnvelope} />
-                      </i>
-                      <div className="form__group">
-                        <input
-                          type="email"
-                          placeholder={isMobile ? "Email" : ""}
-                          onChange={this.onChangeHandlerRegister}
-                          value={registerData.email.value}
-                          style={{
-                            color: registerData.email.validated
-                              ? "black"
-                              : "red",
-                          }}
-                          name="email"
-                          className="form__input"
-                          required
-                        />
-                        <label htmlFor="email" className="form__label">
-                          Email
-                        </label>
-                      </div>
+                  )}
+                  <input
+                    type="submit"
+                    className="btn"
+                    value="Submit"
+                    disabled={disableSubmitButton && auth === "register"}
+                  />
+                  {auth === 'login' &&
+                    <div className='reset-password'>
+                      <span>Forgot your password?</span>
+                      <a  
+                        href='/forgot-password'
+                        className='reset-password__button'>Reset now</a>
                     </div>
-                    <div className="form__component">
-                      <i className="form__group__icon">
-                        <FontAwesomeIcon icon={faKey} />
-                      </i>
-                      <div className="form__group">
-                        <input
-                          type="password"
-                          placeholder={
-                            isMobile
-                              ? "Password (Must be at least 8 characters)"
-                              : ""
-                          }
-                          name="password"
-                          onChange={this.onChangeHandlerRegister}
-                          title="Must be at least 8 characters"
-                          style={{
-                            color: registerData.password.validated
-                              ? "black"
-                              : "red",
-                          }}
-                          value={registerData.password.value}
-                          className="form__input"
-                          required
-                        />
-                        <label htmlFor="password" className="form__label">
-                          <span> Password </span>
-                          <span> ( Must be at least 8 characters)</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div className="form__component">
-                      <i className="form__group__icon">
-                        <FontAwesomeIcon icon={faKey} />
-                      </i>
-                      <div className="form__group">
-                        <input
-                          type="password"
-                          name="confirmPassword"
-                          placeholder={isMobile ? "Confirm password" : ""}
-                          onChange={this.onChangeHandlerRegister}
-                          style={{
-                            color: registerData.confirmPassword.validated
-                              ? "black"
-                              : "red",
-                          }}
-                          value={registerData.confirmPassword.value}
-                          className="form__input"
-                          required
-                        />
-                        <label
-                          htmlFor="confirm-password"
-                          className="form__label"
-                        >
-                          Confirm Password
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="form__inner">
-                    <div className="alert-error">{error && error}</div>
-                    <div className="form__component">
-                      <i className="form__group__icon">
-                        <FontAwesomeIcon icon={faEnvelope} />
-                      </i>
-                      <div className="form__group">
-                        <input
-                          type="email"
-                          placeholder={isMobile ? "Email" : ""}
-                          onChange={this.onChangeHandlerLogin}
-                          value={loginData.email}
-                          name="email"
-                          className="form__input"
-                        />
-                        <label htmlFor="email" className="form__label">
-                          Email
-                        </label>
-                      </div>
-                    </div>
-                    <div className="form__component">
-                      <i className="form__group__icon">
-                        <FontAwesomeIcon icon={faKey} />
-                      </i>
-                      <div className="form__group">
-                        <input
-                          type="password"
-                          name="password"
-                          placeholder={isMobile ? "Password" : ""}
-                          onChange={this.onChangeHandlerLogin}
-                          value={loginData.password}
-                          className="form__input"
-                        />
-                        <label htmlFor="password" className="form__label">
-                          Password
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <input
-                  type="submit"
-                  className="btn"
-                  value="Submit"
-                  disabled={disableSubmitButton && auth === "register"}
-                />
-                {auth === 'login' &&
-                  <div className='reset-password'>
-                    <span>Forgot your password?</span>
-                    <a  
-                      href='/forgot-password'
-                      className='reset-password__button'>Reset now</a>
-                  </div>
-                }
-              </form>
-            </div>
-            <div
-              className="auth-page__right-section"
-              style={{ backgroundImage: `url(${AuthImage})` }}
+                  }
+                </form>
+              </div>
+              <div
+                className="auth-page__right-section"
+                style={{ backgroundImage: `url(${AuthImage})` }}
             ></div>
           </div>
         );

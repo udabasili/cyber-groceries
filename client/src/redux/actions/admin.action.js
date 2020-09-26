@@ -118,9 +118,7 @@ export const enableUser = (uid) => {
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
-                    console.log(error)
-
-                    // return rej(error)
+                    return rej(error)
                 })
         })
     }

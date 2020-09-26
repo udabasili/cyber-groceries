@@ -76,15 +76,15 @@ class OrdersPage extends Component {
     render() {
         const {orders} = this.state
         let filteredOrders = []
-        const {showModal, items, currentUser, searchString} = this.state
+        const {showModal, items,  searchString} = this.state
         if(orders !== null && orders !== undefined){
             filteredOrders = orders.filter((order) => {
                 if (!searchString) {
                     return order
-                } else if (
+                } else{
                     order.currentUser.username.includes(searchString.toLowerCase()) ||
-                    order.currentUser.userId.includes(searchString.toLowerCase())) {
-                    return order
+                    order.currentUser.userId.includes(searchString.toLowerCase())
+                    
                 }
             })
         }

@@ -8,7 +8,6 @@
     @include response(mobile) {
         margin: 5vh auto;
         padding-left: 0;
-        display: ruby;
         width: 100vw;
     }
 
@@ -20,7 +19,10 @@
         border-top: none !important;
 
         @include response(mobile) {
-            width: 70vw;
+            border-radius: 5px 5px 0 0;
+            width: 90%;
+            margin: 2rem auto;
+
         }
 
     }
@@ -66,7 +68,7 @@
 
     th,
     td {
-        padding: .5rem;
+        padding: 1rem .5rem;
 
     }
 
@@ -96,9 +98,10 @@
 
 .user-order{
     &__header{
-         padding-top: 2%;
+        @include modalHeader;
+
          .heading-tertiary {
-             padding-top: 10%;
+             width: 100%;
          }
     }
 
@@ -108,11 +111,21 @@
         overflow-y: auto;
         .checkout-item{
 
+            &__image-container {
+                display: block;
+                width: 23%;
+                padding-right: 15px;
+            }
             &__name,
             &__quantity,
             .price
              {
+                 
                 font-size: 1.2rem;
+                @include response(mobile){
+                    margin: 1.2rem;
+                    font-size: .9rem;
+                }
             }
 
         }
