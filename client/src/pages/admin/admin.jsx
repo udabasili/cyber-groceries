@@ -31,7 +31,6 @@ function AdminRoute({
 				Promise.all([getAllUsersOrder(), getAllUsers(id)])
 					.then(() => {
 					}).catch(() => {
-						alert('Some went wrong')
 				});
 
 			}, [currentUser, getAllUsers, getAllUsersOrder])
