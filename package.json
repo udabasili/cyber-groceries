@@ -4,7 +4,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "client": "cd client && npm run start",
-    "heroku-postbuild": "cd client &&  npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\""
   },
   "engines": {
