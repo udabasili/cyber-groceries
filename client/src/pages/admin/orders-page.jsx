@@ -82,7 +82,7 @@ class OrdersPage extends Component {
                 if (!searchString) {
                     return order
                 } else{
-                    order.currentUser.username.includes(searchString.toLowerCase()) ||
+                    return order.currentUser.username.includes(searchString.toLowerCase()) ||
                     order.currentUser.userId.includes(searchString.toLowerCase())
                     
                 }

@@ -18,29 +18,21 @@ function LeftNav(props) {
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/edibles"
-                 className="left-nav__link"
-                 activeClassName="left-nav-active"
-               >
-                 Edibles
-               </NavLink>
-             </li>
-             <li className="left-nav__item">
-               <NavLink
-                 to="/products/topicals"
-                 className="left-nav__link"
-                 activeClassName="left-nav-active"
-               >
-                 Topicals
-               </NavLink>
-             </li>
-             <li className="left-nav__item">
-               <NavLink
                  to="/products/buds"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
                  Buds
+               </NavLink>
+             </li>
+             <li className="left-nav__item">
+
+               <NavLink
+                 to="/products/edibles"
+                 className="left-nav__link"
+                 activeClassName="left-nav-active"
+               >
+                 Edibles
                </NavLink>
              </li>
              <li className="left-nav__item">
@@ -52,6 +44,17 @@ function LeftNav(props) {
                  Extracts
                </NavLink>
              </li>
+             <li className="left-nav__item">
+               <NavLink
+                 to="/products/topicals"
+                 className="left-nav__link"
+                 activeClassName="left-nav-active"
+               >
+                 Topicals
+               </NavLink>
+             </li>
+             
+             
            </ul>
          </nav>
        </div>

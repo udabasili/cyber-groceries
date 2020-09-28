@@ -20,7 +20,7 @@ export default class ContactPage extends Component {
                     <h3 className="contact__header">Communication</h3>
                     <span className="email">
 							<FontAwesomeIcon icon={faEnvelopeOpen} color='black' className='communication__icon' size='1x'/>
-                            juliannapeterpaul@highway420canna.ca
+                            info@highway420canna.ca
                         </span>
                      <div>
                         <span className="phone">

@@ -46,6 +46,7 @@
         align-items: center;
         flex-direction: column;
 
+
          @include response(mobile) {
              overflow: unset;
       
@@ -66,6 +67,10 @@
             grid-column: 1;
             align-items: center;
 
+
+         }
+
+         @include response(big-desk){
 
          }
 
@@ -131,6 +136,10 @@
         align-items: center;
         justify-content: center;
         box-shadow: $box-shadow;
+         @include response(big-desk) {
+             grid-row: 2/3;
+             grid-column: 1/2;
+         }
 
         @include response(mobile){
             height: 100%;
@@ -190,6 +199,10 @@
              grid-row: 2 / 4;
              grid-column: 1/ -1;
 
+         }
+         @include response(big-desk) {
+             grid-row: 1/3;
+             grid-column: 2/3;
          }
     }
 }

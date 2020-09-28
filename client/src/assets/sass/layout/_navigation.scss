@@ -207,10 +207,10 @@
             text-decoration: none;
             color: black;
             font-size: 1.6rem;
+            text-transform: uppercase;
             outline: none;
               @include response(mobile) {
                   padding: 1.5rem;
-                  text-transform: uppercase;
                   font-size: 3rem;
 
               }

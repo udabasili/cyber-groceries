@@ -36,7 +36,6 @@ const MakeOrder = ({
           clearCart()
           setOrdering(false)
           setOrderedSuccessful(true)
-          history.push('/')
 
         }
       }).catch((err) => {
@@ -49,6 +48,9 @@ const MakeOrder = ({
     setOrdering(false)
     setOrderedSuccessful(false)
     onClose()
+    if(orderSubmit === true){
+        history.push('/')
+    }
 
   }
     return(

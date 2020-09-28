@@ -90,10 +90,10 @@ export default class RevenueGraph extends Component {
                                     series={this.state.series} 
                                     type='donut' 
                                     width = {
-                                        isMobile ? '90%' : "60%"
+                                        isMobile ? '90%' : "80%"
                                     }
                                     height = {
-                                        isMobile ? '90%' : "60%"
+                                        isMobile ? '90%' : "70%"
                                     }
                                     />
                         </React.Fragment>

@@ -88,7 +88,7 @@ export default class NewUsersGraphs extends React.Component {
                         options = {this.state.options}
                         series = {this.state.series}
                         type = "bar"
-                        width = {isMobile? '90%': "60%"}
+                        width = {isMobile? '90%': "90%"}
                         height = {isMobile? '90%': "60%"}
                     />
                         </React.Fragment>
