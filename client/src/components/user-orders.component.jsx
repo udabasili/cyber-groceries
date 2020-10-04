@@ -1,9 +1,8 @@
 import React from 'react'
 
 export default function UserOrders({orders}) {
-    console.log(orders)
     return (
-        < div className = 'user-list order-list' >
+        <div className = 'user-list order-list' >
             <h3 className='heading-tertiary'>
                 User Orders
             </h3>
@@ -26,9 +25,7 @@ export default function UserOrders({orders}) {
                         ))    
                     }
                 </tbody>
-			
             </table>
-            
         </div>
     )
 }

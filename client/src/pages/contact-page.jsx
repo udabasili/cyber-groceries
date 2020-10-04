@@ -5,7 +5,6 @@ import {
 import {faFacebookSquare, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelopeOpen, faPhone } from '@fortawesome/free-solid-svg-icons';
 
-console.log(process.env.REACT_APP_GOOGLE_MAP_API);
 export default class ContactPage extends Component {
     render() {
         return (

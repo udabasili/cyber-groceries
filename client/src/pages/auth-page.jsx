@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import validator from '../components/validator';
+import {validateError, validator} from '../components/validator';
 import AuthImage from '../assets/images/slides/weed1.jpg'
 import { Authenticate } from '../redux/actions/user.action';
 import { removeError } from '../redux/actions/error.action';
@@ -18,6 +18,7 @@ class Auth extends Component {
         super(props);
         this.state = {
             loggedIn: false,
+            errors:{},
             isLoading: false,
             disableSubmitButton: true,
             auth: props.auth || 'register',
@@ -183,9 +184,29 @@ class Auth extends Component {
         this.setState({ auth: value })
     }
 
+    errorHandler = (e) => {
+      const {name, value} = e.target
+      const userData = {
+        [name]: value
+      }
+      const errors = validateError(userData)
+      let error = null;
+      for (let key in errors){    
+        console.log(key)
+        if(key === name){
+          error = errors[key]
+        }
+      }
+      this.setState((prevState) =>({
+        ...prevState,
+        errors: {...prevState.errors, [name]: error}
+      }))
+    
+    }
+
     render() {
         const { error } = this.props;
-        const { auth, registerData, loginData, isMobile, disableSubmitButton, isLoading } = this.state;
+        const { auth, registerData, loginData, isMobile, disableSubmitButton, isLoading,errors } = this.state;
         return (
           <div className="auth-page">
         {isLoading && <Loading/>}
@@ -222,7 +243,13 @@ class Auth extends Component {
                         </i>
                         <div className="form__group">
                           <input
-                            type="text"
+                            type = "text"
+                            onBlur = {
+                              this.errorHandler
+                            }
+                            onFocus ={
+                              this.errorHandler
+                            }
                             name="username"
                             placeholder={isMobile ? "Username" : ""}
                             onChange={this.onChangeHandlerRegister}
@@ -248,10 +275,11 @@ class Auth extends Component {
                           <input
                             type="text"
                             name="name"
+                            onBlur={this.errorHandler}
                             placeholder={isMobile ? "Name" : ""}
                             onChange={this.onChangeHandlerRegister}
                             style={{
-                              color: registerData.username.validated
+                              color: registerData.name.validated
                                 ? "black"
                                 : "red",
                             }}
@@ -274,6 +302,7 @@ class Auth extends Component {
                             placeholder={isMobile ? "Email" : ""}
                             onChange={this.onChangeHandlerRegister}
                             value={registerData.email.value}
+                            onBlur={this.errorHandler}
                             style={{
                               color: registerData.email.validated
                                 ? "black"
@@ -286,6 +315,9 @@ class Auth extends Component {
                           <label htmlFor="email" className="form__label">
                             Email
                           </label>
+                            {(errors && !registerData.email.validated) && 
+                              <div className='input-error'>{errors.email}
+                            </div>}
                         </div>
                       </div>
                       <div className="form__component">
@@ -295,14 +327,15 @@ class Auth extends Component {
                         <div className="form__group">
                           <input
                             type="password"
+                            onBlur={this.errorHandler}
                             placeholder={
                               isMobile
-                                ? "Password (Must be at least 8 characters)"
+                                ? "Password (Must be at least 9 characters)"
                                 : ""
                             }
                             name="password"
                             onChange={this.onChangeHandlerRegister}
-                            title="Must be at least 8 characters"
+                            title="Must be at least 9 characters"
                             style={{
                               color: registerData.password.validated
                                 ? "black"
@@ -314,8 +347,12 @@ class Auth extends Component {
                           />
                           <label htmlFor="password" className="form__label">
                             <span> Password </span>
-                            <span> ( Must be at least 8 characters)</span>
+                            <span> ( Must be at least 9 characters)</span>
                           </label>
+                            {(errors && !registerData.password.validated)
+                             && <div className='input-error'>
+                               {errors.password}
+                            </div>}
                         </div>
                       </div>
                       <div className="form__component">
@@ -325,6 +362,7 @@ class Auth extends Component {
                         <div className="form__group">
                           <input
                             type="password"
+                            onBlur={this.errorHandler}
                             name="confirmPassword"
                             placeholder={isMobile ? "Confirm password" : ""}
                             onChange={this.onChangeHandlerRegister}
@@ -343,6 +381,12 @@ class Auth extends Component {
                           >
                             Confirm Password
                           </label>
+                              {
+                                
+                                  (errors && !registerData.password.validated) && 
+                                    <div className = 'input-error' > {
+                                      errors.confirmPassword
+                                  } </div>}
                         </div>
                       </div>
                     </div>

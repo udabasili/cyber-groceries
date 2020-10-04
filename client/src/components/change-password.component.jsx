@@ -14,8 +14,8 @@ const validator = (values) => {
 	}
 	if (!values.password) {
 		errors.password = 'Password is required';
-	} else if (values.password.length < 8) {
-		errors.password = 'Password must be 8 or more characters';
+	} else if (values.password.length < 9) {
+		errors.password = 'Password must be 9 or more characters';
 	}
 	if (values.password !== values.confirmPassword) {
 		errors.confirmPassword = 'Passwords must match';

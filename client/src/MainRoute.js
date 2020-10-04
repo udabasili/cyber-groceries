@@ -19,7 +19,6 @@ import { AdminProtectedRoute, ProtectedRouteWithRedux} from './components/protec
 import CheckConsent from './components/check-consent.component'
 import ChangePassword from './components/change-password.component';
 import ResetPassword from './pages/reset-password-page'
-import { analytics } from 'firebase'
 
 
 class MainRoute extends PureComponent {
@@ -35,8 +34,7 @@ class MainRoute extends PureComponent {
         const {toggleCartDropDown, isAuthenticated, toggleUserDropdown} = this.props
         this.props.getAllProducts()
             .then((result) => {
-                analytics().setCurrentScreen(window.location.pathname)
-                analytics().logEvent('page_view')
+              
             }).catch((err) => {
                 
             });

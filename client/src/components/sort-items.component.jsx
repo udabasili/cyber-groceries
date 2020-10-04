@@ -1,8 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-
-function Filter({setValue}) {
+/**
+ *
+ *The sorting component for the products
+ * @param {*} {setValue}
+ * @return {*} 
+ */
+function SortItems({setValue}) {
     const character = (e) => {
         setValue(e.target.value)
     }
@@ -20,12 +24,5 @@ function Filter({setValue}) {
     );
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default SortItems;

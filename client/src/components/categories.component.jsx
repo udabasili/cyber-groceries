@@ -13,38 +13,38 @@ export default function Categories() {
 			</div>
 			<div className="row">
 				<div className="categories-box">
-						<h3 className="heading-tertiary categories-box__header u-margin-bottom-small">
-							Edibles
-						</h3>
+					<h3 className="heading-tertiary categories-box__header u-margin-bottom-small">
+						Edibles
+					</h3>
 					<p className="categories-box__text">
-					Fresh leaves extracts vital antioxidants, minerals and{" "}
+						Fresh leaves extracts vital antioxidants, minerals and{" "}
 					
-				</p>
+					</p>
 					<a href={`/products/edibles`} className="categories-box__button">
 						Open
 					</a>
 				</div>
 				<div className="categories-box">
-						<h3 className="heading-tertiary categories-box__header u-margin-bottom-small">
-							Topicals
-						</h3>
+					<h3 className="heading-tertiary categories-box__header u-margin-bottom-small">
+						Topicals
+					</h3>
 					<p className="categories-box__text">
 					Fresh leaves extracts vital antioxidants, minerals and{" "}
-				</p>
-				<a href={`/products/topicals`} className="categories-box__button">
-					Open
-				</a>
+					</p>
+					<a href={`/products/topicals`} className="categories-box__button">
+						Open
+					</a>
 				</div>
 				<div className="categories-box">
-						<h3 className="heading-tertiary categories-box__header u-margin-bottom-small">
-							Buds
-						</h3>
+					<h3 className="heading-tertiary categories-box__header u-margin-bottom-small">
+						Buds
+					</h3>
 					<p className="categories-box__text">
-					Fresh leaves extracts vital antioxidants, minerals and{" "}
-				</p>
-				<a href={`/products/buds`} className="categories-box__button">
-					Open
-				</a>
+						Fresh leaves extracts vital antioxidants, minerals and{" "}
+					</p>
+					<a href={`/products/buds`} className="categories-box__button">
+						Open
+					</a>
 				</div>
 				<div className="categories-box" >
 					<h3 className="heading-tertiary categories-box__header u-margin-bottom-small">

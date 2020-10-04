@@ -1,3 +1,4 @@
+const { AdminService } = require(".");
 const { db,  adminControl } = require("../loaders/firebase");
 const loggerFunction = require("../loaders/logger");
 const userRef = db.ref('users')
@@ -144,10 +145,10 @@ class Admin {
     }
 
      async setOrderById(userId, order) {
-        await purchaseRef.child(userId).child(order.id).update({
+        await purchaseRef.child(userId).child(order.orderId).update({
             orderFulfilled: order.orderFulfilled
         })
-       const ordersRecord = await this.getAllOrders()
+       const ordersRecord = await Admin.getAllOrders()
        return ordersRecord
     }
 
@@ -173,7 +174,7 @@ class Admin {
        
     }
 
-    async getAllOrders(){
+    static async getAllOrders(){
         const orderRecord = []
         const snapshot = await purchaseRef.once('value')
         const exists = snapshot.val() !== null;
@@ -182,7 +183,7 @@ class Admin {
             for (let key in userOrderRecord) {
                 const record = userOrderRecord[key]
                 for(let k in record){
-                    record[k].id = k
+                    record[k].orderId = k
                     orderRecord.push(record[k])
 
                 }
@@ -191,6 +192,20 @@ class Admin {
         return orderRecord
 
     }
+
+     static async setAllOrders(orders) {
+         async function removeOrderById() {
+             for(let index = 0; index < orders.length; index++)
+                await purchaseRef.child(orders[index].currentUser._id).child(orders[index].orderId).remove()
+
+             
+         }
+        await removeOrderById()
+        const orderRecord = await this.getAllOrders()
+        return orderRecord
+
+     }
+     
 }
 
 module.exports = Admin

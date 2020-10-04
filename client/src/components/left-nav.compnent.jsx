@@ -61,9 +61,7 @@ function LeftNav(props) {
      );
 }
 
-LeftNav.propTypes = {
 
-}
 
 export default LeftNav
 

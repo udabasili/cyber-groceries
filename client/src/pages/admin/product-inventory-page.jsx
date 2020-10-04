@@ -20,7 +20,7 @@ export default class ProductInventory extends Component {
 					inventory.map((product) => (
 					<tr key={product._id}>
 						<td>{product.name}</td>
-						<td>{product.price}</td>
+						<td>${product.price}</td>
 						<td>{product.category}</td>
 						<td>{product.strain}</td>
 						<td>{product.quantity}</td>

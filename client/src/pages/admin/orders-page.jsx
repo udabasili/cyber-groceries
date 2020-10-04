@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify'
+import Loading from '../../components/loading.componet'
 import Order from '../../components/order.component'
 import Search from '../../components/search.component'
+import { setAllUsersOrder } from '../../redux/actions/admin.action'
 
 class OrdersPage extends Component {
     state ={
@@ -9,6 +12,7 @@ class OrdersPage extends Component {
         items: null,
         searchString: '',
         order: null,
+        isLoading: false,
         orders: null
 
     }
@@ -21,6 +25,30 @@ class OrdersPage extends Component {
         }))
     }
 
+    allOrderHandled = () =>{
+        this.setState((prevState) => ({
+            ...prevState,
+            isLoading: true
+        }))
+        const orders = this.state.orders.filter((order) =>(
+            order.orderFulfilled === true
+        ))
+        this.props.setAllUsersOrder(orders)
+            .then((result) => {
+                this.setState((prevState) => ({
+                    ...prevState,
+                    isLoading: false
+                }))
+                toast.success('Orders Successfully Updated ')
+            }).catch((err) => {
+                this.setState((prevState) => ({
+                    ...prevState,
+                    isLoading: false
+                }))
+                toast.error(err)
+            });
+    }
+
 
     componentDidMount(){
         this.setState((prevState) =>({
@@ -30,7 +58,7 @@ class OrdersPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.state.orders !== prevProps.orders){
+        if(prevState.orders !== this.props.orders){
             this.setState((prevState) =>({
                 ...prevState,
                 orders: this.props.orders
@@ -61,6 +89,7 @@ class OrdersPage extends Component {
             orders,
             showModal: false
         }))
+        toast.success('Order Completed')
 
     }
 
@@ -74,7 +103,7 @@ class OrdersPage extends Component {
     
 
     render() {
-        const {orders} = this.state
+        const {orders, isLoading} = this.state
         let filteredOrders = []
         const {showModal, items,  searchString} = this.state
         if(orders !== null && orders !== undefined){
@@ -91,6 +120,7 @@ class OrdersPage extends Component {
          
         return (
             <div className="orders-list">
+                <ToastContainer position='top-center' autoClose={2000} hideProgressBar={true} />
                 { showModal &&
                     <Order 
                         items={items} 
@@ -98,6 +128,7 @@ class OrdersPage extends Component {
                         setCheckedValue={this.setCheckedValue}
                         />
                 }
+                {isLoading &&<Loading/>}
             	<Search searchUsersHandler={this.searchUser}/>
                 <table>
                     <thead>
@@ -129,7 +160,7 @@ class OrdersPage extends Component {
                                 <td>{order.currentUser.userId.split('_')[1]}</td>
                                 <td>{order.currentUser.username}</td>
                                 <td>{order.cartItems.length}</td>
-                                <td>{order.total}</td>
+                                <td>${order.total}</td>
                             </tr>
                     ))}
                     </tbody>
@@ -137,6 +168,9 @@ class OrdersPage extends Component {
                 <div className='total'>
                     {`Total: $${this.calculateTotal(filteredOrders)}`}
                 </div>
+                <p className='btn' onClick={this.allOrderHandled}>
+                    All Orders Handled
+                </p>
            </div>
         )
     }
@@ -147,7 +181,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    
+    setAllUsersOrder
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrdersPage)

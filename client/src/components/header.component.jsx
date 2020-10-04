@@ -2,7 +2,7 @@ import React from 'react'
 import Image from "../assets/images/slides/weed1.jpg";
 import Image2 from "../assets/images/slides/weed2.jpg";
 import Image3 from "../assets/images/slides/weed3.jpg";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import CustomButton from './button.component';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -17,33 +17,37 @@ const slideImages = [
 
 function Header({history, products}) {
 	let [index, setIndex] = useState(0)
-	const hoverAction = () => {
-		const imageContainers = document.querySelectorAll(".composition__photo")
-		imageContainers.forEach((img, i) => {
-			if(i === index){
-				img.classList.add('hover');
-				img.classList.remove('not-hover')
-			}else{
-				img.classList.remove('hover'); 
-				img.classList.add('not-hover')
+	
+	const hoverAction =  useCallback(
+		() => {
+			const imageContainers = document.querySelectorAll(".composition__photo")
+			imageContainers.forEach((img, i) => {
+				if (i === index) {
+					img.classList.add('hover');
+					img.classList.remove('not-hover')
+				} else {
+					img.classList.remove('hover');
+					img.classList.add('not-hover')
+				}
+
+			})
+			if (index === 2) {
+				index = 0
+				setIndex(index)
+			} else {
+				index = index + 1;
+				setIndex(index)
 			}
+		},
+		[],
+	)
 
-		})
-		if( index === 2){
-			index = 0
-			setIndex(index)
-		}else{
-			index = index + 1;
-			setIndex(index)
-		}
-
-	}
 	useEffect(() => {
 		let intervalHandler = setInterval(hoverAction,1000)
 		return () => {
 			clearInterval(intervalHandler)
 		}
-	}, [])
+	}, [hoverAction])
 
     return (
       <header className="header">
@@ -75,7 +79,7 @@ function Header({history, products}) {
 				:
 				<div className='no-image'>
 					<img
-					alt="Photo 1"
+					alt="default 1"
 					className="composition__photo composition__photo--p1"
 					src={slideImages[0]}
 					/>
@@ -87,7 +91,7 @@ function Header({history, products}) {
 				</React.Fragment>:
 				<div className='no-image'>
 					<img
-						alt="Photo 1"
+						alt="default 2"
 						className="composition__photo composition__photo--p2"
 						src={slideImages[1]}
 					/>
@@ -100,7 +104,7 @@ function Header({history, products}) {
 					:
 				<div className='no-image'>
 					<img
-						alt="Photo 1"
+						alt="default 3"
 						className="composition__photo composition__photo--p3"
 						src={slideImages[2]}
 					/>

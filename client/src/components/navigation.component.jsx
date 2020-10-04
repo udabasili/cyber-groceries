@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { toggleCartDropDown } from '../redux/actions/cart.action';
 import { toggleUserDropdown, logOut } from '../redux/actions/user.action';
 import logo from '../assets/images/HWY420.png'
+import { toast , ToastContainer} from 'react-toastify';
 
 function Navigation({
 		isAdmin, 
@@ -27,6 +28,16 @@ function Navigation({
 
 	}
 
+	const logoutHandler = () =>{
+		logOut()
+			.then((result) => {
+				toast.success(result)
+
+			}).catch((err) => {
+				toast.error(err)
+			});
+	}
+
 	useEffect(() => {
 		window.addEventListener('resize', setIsMobile)
 		const navLinks = document.querySelectorAll(".navigation__link");
@@ -43,6 +54,11 @@ function Navigation({
 
 	return (
 		<div className="navigation">
+			<ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={true}
+        />
 			<div className='navigation__header'>
 				<div className="logo-box">
 					<div className="logo"><img src={logo} alt='weblogo'/> </div>
@@ -146,7 +162,7 @@ function Navigation({
 							<NavLink
 								to="/"
 								className="navigation__link"
-								onClick={logOut}
+								onClick={logoutHandler}
 								>
 								<FontAwesomeIcon
 									icon={faCannabis}

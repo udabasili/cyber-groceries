@@ -24,9 +24,10 @@
     }
 
     &--1{
-        right: 7vw;
+        right: 12vw;
         top: 16vh;
         height: 20vh;
+        width: 20vw;
         position: fixed;
         padding: 3rem;
 
@@ -40,11 +41,11 @@
         
         @include response(tab-port) {
             width: 35vw !important;
-            right: 3vw;
+            right: 8vw;
         }
 
         @include response(tab-land) {
-            right: 3vw;
+            right: 11vw;
             width: 23vw !important;
         }
 
@@ -52,7 +53,12 @@
             position: absolute;
             top: 5px;
             right: 10px;
-            color: red;
+             position: absolute;
+             border-radius: 50%;
+             cursor: pointer;
+             width: 2rem;
+             height: 2rem;
+             color: gray;
 
             @include response(mobile) {
                 display: none;

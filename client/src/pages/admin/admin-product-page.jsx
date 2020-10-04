@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CardList from '../../components/card-list.component';
-import Filter from '../../components/filter.component';
+import SortItems from '../../components/sort-items.component';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -40,7 +40,7 @@ class AdminProducts extends Component {
 				<ToastContainer position='top-center' autoClose={2000} hideProgressBar={true} />
 				<a href='/admin/add-product/grams' className='btn'>Add Product</a>
 				<div className="admin-overview">
-				<Filter setValue={this.setFilter}/>
+				<SortItems setValue={this.setFilter}/>
 				<CardList products={products} isAdmin={isAdmin} />
 				</div>
 			</div>

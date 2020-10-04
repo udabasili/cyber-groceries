@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import { addError } from '../../redux/actions/error.action';
 import Loading from '../../components/loading.componet';
+import { ToastContainer, toast } from 'react-toastify';
 
 class AddProduct extends Component {
 	constructor(props){
@@ -110,14 +111,12 @@ class AddProduct extends Component {
 							message: 'Product edited successfully'
 						}
 					});
-				}).catch((err) => {
-										console.log(err)
-
+				}).catch((error) => {
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
 					}))
-					alert(this.props.error.message)
+					toast.error(error)
 				})
 			}else{
 				this.props.editProduct(
@@ -136,13 +135,12 @@ class AddProduct extends Component {
 						}
 					});
 				}).catch((err) => {
-										console.log(err)
-
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
 					}))
-					alert(this.props.error.message)
+					toast.error(err.message)
+
 				})
 			}
 			
@@ -160,13 +158,12 @@ class AddProduct extends Component {
 					state:{message: 'Product added successfully'}
 				});
 				})
-        		.catch((err) =>{
-					console.log(err)
+        		.catch((error) =>{
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
 					}))
-				alert(this.props.error.message)
+				toast.error(error.message)
 			})
 
 		}
@@ -174,17 +171,22 @@ class AddProduct extends Component {
 	}
 
 	render() {
-	const {data} = this.state
-	const type = this.props.type
-	const {title, editing} = this.props
-	let item
-	if (this.props.products !== null){
-		item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
+		const {data} = this.state
+		const type = this.props.type
+		const {title, editing} = this.props
+		let item
+		if (this.props.products !== null){
+			item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
 
-	}
+		}
 	let components = ( 
 		<div className="add-product">
 			{this.state.isLoading && <Loading/>}
+			<ToastContainer
+				position="top-center"
+				autoClose={2000}
+				hideProgressBar={true}
+			/>
 			<h2 className="heading-secondary">{title}</h2>
 			<form className="form " onSubmit={this.onSubmitHandler}>
 				<nav className="form-nav">

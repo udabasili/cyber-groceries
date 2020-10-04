@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import { editUserProfile } from '../redux/actions/admin.action';
 import Loading from './loading.componet';
 
-/**
- * Class representing editing form for user
- */
 
+
+/**
+ *
+ * Class representing editing form
+ for users profile in admin
+ * @class EditProfile
+ * @extends {Component}
+ */
 class EditProfile extends Component {
     constructor(props) {
         super(props);
@@ -24,17 +29,17 @@ class EditProfile extends Component {
 
     }
     componentDidMount() {
-    window.addEventListener('resize', this.setIsMobile)
-    const {userData} = this.props;
-		if (this.props.userData){
-			this.setState((prevState) =>({
-				...prevState,
-				data:{
-					username: userData.username,
-					name: userData.name,
-          userId: userData.userId,
-          ageVerified: userData.ageVerified
-				}
+		window.addEventListener('resize', this.setIsMobile)
+		const {userData} = this.props;
+			if (this.props.userData){
+				this.setState((prevState) =>({
+					...prevState,
+					data:{
+						username: userData.username,
+						name: userData.name,
+			userId: userData.userId,
+			ageVerified: userData.ageVerified
+					}
 			}))
 		}
     }

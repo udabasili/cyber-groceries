@@ -1,8 +1,7 @@
-import React, {
+import {
     useState,
     useEffect
 } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -39,7 +38,15 @@ const UseForm = (validator, resetPassword, props) => {
                 toast.error(err)
             });
         }
-    }, [errors, isSubmitting]);
+    }, [errors, 
+        isSubmitting, 
+        code, 
+        history, 
+        props.location.search, 
+        resetPassword, 
+        userInfo.confirmPassword, 
+        userInfo.email, 
+        userInfo.password]);
 
     const onSubmitHandler = (e) => {
         e.preventDefault();

@@ -233,12 +233,7 @@
         }
     }
 
-    &__active{
-        color: $color-secondary;
-    }
-    &__active &__i{
-        visibility: visible;
-    }
+    
 
 
     &__button{
@@ -370,6 +365,13 @@
             transform: rotate(45deg);
         }
         
+    }
+
+    &__active{
+        color: $color-secondary !important;
+    }
+    &__active &__i{
+        visibility: visible;
     }
 }
 

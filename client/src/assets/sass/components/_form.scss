@@ -17,6 +17,11 @@
         position: relative;
         width: 100%;
 
+        .input-error{
+            color: red;
+            font-size: 1rem;
+        }
+
         .form__select{
             margin: 0;
             width: 30%;

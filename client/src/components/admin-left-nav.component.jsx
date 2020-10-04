@@ -1,6 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+/**
+ *The left navigation for the admin page
+ *
+ * @export function LeftNav
+ * @return {*} 
+ */
 export default function LeftNav() {
     return (
       <div className="left-nav">

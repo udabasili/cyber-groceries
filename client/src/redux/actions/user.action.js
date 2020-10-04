@@ -1,11 +1,9 @@
-import React from 'react'
 import actionType from '../actionTypes'
 import {
     apiHandler,setTokenHeader, getToken
 } from '../../services/api'
 import { addError, removeError } from './error.action'
-import { setAllUsers } from './admin.action'
-import { useHistory } from 'react-router-dom'
+import { setAllOrders, setAllUsers } from './admin.action'
 
 export const setCurrentUser = (user) => ({
     type: actionType.SET_CURRENT_USER,
@@ -27,10 +25,19 @@ export const toggleUserDropdown = (hideCart) => ({
 
 export const logOut = () => {
     return dispatch =>{
-        sessionStorage.removeItem('userId')
-        sessionStorage.removeItem('validator')
-        dispatch(setCurrentUser({}));
-        dispatch(setAllUsers([]))
+           return new Promise((resolve, reject) => {
+            return apiHandler(`/api/auth/logout`, 'get')
+                .then((result) => {
+                    sessionStorage.removeItem('userId')
+                    sessionStorage.removeItem('validator')
+                    dispatch(setCurrentUser({}));
+                    dispatch(setAllUsers([]))
+                    dispatch(setAllOrders([]))
+                    return resolve(result)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
     }
 }
 export const Authenticate = (userData, authPath) => {
@@ -44,6 +51,10 @@ export const Authenticate = (userData, authPath) => {
                     sessionStorage.setItem('userId', currentUser._id);
                     sessionStorage.setItem('validator', response.generateUserToken)
                     dispatch(setCurrentUser(currentUser));
+                    if(!currentUser.isAdmin){
+                         dispatch(setAllUsers([]))
+                         dispatch(setAllOrders([]))
+                    }
                     return resolve()
                 }).catch((err) => {
                     dispatch(addError(err.message))

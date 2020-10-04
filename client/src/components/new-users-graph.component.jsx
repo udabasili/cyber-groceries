@@ -82,15 +82,15 @@ export default class NewUsersGraphs extends React.Component {
                          :
                         <React.Fragment>
                              <h3 className='heading-tertiary'>
-                        Registered Users
-                    </h3>
-                    <Chart 
-                        options = {this.state.options}
-                        series = {this.state.series}
-                        type = "bar"
-                        width = {isMobile? '90%': "90%"}
-                        height = {isMobile? '90%': "60%"}
-                    />
+                                Registered Users
+                            </h3>
+                            <Chart 
+                                options = {this.state.options}
+                                series = {this.state.series}
+                                type = "bar"
+                                width = {isMobile? '90%': "90%"}
+                                height = {isMobile? '90%': "60%"}
+                            />
                         </React.Fragment>
                     }
                    

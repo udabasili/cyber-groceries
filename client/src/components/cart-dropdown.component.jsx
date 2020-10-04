@@ -1,13 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+/**
+ *
+ * The dropdown cart components
+ * @param {Array} {cartItems}
+ */
 function CartDropDown({cartItems}) {
     return (
         <div className='dropdown'>
             <ul className="dropdown__list">
                 {cartItems.map((item, index) =>  (
                     <li className="dropdown__item" key={index}>
-                        <img className="image" src={item.imageUrl}/>
+                        <img className="image" src={item.imageUrl} alt={item.name}/>
                         <div className="detail">
                             <div className="detail__name">
                                 {item.name}
@@ -17,7 +22,6 @@ function CartDropDown({cartItems}) {
                                 <span className='price'>{`Size:${item.size} grams`}</span>
                                 <span className='quantity'>{`Quantity :${item.quantity}`}</span>
                             </div>
-
                         </div>
                     </li>
                 ))}

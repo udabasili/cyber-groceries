@@ -108,5 +108,20 @@ router.post('/reset-password',
                 status: 500
             })
         }
-    })
+})
+
+router.get('/logout', async (req, res, next) => {
+    try {
+        const response = await Service.UserService.signOut()
+        return res.status(200).json({
+            message: response
+        })
+    } catch (error) {
+
+        return next({
+            message: error.message,
+            status: 500
+        })
+    }
+})
 module.exports = router;

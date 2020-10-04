@@ -10,8 +10,8 @@
         padding: 1.5rem 2rem;
 
         &:hover{
-            background-color: $color-background;
-            color: $color-primary-dark;
+            background-color: $color-secondary;
+            color: white;
         }
     }
 }
@@ -52,8 +52,8 @@
     }
 
     &:hover {
-        background-color: $color-background;
-        color: $color-primary-dark;
+        background-color: $color-secondary;
+        color: white;
     }
 
     &:disabled{
@@ -98,7 +98,7 @@
      }
 
     &:hover{
-        background-color: $color-primary-dark;
+        background-color: $color-secondary;
         color: white;
     }
 }

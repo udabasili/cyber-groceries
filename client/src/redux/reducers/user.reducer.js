@@ -27,7 +27,6 @@ export default function userReducer(state=INITIAL_STATE, action){
             if(hideCartDropDownValue === false){
                 hideCartDropDownValue = true
             }
-            console.log(state.hideUserCart)
             return {
                 ...state,
                 hideUserCart: action.payload ? action.payload :  !state.hideUserCart,

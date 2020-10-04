@@ -3,30 +3,41 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Modal from './modal.component'
 import { setOrderById } from '../redux/actions/admin.action'
+import Loading from './loading.componet'
 
 class Order extends Component {
     constructor(props){
         super (props);
         this.state = {
-            orderFulfilled: props.order.orderFulfilled
+            orderFulfilled: props.order.orderFulfilled,
+            isLoading: false
         }
     }
 
 
     onChange = (e) => {
+
         let orderFulfilled = e.target.checked;
         const order = {...this.props.order}
         let {currentUser, id} = order
         order.orderFulfilled = true
         this.setState(prevState =>({
             ...prevState,
+            isLoading: true,
             orderFulfilled
         }))
         this.props.setOrderById(currentUser._id, order)
             .then((result) => {
+                this.setState(prevState => ({
+                    ...prevState,
+                    isLoading: false,
+                }))
                 this.props.setCheckedValue(orderFulfilled, id)
             }).catch((err) => {
-
+                this.setState(prevState => ({
+                    ...prevState,
+                    isLoading: false,
+                }))
         });
     }
 
@@ -37,9 +48,10 @@ class Order extends Component {
     
     render() {
         const {order} = this.props
-        const {orderFulfilled} = this.state
+        const {orderFulfilled, isLoading} = this.state
         return (
             <Modal onClose={this.onCloseHandler}>
+                {isLoading &&<Loading/>}
                 <div className='user-order__header'>
                     <h2 className='heading-tertiary'>{order.currentUser.username}</h2>
                 </div>

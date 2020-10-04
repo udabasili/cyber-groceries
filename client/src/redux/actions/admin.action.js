@@ -41,9 +41,7 @@ export const getTotalCost = () => {
                 .then((response) => {
                     return res(response)
                 }).catch((error) => {
-                    console.log(error)
-
-                    // return rej(error)
+                    return rej(error)
                 })
         })
     
@@ -58,13 +56,10 @@ export const deleteUser = (uid) => {
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/edit-user-email/${uid}`, 'delete')
                 .then((response) => {
-                    console.log(response)
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
-                    console.log(error)
-
-                    // return rej(error)
+                    return rej(error)
                 })
         })
     }
@@ -94,13 +89,10 @@ export const disableUser = (uid) => {
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/disable/${uid}`, 'get')
                 .then((response) => {
-                    console.log(response)
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
-                    console.log(error)
-
-                    // return rej(error)
+                    return rej(error)
                 })
         })
     }
@@ -114,7 +106,6 @@ export const enableUser = (uid) => {
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/enable/${uid}`, 'get')
                 .then((response) => {
-                    console.log(response)
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
@@ -132,13 +123,10 @@ export const editUserProfile = (userData, uid) => {
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/update/${uid}`, 'put', userData)
                 .then((response) => {
-                    console.log(response)
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
-                    console.log(error)
-
-                    // return rej(error)
+                    return rej(error)
                 })
         })
     }
@@ -153,9 +141,7 @@ export const getUserChatData = () => {
                 .then((response) => {
                     return res(response)
                 }).catch((error) => {
-                    console.log(error)
                     return rej(error)
-                    // return rej(error)
                 })
         })
     
@@ -176,6 +162,23 @@ export const getUserOrderById = (userId) =>{
     })
 }
 
+export const setAllUsersOrder = (orders) => {
+    return dispatch => {
+        return new Promise((res, rej) => {
+            const token = getToken()
+            setTokenHeader(token)
+            const currentUserId = sessionStorage.getItem('userId')
+            return apiHandler(`/api/admin/${currentUserId}/set-users-orders`, 'post', {orders})
+                .then((result) => {
+                    dispatch(setAllOrders(result))
+                    res(result)
+                }).catch((err) => {
+                    rej(err)
+                });
+
+        })
+    }
+}
 export const getAllUsersOrder = () => {
     return dispatch=>{
         return new Promise((res, rej) => {
@@ -205,7 +208,7 @@ export const setOrderById = (userId, order) => {
                     dispatch(setAllOrders(result))
                     res()
                 }).catch((err) => {
-                    rej()
+                    rej(err)
                 });
 
         })

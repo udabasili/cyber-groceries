@@ -154,8 +154,22 @@ router.get("/get-user-chart-data", async (req, res, next) => {
 
 router.get("/get-users-orders", async (req, res, next) => {
     try {
-        const AdminService = new Service.AdminService()
-        const orders = await AdminService.getAllOrders()
+        const orders = await Service.AdminService.getAllOrders()
+        return res.status(200).json({
+            message: orders
+        })
+    } catch (error) {
+        return next({
+            message: error.message,
+            status: 500
+        })
+    }
+})
+
+router.post("/set-users-orders", async (req, res, next) => {
+    try {
+        const ordersRecord = req.body.orders
+        const orders = await Service.AdminService.setAllOrders(ordersRecord)
         return res.status(200).json({
             message: orders
         })

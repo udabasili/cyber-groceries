@@ -5,6 +5,17 @@ import { connect } from 'react-redux';
 import {deleteProduct} from '../redux/actions/product.action';
 import { addItemToCart } from '../redux/actions/cart.action';
 
+/**
+ *
+ * The Card that shows products
+ * @param {String, String, String, Boolean, String} {
+ *     item,
+ *     addItemToCart,
+ *     deleteProduct, 
+ *     isAdmin,
+ *     setToastMessage,
+ *   }
+ */
 function Card({
     item,
     addItemToCart,
@@ -14,26 +25,26 @@ function Card({
   }) {
     const [size, setSize] = useState(item.type !== 'millimeter'? '3.5':'50')
     const setSizeHandler = (e) =>{
-      const {name, value} = e.target;
+      const {value} = e.target;
       setSize(value)
     }
     const deleteProductHandler = (id) =>{
       deleteProduct(id)
         .then((result) => {
-          setToastMessage('Deleted Successfully')
+          setToastMessage('Deleted Successfully', 'success')
         }).catch((err) => {
-          
+            setToastMessage('Something went wrong', 'error')
+
         });
     }
 
     const addItemToCartHandler = (id) =>{
       try {
-        
         addItemToCart(id, size)
-        setToastMessage('Item added to Cart')
+        setToastMessage('Item added to Cart', 'success')
 
       } catch (error) {
-        setToastMessage('Something went wrong')
+        setToastMessage('Something went wrong', 'error')
 
       }
     }
@@ -41,11 +52,9 @@ function Card({
 
     return (
       <div className="card" id={item._id}>
-
         <div
           className="card__image"
-          style={{ backgroundImage: `url(${item.imageUrl})` }}
-        ></div>
+          style={{ backgroundImage: `url(${item.imageUrl})` }}/>
         <div className="card__heading">{item.name}</div>
         <div className="card__details">
           <div className="price item">
@@ -104,12 +113,6 @@ function Card({
       </div>
     );
 }
-
-Card.propTypes = {
-
-}
-
-
 
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { countCart } from '../redux/selector/cart.selectors';
 
+/**
+ *
+ *The count counter for the cart Icon
+ * @param {Number} {cartQuantity = 0}
+ * @return {*} 
+ */
 function CartCount({cartQuantity = 0}) {
     return (
         <div className='cart-count'>

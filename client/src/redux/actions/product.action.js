@@ -1,7 +1,6 @@
 import actionType from '../actionTypes'
 import { apiHandler, setTokenHeader, getToken } from '../../services/api'
 import { removeError } from './error.action'
-import { storage } from '../../services/firebase';
 import axios from 'axios'
 export const setProducts = (products) => ({
     type: actionType.SET_PRODUCTS,
@@ -18,10 +17,9 @@ export const getAllProducts = () => {
     return dispatch => {
         return apiHandler(`/api/products/get-all-products`, 'get')
             .then((result) => {
-                console.log(result)
                 dispatch(setProducts(result))
             }).catch((err) => {
-                console.log(err)
+                console.error(err)
             });
 
     }
@@ -46,7 +44,6 @@ export const addProduct = (product, imageUrl) =>{
                 }
 
             }).then((result) => {
-                console.log(result)
                     dispatch(removeError())
                     dispatch(setProducts(result.data.message))
                     resolve()
@@ -69,7 +66,6 @@ export const editProduct = (product, imageUrl, productId) => {
         return new Promise((resolve, reject) => {
             const fileData = new FormData();
             const files = JSON.stringify(product)
-            console.log(product, imageUrl, productId)
             fileData.append('imageUrl', imageUrl)
             fileData.append('productData', files)
             axios({
@@ -81,7 +77,6 @@ export const editProduct = (product, imageUrl, productId) => {
                 }
 
             }).then((result) => {
-                console.log(result)
                 dispatch(removeError())
                 dispatch(setProducts(result.data.message))
                 resolve()
@@ -138,17 +133,3 @@ export const deleteProduct = (productId) => {
 
 
 
-export const uploadImage = (uri, imageName) => {
-  return new Promise(async (res, rej) => {
-    try {
-      const response = await fetch(uri);
-      const blob = await response.blob();
-      const ref = storage.ref("posts/postImages").child(imageName);
-      const snapshot = await ref.put(blob);
-      const imageUrl = await snapshot.ref.getDownloadURL();
-      return res(imageUrl);
-    } catch (error) {
-      rej(error);
-    }
-  });
-};

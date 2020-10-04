@@ -84,6 +84,13 @@ class UserService{
             }       
     }
 
+    static async  signOut() {
+        await auth.signOut()
+        loggerFunction('info', `user  has successfully  logged out`)
+        return 'Successfully Logged Out'
+    }
+
+
     static async sentResetPassword(email){
         let url 
         if (process.env.NODE_ENV === 'development'){

@@ -31,13 +31,16 @@ export default class UsersList extends Component {
 		<div className='user-list'> 
 			<Search searchUsersHandler={this.searchUser}/>
 			<table>
-			<tr>
-				<th>UserId</th>
-				<th>Name</th>
-				<th>UserName</th>
-				<th>age Verified</th>
-			</tr>
-				{(filteredUser  && filteredUser !== undefined) && 
+				<thead>
+					<tr>
+						<th>UserId</th>
+						<th>Name</th>
+						<th>UserName</th>
+						<th>age Verified</th>
+					</tr>
+				</thead>
+				<tbody>
+					{(filteredUser  && filteredUser !== undefined) && 
 					filteredUser.map((user) => (
 					< tr key = {
 						user.userId
@@ -51,6 +54,7 @@ export default class UsersList extends Component {
 						<td>{user.ageVerified.toString()}</td>
 					</tr>
 				))}
+				</tbody>
 			</table>
 			<ul>
         </ul>

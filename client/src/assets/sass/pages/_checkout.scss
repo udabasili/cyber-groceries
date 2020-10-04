@@ -54,7 +54,8 @@
     }
   
     &__image-container {
-      width: 23%;
+      width: 20rem;
+      height: 20rem;
       padding-right: 15px;
 
       @include response(mobile) {

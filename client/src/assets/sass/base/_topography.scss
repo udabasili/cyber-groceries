@@ -41,7 +41,7 @@
 
         span{
             padding-left: 2rem;
-            color: $color-primary-dark;
+            color: white;
 
             @include response(mobile) {
                 color: black;

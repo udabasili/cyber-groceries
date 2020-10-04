@@ -2,6 +2,12 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBan } from '@fortawesome/free-solid-svg-icons'
 
+/**
+ *The component that shows when a non admin user tries to access an admin page
+ *
+ * @export function
+ * @return {*} 
+ */
 export default function AccessDenied() {
      return (
        <div className="access-denied-page">
