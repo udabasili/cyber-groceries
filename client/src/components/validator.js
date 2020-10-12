@@ -34,7 +34,6 @@ export function validator(key, value) {
         return
     }
   }
-  
   export function validateError(values) {
     let errors = {};
     if(!values.email){
