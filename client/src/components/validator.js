@@ -35,9 +35,8 @@ export function validator(key, value) {
     }
   }
   
-
   export function validateError(values) {
-      let errors = {};
+    let errors = {};
     if(!values.email){
       errors.email = 'Email cannot be empty'
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
