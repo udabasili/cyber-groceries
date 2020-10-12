@@ -51,6 +51,8 @@
 
     @include response(mobile){
       justify-content: space-evenly;
+      padding: 3px 5px;
+
     }
   
     &__image-container {
@@ -69,13 +71,23 @@
     }
 
     &__name,
-    &__quantity,
-    &__price {
+    &__quantity{
       margin: 3rem;
       font-size: 2rem;
 
       @include response(mobile) {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
+        margin: 1rem;
+      }
+
+      @include response(tab-port) {
+        font-size: 1.6rem;
+        margin: 1rem;
+      }
+
+      @include response(tab-land) {
+        font-size: 1.7rem;
+        margin: 1rem;
       }
     }
   
@@ -86,9 +98,25 @@
       justify-content: space-around;
     }
 
-	.price{
-		font-size: 1.5rem;
-	}
+  .price,
+  .unit-price,
+  .size
+  {
+    font-size: 1.5rem;
+     @include response(mobile) {
+       font-size: 1.3rem;
+     }
+  }
+
+  .unit-price{
+     @include response(mobile) {
+       display: none;
+     }
+  }
+  
+  .price:nth-child(1){
+    display: none;
+  }
     &__button{
 	  padding:  0 2rem;
 	  cursor: pointer;
@@ -98,6 +126,11 @@
       margin: 12px;
       color: red;
       cursor: pointer;
+
+      @include response(mobile) {
+        font-size: 1rem;
+        margin: .7rem;
+      }
     }
   }
   

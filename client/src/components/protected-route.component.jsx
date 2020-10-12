@@ -39,7 +39,13 @@ function ProtectedRoute({
         <Route {...otherProps} render={(props) => (
             token && isAuthenticated ?
                 <Component currentUser={currentUser} {...props}/> :
-                <Redirect to='/auth/login'/>
+                <Redirect to={{
+                  pathname:'/auth/login',
+                  state: {
+                    from :otherProps.location
+                  }
+
+                }}/>
             )
         } />
     )

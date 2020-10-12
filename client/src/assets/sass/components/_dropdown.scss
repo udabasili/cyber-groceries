@@ -5,22 +5,22 @@
     top: 16vh;
     right: 0;
     width: 30vw;
-    height: 50vh;
+    min-height: 50vh;
     text-align: center;
     background-color: white;
     border: 2px solid $color-primary-light;
 
     @include response(mobile) {
-        height: 30vh;
+        min-height: 30vh;
     }
 
 
     @include response(tab-port) {
-        height: 30vh;
+        min-height: 30vh;
     }
 
     @include response(tab-land) {
-        height: 30vh;
+        min-height: 30vh;
     }
 
     &--1{
@@ -101,18 +101,11 @@
 
     &__item{
         background-color: rgb(233, 233, 233);
-        height: 40%;
+        min-height: 30%;
         display: flex;
         color: black;
 
-        @include response(mobile) {
-            height: 35%;
-        }
-
-        @include response(tab-port) {
-            height: 35%;
-
-        }
+        
 
         &--1{
             display: flex;
@@ -139,15 +132,15 @@
 
 
         .image{
-            height: 100%;
+            height: 10vh;
             width: 30%;
         }
 
         .detail{
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 1rem;
+            justify-content: flex-start;
+            padding: 0 1rem;
 
             &__name{
                 font-size: 1.5rem;
@@ -156,9 +149,16 @@
             }
 
             &__quantity{
-
+                
                 .price{
                     margin: 0 10px 0 0;
+
+                }
+
+                span {
+                    @include response(mobile) {
+                        display: block;
+                    }
                 }
             }
         }

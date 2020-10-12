@@ -73,6 +73,7 @@
             font-family: $russ-one;
             text-transform: uppercase;
             font-size: 2rem;
+            text-decoration: none;
             font-weight: bolder;
 
             @include response(mobile) {

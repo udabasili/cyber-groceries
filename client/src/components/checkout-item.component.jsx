@@ -30,10 +30,10 @@ const CheckOutItem = ({item, removeItem, addItem, clearItemFromCart}) => {
         <img src={imageUrl} alt="item" />
       </div>
       <span className="checkout-item__name">{name}</span>
-      <span className="price">
+      <span className="size">
         {`${size} grams`}
       </span>
-      <span className="price">
+      <span className="unit-price">
         {`$${price}/gram`}
       </span>
       <span className="checkout-item__quantity">

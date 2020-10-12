@@ -20,6 +20,7 @@ class Auth extends Component {
             loggedIn: false,
             errors:{},
             isLoading: false,
+            prevRoute: null,
             disableSubmitButton: true,
             auth: props.auth || 'register',
             error: null,
@@ -60,10 +61,19 @@ class Auth extends Component {
 
     }
     componentDidMount() {
+            console.log(this.props.location.state)
+        if (this.props.location.state){
+          this.setState((prevState) => ({
+              ...prevState,
+              prevRoute: this.props.location.state.from.pathname
+            })
+          )
+        }
         window.addEventListener('resize', this.setIsMobile)
     }
 
     componentDidUpdate(prevProps) {
+      console.log(this.props.location.state)
         if (this.props.auth !== prevProps.auth) {
             this.setState((prevState) => ({
                 ...prevState,
@@ -143,11 +153,12 @@ class Auth extends Component {
      * @param {*} e 
      */
     onSubmitHandler = (e) => {
-		e.preventDefault()
-		this.setState((prevState) =>({
-			...prevState,
-			isLoading: true
-		}))
+      e.preventDefault()
+      const path = this.state.prevRoute ? this.state.prevRoute : '/'
+      this.setState((prevState) =>({
+        ...prevState,
+        isLoading: true
+      }))
         let userData;
         const userId = this.generateUserId()
         if(this.state.auth === 'register'){
@@ -167,7 +178,7 @@ class Auth extends Component {
             	...prevState,
             	isLoading: false
             }))
-            this.props.history.push('/')
+            this.props.history.push(path)
 		})
 		.catch(() =>{
 			this.setState((prevState) => ({
@@ -176,7 +187,6 @@ class Auth extends Component {
 			}))
 		})
 		
-      
     }
 
 

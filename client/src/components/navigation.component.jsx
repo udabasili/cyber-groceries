@@ -62,11 +62,12 @@ function Navigation({
 			<div className='navigation__header'>
 				<div className="logo-box">
 					<div className="logo"><img src={logo} alt='weblogo'/> </div>
-					<div className="app-name">
-					<span>HIGHway</span>
-					<span>420</span>
-					<span>Canna</span>
-					</div>
+						<NavLink to='/' className="app-name">
+							<span>HIGHway</span>
+							<span>420</span>
+							<span>Canna</span>
+						</NavLink>
+					
 				</div>
 				<label htmlFor="toggle" className="navigation__button">
 					<span className="navigation__icon">&nbsp;</span>
