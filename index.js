@@ -6,7 +6,7 @@ const app = require("./loaders/app");
 const loggerFunction = require("./loaders/logger");
 var secure = require('ssl-express-www');
 const helmet = require('helmet');
-app.use(secure())
+app.use(secure)
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.expectCt());
 app.use(helmet.frameguard());
