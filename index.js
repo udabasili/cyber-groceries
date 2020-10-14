@@ -2,11 +2,23 @@ const {
     port
 } = require("./config");
 const functions = require('firebase-functions');
-const server = require("./loaders/app");
+const app = require("./loaders/app");
 const loggerFunction = require("./loaders/logger");
+var secure = require('ssl-express-www');
+const helmet = require('helmet');
+app.use(secure())
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
-
-server.listen(port, function () {
+app.listen(port, function () {
     loggerFunction("info", `Serving is running on PORT ${port}`);
 
 })

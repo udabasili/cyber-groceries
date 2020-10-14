@@ -8,6 +8,7 @@ const loggerFunction = require('./logger');
 const rateLimit = require("express-rate-limit");
 const xss = require("xss-clean")
 const mongoSanitize = require('express-mongo-sanitize')
+var secure = require('ssl-express-www');
 app.set('trust proxy', 1);
 app.disable('x-powered-by')
 
@@ -16,6 +17,7 @@ app.disable('x-powered-by')
 /**
  * SECURITY MIDDLEWARE
  */
+app.use(secure())
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.expectCt());
 app.use(helmet.frameguard());
