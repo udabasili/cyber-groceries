@@ -16,7 +16,7 @@ app.disable('x-powered-by')
 /**
  * SECURITY MIDDLEWARE
  */
-// app.use(helmet())
+app.use(helmet())
 const limit = rateLimit({
     max: 100, // max requests
     windowMs: 60 * 60 * 1000, // 1 Hour
