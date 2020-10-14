@@ -17,7 +17,8 @@ app.use(helmet.noSniff());
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
-
+app.set('trust proxy', 1);
+app.disable('x-powered-by')
 app.listen(port, function () {
     loggerFunction("info", `Serving is running on PORT ${port}`);
 
