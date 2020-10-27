@@ -14,6 +14,15 @@ const { secretKey } = require('../config');
 const csrf = require('csurf');
 
 
+/**STATIC FILES */
+if (process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, '../client/build')))
+    app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/build/index.html'))
+    })
+}
+    
+
  const csrfProtection = csrf({
   cookie: true,
   ignoreMethods:['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
@@ -55,14 +64,6 @@ app.use(mongoSanitize());
 require('./router')(app)
 
 
-/**STATIC FILES */
-if (process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, '../client/build')))
-    app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'))
-    })
-}
-    
 
 
 
