@@ -9,7 +9,6 @@ class Product {
     async getAllProducts (){
         let products = []
         let productsRecord = await productsRef.once('value') 
-
         productsRecord = productsRecord.val()
         for (let value in productsRecord){
             productsRecord[value]._id = value

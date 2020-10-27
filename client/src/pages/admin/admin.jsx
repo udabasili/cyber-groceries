@@ -13,6 +13,7 @@ import { toggleCartDropDown } from '../../redux/actions/cart.action'
 import { toggleUserDropdown } from '../../redux/actions/user.action'
 import { removeError } from '../../redux/actions/error.action'
 import OrdersPage from './orders-page'
+import { toast } from 'react-toastify'
 
 function AdminRoute({
 	match, 
@@ -31,6 +32,7 @@ function AdminRoute({
 				Promise.all([getAllUsersOrder(), getAllUsers(id)])
 					.then(() => {
 					}).catch(() => {
+						toast.error('Something went wrong. Try again letter')
 				});
 
 			}, [currentUser, getAllUsers, getAllUsersOrder])
@@ -61,14 +63,14 @@ function AdminRoute({
 		  exact
             path={`${match.url}/edit-product/grams/:itemId`}
             render={(props) => (
-              <AddProduct title="Edit product" editing {...props} />
+              <AddProduct title="Edit product" editing type='grams' {...props} />
             )}
           />
 		  <Route
 		  exact
             path={`${match.url}/edit-product/millimeter/:itemId`}
             render={(props) => (
-              <AddProduct title="Edit product" editing {...props} />
+              <AddProduct title="Edit product" type='millimeter' editing {...props} />
             )}
           />
           <Route

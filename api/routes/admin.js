@@ -6,7 +6,7 @@ router.get("/all-users", async (req, res, next) =>{
     try {
         const allUsers = await Service.AdminService.getAllUsers()
         return res.status(200).json({
-        message:allUsers
+            message:allUsers
         })
     } catch (error) {
         return next({

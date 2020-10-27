@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { deleteUser, disableUser, getUserOrderById } from '../redux/actions/admin.action';
 import UserOrders from './user-orders.component';
 import { logOut } from '../redux/actions/user.action';
+import Loading from './loading.componet';
 
 class UserProfile extends Component {
      constructor(props){
@@ -17,6 +18,7 @@ class UserProfile extends Component {
              user: {},
              orders:[],
             showModal: false,
+            isLoading: false,
             showEditProfileWindow:false,
             showPasswordWindow:false,
             showEmailWindow: false         
@@ -31,6 +33,7 @@ class UserProfile extends Component {
      }
 
      userOrders = (userId) =>{
+         
          getUserOrderById(userId)
             .then((result) => {
                 this.setState((prevState) =>({
@@ -38,7 +41,7 @@ class UserProfile extends Component {
                     orders: result
                 }))
             }).catch((err) => {
-                console.log(err)
+                toast.error(err)
             });
      }
 
@@ -108,23 +111,43 @@ class UserProfile extends Component {
 
     deleteUserUserHandler = (userId) =>{
         const {currentUser, deleteUser, logOut, history} = this.props
+        this.setState((prevState) =>({
+             ...prevState,
+             isLoading: true
+         }))
         deleteUser(userId)
             .then((result) => {
                 toast.success('Profile Deleted')
                 if(userId === currentUser._id){
+                    this.setState((prevState) =>({
+                        ...prevState,
+                        isLoading: false
+                    }))
                     logOut()
                     return;
                 }
                 else{
-                    history.push('/admin/inventory')
+                    this.setState((prevState) =>({
+                        ...prevState,
+                        isLoading: false
+                    }))
+                    history.push('/admin/users')
                 }
             }).catch((err) => {
+                this.setState((prevState) =>({
+                    ...prevState,
+                    isLoading: false
+                }))
                 toast.error('Something Went wrong. Try again later')
 
             });
     }
 
     disableUserUserHandler = (userId) => {
+        this.setState((prevState) =>({
+             ...prevState,
+             isLoading: true
+         }))
         const {
             currentUser,
             disableUser,
@@ -134,10 +157,18 @@ class UserProfile extends Component {
             .then((result) => {
                 toast.success('Profile Disabled')
                 if (userId === currentUser._id) {
+                    this.setState((prevState) =>({
+                        ...prevState,
+                        isLoading: false
+                    }))
                     logOut()
                     return;
                 }
             }).catch((err) => {
+                this.setState((prevState) =>({
+                        ...prevState,
+                        isLoading: false
+                    }))
                 toast.error('Something Went wrong. Try again later')
 
             });
@@ -161,6 +192,7 @@ class UserProfile extends Component {
             
             return (
                 <React.Fragment>
+                    {this.state.isLoading && <Loading/>}
                     <ToastContainer
                         position="top-center"
                         autoClose={2000}

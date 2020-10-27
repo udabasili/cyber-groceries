@@ -1,5 +1,5 @@
 import {
-    apiHandler, setTokenHeader, getToken
+    apiHandler
 } from '../../services/api'
 import actionType from '../actionTypes'
 
@@ -18,15 +18,13 @@ export const setAllOrders = (orders) => ({
 export const getAllUsers = () => {
     return dispatch => {
         return new Promise((res, rej) =>{
-            const token = getToken()
-            setTokenHeader(token)
             const userId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${userId}/all-users`, 'get')
                 .then((response) => {
                     dispatch(setAllUsers(response));
                     return res(response)
                 }).catch((error) => {
-                    return rej(error)
+                    return rej(error.message)
                     })
                 })
             }
@@ -34,14 +32,12 @@ export const getAllUsers = () => {
 
 export const getTotalCost = () => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const userId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${userId}/get-total-cost`, 'get')
                 .then((response) => {
                     return res(response)
                 }).catch((error) => {
-                    return rej(error)
+                    return rej(error.message || error )
                 })
         })
     
@@ -51,10 +47,8 @@ export const getTotalCost = () => {
 export const deleteUser = (uid) => {
     return dispatch => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
-            return apiHandler(`/api/admin/${currentUserId}/edit-user-email/${uid}`, 'delete')
+            return apiHandler(`/api/admin/${currentUserId}/delete/${uid}`, 'delete')
                 .then((response) => {
                     dispatch(setAllUsers(response));
                     return res()
@@ -67,15 +61,13 @@ export const deleteUser = (uid) => {
 export const editUserEmail = (email, uid) => {
     return dispatch => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/edit-user-email/${uid}`, 'put', email)
                 .then((response) => {
                     dispatch(setAllUsers(response));
                     return res('Success')
                 }).catch((error) => {
-                    return rej(error)
+                    return rej(error.message || error )
                 })
         })
     }
@@ -84,15 +76,13 @@ export const editUserEmail = (email, uid) => {
 export const disableUser = (uid) => {
     return dispatch => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/disable/${uid}`, 'get')
                 .then((response) => {
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
-                    return rej(error)
+                    return rej(error.message || error )
                 })
         })
     }
@@ -101,15 +91,13 @@ export const disableUser = (uid) => {
 export const enableUser = (uid) => {
     return dispatch => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/enable/${uid}`, 'get')
                 .then((response) => {
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
-                    return rej(error)
+                    return rej(error.message || error )
                 })
         })
     }
@@ -118,15 +106,13 @@ export const enableUser = (uid) => {
 export const editUserProfile = (userData, uid) => {
     return dispatch => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/update/${uid}`, 'put', userData)
                 .then((response) => {
                     dispatch(setAllUsers(response));
                     return res()
                 }).catch((error) => {
-                    return rej(error)
+                    return rej(error.message || error )
                 })
         })
     }
@@ -134,14 +120,12 @@ export const editUserProfile = (userData, uid) => {
 
 export const getUserChatData = () => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const userId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${userId}/get-user-chart-data`, 'get')
                 .then((response) => {
                     return res(response)
                 }).catch((error) => {
-                    return rej(error)
+                    return rej(error.message || error)
                 })
         })
     
@@ -149,14 +133,12 @@ export const getUserChatData = () => {
 
 export const getUserOrderById = (userId) =>{
     return new Promise((res,rej) =>{
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/get-user-order/${userId}`, 'get')
                 .then((result) => {
                     res(result)
-                }).catch((err) => {
-                    rej(err)
+                }).catch((error) => {
+                    return rej(error.message || error )
                 });
 
     })
@@ -165,15 +147,13 @@ export const getUserOrderById = (userId) =>{
 export const setAllUsersOrder = (orders) => {
     return dispatch => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/set-users-orders`, 'post', {orders})
                 .then((result) => {
                     dispatch(setAllOrders(result))
                     res(result)
-                }).catch((err) => {
-                    rej(err)
+                }).catch((error) => {
+                    return rej(error.message || error )
                 });
 
         })
@@ -182,15 +162,13 @@ export const setAllUsersOrder = (orders) => {
 export const getAllUsersOrder = () => {
     return dispatch=>{
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/get-users-orders`, 'get')
                 .then((result) => {
                     dispatch(setAllOrders(result))
                     res(result)
                 }).catch((err) => {
-                    rej(err)
+                    rej(err.message || err)
                 });
 
         })
@@ -200,15 +178,13 @@ export const getAllUsersOrder = () => {
 export const setOrderById = (userId, order) => {
     return dispatch => {
         return new Promise((res, rej) => {
-            const token = getToken()
-            setTokenHeader(token)
             const currentUserId = sessionStorage.getItem('userId')
             return apiHandler(`/api/admin/${currentUserId}/set-user-orders/${userId}`, 'post', order)
                 .then((result) => {
                     dispatch(setAllOrders(result))
                     res()
-                }).catch((err) => {
-                    rej(err)
+                }).catch((error) => {
+                    return rej(error.message || error )
                 });
 
         })

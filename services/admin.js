@@ -15,7 +15,6 @@ class Admin {
             allUsers.push(usersRecord[value])
         }
         loggerFunction('info','all users gotten')
-        
         return allUsers
     }
 
@@ -115,6 +114,10 @@ class Admin {
         return allUsers
     }
 
+    /**
+     * function getTotalPurchases - get the list of orders user has made
+     * @returns {Object} orders - all users orders
+     */
     static async getTotalPurchases() {
         let ordersRecord = []
         let snapshot = await purchaseRef.once('value')

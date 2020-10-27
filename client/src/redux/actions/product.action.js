@@ -1,5 +1,5 @@
 import actionType from '../actionTypes'
-import { apiHandler, setTokenHeader, getToken } from '../../services/api'
+import { apiHandler } from '../../services/api'
 import { removeError } from './error.action'
 import axios from 'axios'
 export const setProducts = (products) => ({
@@ -15,7 +15,7 @@ export const filterByPrice = () => ({
 
 export const getAllProducts = () => {
     return dispatch => {
-        return apiHandler(`/api/products/get-all-products`, 'get')
+        return apiHandler(`/api/public/get-all-products`, 'get')
             .then((result) => {
                 dispatch(setProducts(result))
             }).catch((err) => {
@@ -28,8 +28,6 @@ export const getAllProducts = () => {
 
 export const addProduct = (product, imageUrl) =>{  
     return dispatch => {
-        const token = getToken()
-        setTokenHeader(token)
         return new Promise((resolve, reject) => {
             const fileData = new FormData();
             const files = JSON.stringify(product)
@@ -60,8 +58,6 @@ export const addProduct = (product, imageUrl) =>{
 
 
 export const editProduct = (product, imageUrl, productId) => {
-    const token = getToken()
-    setTokenHeader(token)
     return dispatch => {
         return new Promise((resolve, reject) => {
             const fileData = new FormData();
@@ -93,8 +89,6 @@ export const editProduct = (product, imageUrl, productId) => {
 
 
 export const editProductWithUrl = (product, productId) => {
-    const token = getToken()
-    setTokenHeader(token)
     return dispatch => {
         return new Promise((resolve, reject) => {
             return apiHandler(`/api/products/edit-product-with-url/${productId}`, 'put', product)
@@ -115,8 +109,6 @@ export const editProductWithUrl = (product, productId) => {
 
 export const deleteProduct = (productId) => {
     return dispatch => {
-        const token = getToken()
-        setTokenHeader(token)
         return new Promise((resolve, reject) => {
             return apiHandler(`/api/products/delete-product/${productId}`, 'delete')
                 .then((result) => {

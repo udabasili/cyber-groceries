@@ -69,7 +69,6 @@ class EditProfile extends Component {
     */
     onChangeHandler = (e) => {
         const { name, value } = e.target;
-        console.log(typeof value)
         this.setState((prevState) =>({
           ...prevState,
           data: {

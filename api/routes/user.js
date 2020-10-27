@@ -30,7 +30,7 @@ router.post('/register',celebrate({
         }
         return next({
             message: error.message,
-            status: 500
+            status: 401
         })
     }
     
@@ -48,6 +48,11 @@ router.post('/login', celebrate({
                 generateUserToken,
                 newUser
             } = await UserService.signIn();
+              res.cookie('token', generateUserToken, { 
+                  httpOnly: true,
+                  maxAge: 1000 * 60 * 60 * 24, // 24 HOURS,
+                  secure: true
+                 });
             return res.status(200).json({
                 message: {
                     newUser,
@@ -63,7 +68,7 @@ router.post('/login', celebrate({
             }
             return next({
                 message: error.message,
-                status: 500
+                status: 401
             })
         }
 })
@@ -110,9 +115,12 @@ router.post('/reset-password',
         }
 })
 
-router.get('/logout', async (req, res, next) => {
+router.get('/:userId/logout', async (req, res, next) => {
     try {
-        const response = await Service.UserService.signOut()
+        const userId = req.params.userId
+        const response = await Service.UserService.signOut(userId)
+        res.clearCookie('token')
+        req.user = null
         return res.status(200).json({
             message: response
         })

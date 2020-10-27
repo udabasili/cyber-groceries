@@ -61,6 +61,12 @@ export default class RevenueGraph extends Component {
                 
                
             })
+            .catch((err) => {
+                this.setState((prevState) =>({
+                    ...prevState,
+                    loading: false
+                }))
+            })
 
         }
     componentWillUnmount() {

@@ -1,8 +1,4 @@
-const {
-    db,
-    auth,
-    adminControl
-} = require("../../loaders/firebase");
+const {adminControl} = require("../../loaders/firebase");
 const loggerFunction = require('../../loaders/logger')
 
 exports.checkIfAdmin = async function(req, res, next){
@@ -11,19 +7,15 @@ exports.checkIfAdmin = async function(req, res, next){
         const response = await adminControl.getUser(userId)
         const isAdmin = response.customClaims.admin
             if(!isAdmin){
-                return next({
-                    message: 'You are not allowed to access this page',
-                    status: 403
-                })
-
+                throw new Error('You are not allowed to access this page')
             }
-            loggerFunction('info', 'current user is an admin user')
-            return next();
+        loggerFunction('info', 'current user is an admin user')
+        return next();
   
     } catch (error) {
         return next({
         message: error.message,
-        status: 401
+        status: 403
         })
     }
 }

@@ -8,10 +8,35 @@ const loggerFunction = require('./logger');
 const rateLimit = require("express-rate-limit");
 const xss = require("xss-clean")
 const mongoSanitize = require('express-mongo-sanitize')
+const expressJwt = require('express-jwt');
+const cookieParser = require('cookie-parser');
+const { secretKey } = require('../config');
+const csrf = require('csurf');
+
+
 app.set('trust proxy', 1);
 app.disable('x-powered-by')
 
+ const csrfProtection = csrf({
+  cookie: true,
+  ignoreMethods:['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
+});
 
+app.use(function(request, response, next) {
+
+if (process.env.NODE_ENV !== 'development' && !request.secure) {
+   return response.redirect("https://" + request.headers.host + request.url) } 
+   next()}
+)
+
+app.use(cookieParser());
+app.use(csrfProtection);
+
+
+app.get('/api/csrf-token', (req, res) => {
+    loggerFunction('info', 'cs gotten' )
+    res.json({ csrfToken: req.csrfToken() });
+});
 
 /**
  * SECURITY MIDDLEWARE

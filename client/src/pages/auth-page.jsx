@@ -61,7 +61,6 @@ class Auth extends Component {
 
     }
     componentDidMount() {
-            console.log(this.props.location.state)
         if (this.props.location.state){
           this.setState((prevState) => ({
               ...prevState,
@@ -73,7 +72,6 @@ class Auth extends Component {
     }
 
     componentDidUpdate(prevProps) {
-      console.log(this.props.location.state)
         if (this.props.auth !== prevProps.auth) {
             this.setState((prevState) => ({
                 ...prevState,
@@ -202,7 +200,6 @@ class Auth extends Component {
       const errors = validateError(userData)
       let error = null;
       for (let key in errors){    
-        console.log(key)
         if(key === name){
           error = errors[key]
         }

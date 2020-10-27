@@ -5,56 +5,43 @@ const loggerFunction = require('../../loaders/logger')
 
 exports.protectedRoute = function(req, res, next){
     try {
-        let token = req.headers['authorization']
+        let token = req.cookies.token
         if(token === undefined){
-            return res.status(401).json({
-                status: 401,
-                message: 'UnAuthorized'
-            })
+            throw new Error('token must be provided')
         }
-        token = token.split(' ')[1]
         jwt.verify(token, secretKey,  async (error, decoded) =>{
             if(decoded){
                 loggerFunction('info', `${decoded.username} has permission to access protected route`)
                 return next()
             } else{
-                return res.status(401).json({
-                    status: 401,
-                    message: 'UnAuthorized'
-                })
+                throw new Error(error)
             }
         })
     } catch (error) {
-        return next(error)
+        return next({
+            message: error.message,
+            status: 401
+        })
     }
 }
 
 exports.setCurrentUser = function (req, res, next) {
     try {
-        let token = req.headers['authorization']
-        if (token === undefined) {
-            return res.status(401).json({
-                status: 401,
-                message: 'UnAuthorized'
-            })
+        let token = req.cookies.token
+        if(token === undefined){
+            throw new Error('token must be provided')
         }
-        token = token.split(' ')[1]
         jwt.verify(token, secretKey, async (error, decoded) => {
             if (error) {
-                return res.status(401).json({
-                    status: 401,
-                    message: 'UnAuthorized'
-                })
+                throw new Error(error)
+                
             }
             const snapshot = await db.ref('users').child(decoded._id).once('value')
-            const exists = snapshot.val() !== null
-            if (!exists) {
-                return res.status(401).json({
-                    status: 401,
-                    message: 'UnAuthorized'
-                })
-            }
+            const exists = snapshot.val() !== null;
             const user = snapshot.val()
+            if (!exists || user._id !== decoded._id ) {
+                throw new Error('User does not exist')
+            }
             delete user.password
             delete user.email
             req.user = user
@@ -64,36 +51,29 @@ exports.setCurrentUser = function (req, res, next) {
             return next()
         })
     } catch (error) {
-        return next(error)
+        return next({
+            message: error.message,
+            status: 401
+        })
     }
 }
 
 exports.confirmUser = function (req, res, next) {
     try {
-        let token = req.headers['authorization']
-        if (token === undefined) {
-            return res.status(401).json({
-                status: 401,
-                message: 'UnAuthorized'
-            })
+        let token = req.cookies.token;
+        if(token === undefined){
+            throw new Error('token must be provided');
         }
-        token = token.split(' ')[1]
         jwt.verify(token, secretKey, async (error, decoded) => {
             if (error) {
-                return res.status(401).json({
-                    status: 401,
-                    message: 'UnAuthorized'
-                })
+                throw new Error(error);
             }
-            const snapshot = await db.ref('users').child(decoded._id).once('value')
-            const exists = snapshot.val() !== null
-            if (!exists) {
-                return res.status(401).json({
-                    status: 401,
-                    message: 'UnAuthorized'
-                })
+            const snapshot = await db.ref('users').child(decoded._id).once('value');
+            const exists = snapshot.val() !== null;
+            const user = snapshot.val();
+            if (!exists || user._id !== decoded._id ) {
+                throw new Error('User does not exist')
             }
-            const user = snapshot.val()
             req.user = user
             req.isAdmin = user.isAdmin
             if(user.isAdmin){
@@ -110,6 +90,9 @@ exports.confirmUser = function (req, res, next) {
             })
         })
     } catch (error) {
-        return next(error)
+        return next({
+            message: error.message,
+            status: 401
+        })
     }
 }

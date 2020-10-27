@@ -10,7 +10,7 @@ import Footer from './components/footer.component'
 import AdminRoute from './pages/admin/admin';
 import NotFoundPage from './components/not-found'
 import { connect } from 'react-redux'
-import { toggleUserDropdown, setConsent, confirmUserToken, setCurrentUser } from './redux/actions/user.action'
+import { toggleUserDropdown, setConsent, confirmUserToken, setCurrentUser, getCsrfToken } from './redux/actions/user.action'
 import { toggleCartDropDown } from './redux/actions/cart.action'
 import { getAllProducts } from './redux/actions/product.action'
 import { removeError } from './redux/actions/error.action'
@@ -19,7 +19,7 @@ import { AdminProtectedRoute, ProtectedRouteWithRedux} from './components/protec
 import CheckConsent from './components/check-consent.component'
 import ChangePassword from './components/change-password.component';
 import ResetPassword from './pages/reset-password-page'
-
+import { toast, ToastContainer } from 'react-toastify'
 
 class MainRoute extends PureComponent {
     constructor(props){
@@ -32,11 +32,12 @@ class MainRoute extends PureComponent {
 
     componentDidMount(){
         const {toggleCartDropDown, isAuthenticated, toggleUserDropdown} = this.props
+        getCsrfToken()
         this.props.getAllProducts()
             .then((result) => {
               
             }).catch((err) => {
-                
+                toast.error(err)
             });
         toggleCartDropDown(true)
         if(isAuthenticated){
@@ -67,6 +68,11 @@ class MainRoute extends PureComponent {
                     {!acceptedTerm ? 
                         <CheckConsent/> :
                         <React.Fragment>
+                            <ToastContainer
+                                position="top-center"
+                                autoClose={1000}
+                                hideProgressBar={true}
+                            />
                             <Navigation currentUser={currentUser} isAdmin={isAdmin} isAuthenticated={isAuthenticated}/>
                             <Switch>
                                 <Route exact path='/' component={HomePage}/>

@@ -12,14 +12,12 @@ function ProtectedRoute({
     setCurrentUser,
     currentUser, 
     ...otherProps}) {
-    const [token, setToken] = useState(sessionStorage.getItem('validator'));
     const history = useHistory()
     axios.interceptors.response.use((response) => {
       return response;
     }, (error) => {
       if (error.response.status === 401) {
         sessionStorage.removeItem('userId');
-        sessionStorage.removeItem('validator')
         setCurrentUser({})
         history.push('/auth/login')
       }
@@ -28,16 +26,9 @@ function ProtectedRoute({
         reject(error);
       })
     })
-    useEffect(() => {
-      setToken(sessionStorage.getItem("validator"));
-      
-
-
-
-    }, [setCurrentUser]);
     return (
         <Route {...otherProps} render={(props) => (
-            token && isAuthenticated ?
+            isAuthenticated ?
                 <Component currentUser={currentUser} {...props}/> :
                 <Redirect to={{
                   pathname:'/auth/login',
@@ -75,14 +66,17 @@ export function AdminProtectedRoute({
           return response;
 
         }, (error) => {
+          if (error.response.status === 403) {
+            history.push('/403')
+          }
+
           if (error.response.status === 401) {
             sessionStorage.removeItem('userId');
-            sessionStorage.removeItem('validator')
             setCurrentUser({})
             history.push('/auth/login')
           }
-          if (error.response.status === 403) {
-            history.push('/403')
+          if (error.response.data.toLowerCase().includes('ECONNREFUSED'.toLowerCase())) {
+            error.response.data = 'Something went wrong. Try again later'
           }
           return new Promise((resolve, reject) => {
             reject(error);
@@ -91,7 +85,7 @@ export function AdminProtectedRoute({
         useEffect(() => {
             setCheckIfAdmin(isAdmin)
             
-        },[isAdmin]);
+        });
   return (
     <Route
       {...otherProps}

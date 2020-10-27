@@ -1,5 +1,5 @@
 import actionType from '../actionTypes'
-import { apiHandler, setTokenHeader, getToken } from '../../services/api';
+import { apiHandler } from '../../services/api';
 
 export const addItemToCart = (cartItem, size) =>({
     type: actionType.ADD_TO_CART,
@@ -41,9 +41,7 @@ export const submitOrder = (email, cartItems, total) => {
     }
     return dispatch =>{
     return new Promise((resolve, reject) =>{
-        const token = getToken()
         const userId = sessionStorage.getItem('userId')
-        setTokenHeader(token)
         try {
             apiHandler(`/api/cart/${userId}/order`,'post',data)
             .then((result) => {

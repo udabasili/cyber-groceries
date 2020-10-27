@@ -1,4 +1,30 @@
-const winston = require("winston")
+const winston = require("winston");
+const { paperTrailHost, paperTrailPort } = require("../config");
+require('winston-papertrail').Papertrail;
+
+let winstonTransport = []
+
+if (process.env.NODE_ENV ===  'production'){
+    let winstonPaperTrail = new winston.transports.Papertrail({ 
+        host: paperTrailHost,
+        port: paperTrailPort,
+        logFormat: function(level, message) {
+            let mess = `${dateFormat()} | ${level.toUpperCase()} | loggers.log | ${message} | `
+            return mess
+        }
+    })
+    winstonPaperTrail.on('error', function(err) {
+        // Handle, report, or silently ignore connection errors and failures
+    });
+    winstonTransport.push(winstonPaperTrail)
+} else {
+    const winstonTransports = new winston.transports.File({
+        filename: `./logs/logger.log`
+    })
+    winstonTransport.push(winstonTransports)
+
+}
+
 dateFormat = () => {
     return new Date(Date.now()).toUTCString()
 };
@@ -6,13 +32,11 @@ dateFormat = () => {
 const logger = winston.createLogger({
     transports: [
         new winston.transports.Console(),
-        new winston.transports.File({
-            filename: `./logs/logger.log`
-        })
+        ...winstonTransport
     ],
     format: winston.format.printf((info) => {
-        let message = `${dateFormat()} | ${info.level.toUpperCase()} | loggers.log | ${info.message} | `
-        return message
+        let mess = `${dateFormat()} | ${info.level.toUpperCase()} | loggers.log | ${info.message} | `
+        return mess
     })
 
 });

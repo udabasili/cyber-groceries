@@ -23,7 +23,8 @@ class AddProduct extends Component {
 			imageFile:'',
 			imageUrl: null,
 			imageUploaded: false,
-			isLoading: false
+			isLoading: false,
+			nextRoute: null
 		}
   }
   
@@ -33,6 +34,12 @@ class AddProduct extends Component {
 			let item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
 			const imageFileName = item.imageUrl.slice(item.imageUrl.lastIndexOf('/')+ 1)
 			filePath.value = imageFileName;
+			if(this.props.history.location.state){
+				this.setState((prevState) =>({
+					...prevState,
+					nextRoute: this.props.history.location.state.location
+				}))
+			}
 			if(item){
 				this.setState((prevState) => ({
 					...prevState,
@@ -51,6 +58,15 @@ class AddProduct extends Component {
 			}
 		}
   }
+  	componentDidUpdate(prevProps, prevState){
+		  if(prevProps.type !== this.props.type ){
+			this.setState((prevState) => ({
+				...prevState,
+				type: this.props.type
+
+			}))
+		  }
+	  }
 
 	onImageUploadHandler = () => {
 		let fileUpload = document.querySelector(".image-upload__input");
@@ -94,7 +110,6 @@ class AddProduct extends Component {
 		}
 		const image = this.state.imageFile
 		if(this.props.editing){
-			console.log(data)
 			if(this.state.imageUrl){
 				data.imageUrl = this.state.imageUrl
 				this.props.editProductWithUrl(
@@ -106,7 +121,7 @@ class AddProduct extends Component {
 						isLoading: false
 					}))
 					this.props.history.push({
-						pathname: '/admin/products',
+						pathname: this.state.nextRoute ? this.state.nextRoute:  '/admin/products',
 						state: {
 							message: 'Product edited successfully'
 						}
@@ -139,7 +154,7 @@ class AddProduct extends Component {
 						...prevState,
 						isLoading: false
 					}))
-					toast.error(err.message)
+					toast.error(err)
 
 				})
 			}
@@ -163,7 +178,7 @@ class AddProduct extends Component {
 						...prevState,
 						isLoading: false
 					}))
-				toast.error(error.message)
+				toast.error(error)
 			})
 
 		}

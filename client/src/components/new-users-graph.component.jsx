@@ -1,5 +1,6 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
+import { toast } from 'react-toastify';
 import { getUserChatData } from '../redux/actions/admin.action';
 
 export default class NewUsersGraphs extends React.Component {
@@ -58,7 +59,13 @@ export default class NewUsersGraphs extends React.Component {
                     }))
                    
                 })
-                .catch((error) =>console.log(error))
+                .catch((error) =>{
+                    toast.error(error)
+                    this.setState((prevState) =>({
+                    ...prevState,
+                    loading: false
+                }))
+                })
                 
         }
 

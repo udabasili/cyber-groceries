@@ -17,7 +17,6 @@ import PropTypes from "prop-types";
 
 const CheckOutItem = ({item, removeItem, addItem, clearItemFromCart}) => {
   const {_id, name, imageUrl, price, quantity, size} = item;
-  console.log(_id)
   return (
     <div className="checkout-item">
       <div

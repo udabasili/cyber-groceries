@@ -20,4 +20,7 @@ module.exports = {
   user: process.env.USER,
   sendGrid: process.env.SENDGRID_API_KEY,
   templateId: process.env.Template_ID,
+  paperTrailPort: process.env.PAPERTAIL_PORT,
+  paperTrailHost: process.env.PAPERTAIL_HOST,
+
 };

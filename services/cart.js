@@ -28,6 +28,12 @@ class CartService{
 
     }
 
+    /**
+     *
+     * function confirmOrder -send confirmation email to user that order
+     * @return {String} success
+     * @memberof CartService
+     */
     async confirmOrder(){
         var today = new Date();
         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();

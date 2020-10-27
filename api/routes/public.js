@@ -22,5 +22,17 @@ router.get(
     }
 );
 
+router.get('/csrf-token', (req, res, next) => {
+    try {
+        res.status(200).json({ 
+            message: req.csrfToken() 
+        });
+    } catch (error) {
+        return next({
+                message: error.message,
+                status: error.status
+            })
+    }
+});
 
 module.exports = router

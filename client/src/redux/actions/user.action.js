@@ -1,10 +1,10 @@
 import actionType from '../actionTypes'
 import {
-    apiHandler,setTokenHeader, getToken
+    apiHandler
 } from '../../services/api'
 import { addError, removeError } from './error.action'
 import { setAllOrders, setAllUsers } from './admin.action'
-
+import axios from 'axios'
 export const setCurrentUser = (user) => ({
     type: actionType.SET_CURRENT_USER,
     payload: user
@@ -25,8 +25,9 @@ export const toggleUserDropdown = (hideCart) => ({
 
 export const logOut = () => {
     return dispatch =>{
+            const userId = sessionStorage.getItem('userId')
            return new Promise((resolve, reject) => {
-            return apiHandler(`/api/auth/logout`, 'get')
+            return apiHandler(`/api/auth/${userId}/logout`, 'get')
                 .then((result) => {
                     sessionStorage.removeItem('userId')
                     sessionStorage.removeItem('validator')
@@ -46,10 +47,8 @@ export const Authenticate = (userData, authPath) => {
             return apiHandler(`/api/auth/${authPath}`, 'post', userData)
                 .then((response) => {
                     dispatch(removeError())
-                    setTokenHeader(response.generateUserToken)
                     let currentUser = response.newUser
                     sessionStorage.setItem('userId', currentUser._id);
-                    sessionStorage.setItem('validator', response.generateUserToken)
                     dispatch(setCurrentUser(currentUser));
                     if(!currentUser.isAdmin){
                          dispatch(setAllUsers([]))
@@ -72,21 +71,16 @@ export const Authenticate = (userData, authPath) => {
 export const confirmUserToken = () => {
     return dispatch => {
         return new Promise((resolve, reject) => {
-            const token = getToken()
-            setTokenHeader(token)
             return apiHandler(`/api/confirmUser`, 'get')
                 .then((response) => {
                     console.log('here')
                     dispatch(removeError())
-                    setTokenHeader(response.token)
                     let currentUser = response.user
                     sessionStorage.setItem('userId', currentUser._id);
-                    sessionStorage.setItem('validator', response.token)
                     dispatch(setCurrentUser(currentUser));
                     return resolve()
                 }).catch((err) => {
                     sessionStorage.removeItem('userId');
-                    sessionStorage.removeItem('validator')
                     dispatch(setCurrentUser({}));
                     dispatch(addError('Please Login Again'))
                     return reject(err)
@@ -99,7 +93,6 @@ export const confirmUserToken = () => {
 
 
 export const sentPasswordReset = (emailAddress) => {
-    console.log(emailAddress)
     return new Promise((resolve, reject) => {
         return apiHandler(`/api/auth/send-password-reset`, 'post', {emailAddress})
             .then((response) => {
@@ -125,3 +118,13 @@ export const resetPassword = (code, email,password, confirmPassword) => {
             });
     })
 }
+
+export const getCsrfToken = async () => {
+    try {
+        const { data } = await axios.get('/api/csrf-token');
+        axios.defaults.headers.post['X-CSRF-Token'] = data.csrfToken;
+    } catch (error) {
+        console.log(error)
+    }
+    
+   };

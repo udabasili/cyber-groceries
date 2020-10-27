@@ -14,6 +14,14 @@
             color: white;
         }
     }
+
+    .disabled-btn {
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
 }
 .btn{
     background-color: $color-primary-dark;
@@ -66,6 +74,9 @@
          cursor: not-allowed;
     }
 }
+
+
+
 
 
 

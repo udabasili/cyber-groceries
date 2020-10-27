@@ -84,19 +84,19 @@ class UserService{
             }       
     }
 
-    static async  signOut() {
+    static async  signOut(userId) {
         await auth.signOut()
-        loggerFunction('info', `user  has successfully  logged out`)
+        loggerFunction('info', `user ${userId} has successfully  logged out`)
         return 'Successfully Logged Out'
     }
 
 
     static async sentResetPassword(email){
-        let url 
+        let url;
         if (process.env.NODE_ENV === 'development'){
             url = 'http://localhost:3000/auth/register'
         }else{
-             url = 'https://highway420canna.herokuapp.com/auth/register'
+             url = 'https://www.highway420canna.ca/auth/register'
         }
         const actionCodeSettings = {
             url
