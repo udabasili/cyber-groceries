@@ -1,4 +1,4 @@
-import sslRedirect from 'heroku-ssl-redirect';
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -12,14 +12,15 @@ const mongoSanitize = require('express-mongo-sanitize')
 const cookieParser = require('cookie-parser');
 const { secretKey } = require('../config');
 const csrf = require('csurf');
+const redirectSSL = require('redirect-ssl')
 
-
+app.use(redirectSSL)
  const csrfProtection = csrf({
   cookie: true,
   ignoreMethods:['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
 });
 
-app.use(sslRedirect());
+
 app.use(cookieParser());
 app.use(csrfProtection);
 
