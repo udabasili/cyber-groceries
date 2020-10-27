@@ -12,18 +12,7 @@ const expressJwt = require('express-jwt');
 const cookieParser = require('cookie-parser');
 const { secretKey } = require('../config');
 const csrf = require('csurf');
-const routes = require('../api/routes')
 
-app.use('/api/auth/', routes.UserRoute)
-app.use('/api/public/', routes.PublicRoute)
-/**STATIC FILES */
-if (process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, '../client/build')))
-    app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'))
-    })
-}
-    
 
  const csrfProtection = csrf({
   cookie: true,
@@ -66,6 +55,14 @@ app.use(mongoSanitize());
 require('./router')(app)
 
 
+/**STATIC FILES */
+if (process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, '../client/build')))
+    app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/build/index.html'))
+    })
+}
+    
 
 
 
