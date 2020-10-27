@@ -14,20 +14,11 @@ const { secretKey } = require('../config');
 const csrf = require('csurf');
 
 
-app.set('trust proxy', 1);
-app.disable('x-powered-by')
-
  const csrfProtection = csrf({
   cookie: true,
   ignoreMethods:['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
 });
 
-app.use(function(request, response, next) {
-
-if (process.env.NODE_ENV !== 'development' && !request.secure) {
-   return response.redirect("https://" + request.headers.host + request.url) } 
-   next()}
-)
 
 app.use(cookieParser());
 app.use(csrfProtection);
