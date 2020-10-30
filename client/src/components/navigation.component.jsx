@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { toggleCartDropDown } from '../redux/actions/cart.action';
 import { toggleUserDropdown, logOut } from '../redux/actions/user.action';
 import logo from '../assets/images/HWY420.png'
-import { toast , ToastContainer} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function Navigation({
 		isAdmin, 
@@ -54,11 +54,6 @@ function Navigation({
 
 	return (
 		<div className="navigation">
-			<ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={true}
-        />
 			<div className='navigation__header'>
 				<div className="logo-box">
 					<div className="logo"><img src={logo} alt='weblogo'/> </div>

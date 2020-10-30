@@ -7,7 +7,7 @@ import Loading from "./loading.componet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const MakeOrder = ({
     total,
@@ -56,11 +56,6 @@ const MakeOrder = ({
   }
     return(
         <Modal onClose={onCloseHandler}>
-          <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={true}
-        />
           {ordering && <Loading/>}
             <div className='order__header' >
                 <div className="logo-box">

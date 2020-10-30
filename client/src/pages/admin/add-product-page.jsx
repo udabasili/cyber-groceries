@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import { addError } from '../../redux/actions/error.action';
 import Loading from '../../components/loading.componet';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 class AddProduct extends Component {
 	constructor(props){
@@ -201,11 +201,6 @@ class AddProduct extends Component {
 	let components = ( 
 		<div className="add-product">
 			{this.state.isLoading && <Loading/>}
-			<ToastContainer
-				position="top-center"
-				autoClose={2000}
-				hideProgressBar={true}
-			/>
 			<h2 className="heading-secondary">{title}</h2>
 			<form className="form " onSubmit={this.onSubmitHandler}>
 				<nav className="form-nav">

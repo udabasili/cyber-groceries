@@ -6,9 +6,9 @@ const rateLimit = require("express-rate-limit");
 
 
 const loginLimit = rateLimit({
-    max: 100, // max requests
+    max: 10, // max requests
     windowMs: 15 * 60 * 1000, // 15 minutes,
-    message: 'You have attempted too many time. Please try again in 15 minutes ' // message to send
+    message: 'You have attempted too many time. Please try again later ' // message to send
 });
 
 const limit = rateLimit({
@@ -23,7 +23,7 @@ const limit = rateLimit({
  */
 
 module.exports = function (app) {
-    app.use('/api/auth/', loginLimit, routes.UserRoute)
+    app.use('/api/auth/', loginLimit , routes.UserRoute)
     app.use('/api/public/', routes.PublicRoute)
     app.use('/api/admin/:userId', 
         expressJwt({

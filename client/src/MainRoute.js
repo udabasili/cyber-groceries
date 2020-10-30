@@ -70,7 +70,7 @@ class MainRoute extends PureComponent {
                         <React.Fragment>
                             <ToastContainer
                                 position="top-center"
-                                autoClose={1000}
+                                autoClose={3000}
                                 hideProgressBar={true}
                             />
                             <Navigation currentUser={currentUser} isAdmin={isAdmin} isAuthenticated={isAuthenticated}/>

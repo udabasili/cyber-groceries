@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CardList from '../../components/card-list.component';
 import SortItems from '../../components/sort-items.component';
-import { ToastContainer, toast } from "react-toastify";
+import {toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 class AdminProducts extends Component {
@@ -37,7 +37,6 @@ class AdminProducts extends Component {
 		const {products} = this.state
         return (
 			<div className="admin-products">
-				<ToastContainer position='top-center' autoClose={2000} hideProgressBar={true} />
 				<a href='/admin/add-product/grams' className='btn'>Add Product</a>
 				<div className="admin-overview">
 				<SortItems setValue={this.setFilter}/>

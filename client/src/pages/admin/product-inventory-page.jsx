@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { deleteProduct } from '../../redux/actions/product.action';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import Loading from '../../components/loading.componet';
 import { connect } from 'react-redux';
 
@@ -39,11 +39,6 @@ import { connect } from 'react-redux';
          return (
            <div className="user-list">
 			   {this.state.isLoading && <Loading/>}
-				<ToastContainer
-					position="top-center"
-					autoClose={2000}
-					hideProgressBar={true}
-				/>
              <table>
 				<thead>
 					<tr>

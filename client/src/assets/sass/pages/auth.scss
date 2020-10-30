@@ -114,6 +114,14 @@
     text-align: center;
     height: 70vh;
     width: 50%;
+
+    @include response(mobile) {
+        width: 90%;
+    }
+
+    @include response(tab-port) {
+        width: 80%;
+    }
 }
 
 .error{

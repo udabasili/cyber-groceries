@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import Loading from '../../components/loading.componet'
 import Order from '../../components/order.component'
 import Search from '../../components/search.component'
@@ -89,7 +89,6 @@ class OrdersPage extends Component {
             orders,
             showModal: false
         }))
-        toast.success('Order Completed')
 
     }
 
@@ -120,7 +119,6 @@ class OrdersPage extends Component {
          
         return (
             <div className="orders-list">
-                <ToastContainer position='top-center' autoClose={2000} hideProgressBar={true} />
                 { showModal &&
                     <Order 
                         items={items} 

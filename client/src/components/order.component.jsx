@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Modal from './modal.component'
 import { setOrderById } from '../redux/actions/admin.action'
 import Loading from './loading.componet'
+import { toast } from 'react-toastify'
 
 class Order extends Component {
     constructor(props){
@@ -14,12 +15,20 @@ class Order extends Component {
         }
     }
 
-
-    onChange = (e) => {
-
-        let orderFulfilled = e.target.checked;
+    componentDidMount(){
         const order = {...this.props.order}
         let {currentUser, id} = order
+        console.log(currentUser.ageVerified)
+    }
+
+    onChange = (e) => {
+        const order = {...this.props.order}
+        let {currentUser, id} = order
+        if(!currentUser.ageVerified){
+            toast.error("Current user's age has not been verified");
+            return;
+        }
+        let orderFulfilled = e.target.checked;
         order.orderFulfilled = true
         this.setState(prevState =>({
             ...prevState,
@@ -32,12 +41,15 @@ class Order extends Component {
                     ...prevState,
                     isLoading: false,
                 }))
+                toast.success('Order Completed')
                 this.props.setCheckedValue(orderFulfilled, id)
             }).catch((err) => {
                 this.setState(prevState => ({
                     ...prevState,
                     isLoading: false,
                 }))
+                toast.success('Something went wrong. Try again later')
+
         });
     }
 

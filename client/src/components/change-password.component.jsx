@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
 import formHandler from './change-password-form-handler';
 import { resetPassword } from '../redux/actions/user.action';
-import { ToastContainer } from 'react-toastify';
 
 const validator = (values) => {
 	let errors = {};
@@ -50,29 +49,18 @@ export default function ChangePassword(props) {
     
     return (
         <div className="change-password">
-			<ToastContainer
-				position="top-center"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				/>
-			<h2 className='heading-secondary'>Reset Password</h2>
-            <form className="form" onSubmit={Submit}>
-                <div className="form__inner">
-                  <div className="form__component">
-                    <i className="form__group__icon">
-                      <FontAwesomeIcon icon={faEnvelopeOpen} />
-                    </i>
-                    <div className="form__group">
-                      <input
-                        type="email"
-						name="email"
-						id='email'
+            <h2 className='heading-secondary'>Reset Password</h2>
+                  <form className="form" onSubmit={Submit}>
+                      <div className="form__inner">
+                        <div className="form__component">
+                          <i className="form__group__icon">
+                            <FontAwesomeIcon icon={faEnvelopeOpen} />
+                          </i>
+                          <div className="form__group">
+                            <input
+                              type="email"
+								name="email"
+								id='email'
                         placeholder={isMobile ? "Email" : ""}
                         onChange={onChangeHandler}
 						autoComplete='off'
