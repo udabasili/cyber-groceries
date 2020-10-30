@@ -101,6 +101,10 @@ class AddProduct extends Component {
 
 	onSubmitHandler = (e) => {
 		e.preventDefault()
+		if(!this.state.imageUploaded){
+			toast.error('Image must be uploaded')
+			return;
+		}
 		this.setState((prevState) =>({
 			...prevState,
 			isLoading: true
@@ -288,19 +292,18 @@ class AddProduct extends Component {
 					:
 					<div className='form__component'>
 						<div className="form__group">
-
-						<div className="form__select">
-						<select
-							className="card__select"
-							name="quantity"
-							value={data.quantity}
-							id="quantity"
-							onChange={this.onChangeHandler}
-						>
-							<option value="100">50ml</option>
-							<option value="150">150ml</option>
-							<option value="450">250ml</option>
-						</select>
+							<div className="form__select">
+							<select
+								className="card__select"
+								name="quantity"
+								value={data.quantity}
+								id="quantity"
+								onChange={this.onChangeHandler}
+							>
+								<option value="100">50ml</option>
+								<option value="150">150ml</option>
+								<option value="450">250ml</option>
+							</select>
 						<label htmlFor="quantity" className="form__label">
 							Quantity
 						</label>

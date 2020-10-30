@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 const { secretKey } = require('../../config')
-const {db, adminControl} = require('../../loaders/firebase')
-const loggerFunction = require('../../loaders/logger')
+const {db, adminControl} = require('../../loaders/firebase');
+const loggerFunction = require('../../loaders/logger');
+const expressJwt = require('express-jwt');
 
 exports.protectedRoute = function(req, res, next){
     try {
@@ -95,4 +96,12 @@ exports.confirmUser = function (req, res, next) {
             status: 401
         })
     }
+}
+
+exports.jwtToken = function(){
+     expressJwt({
+            secret: secretKey,
+            getToken: req => req.cookies.token,
+            algorithms: ['HS256']
+        })
 }

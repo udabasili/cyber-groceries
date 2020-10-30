@@ -2,6 +2,20 @@ const routes = require('../api/routes')
 const middleware = require('../api/middleware')
 const expressJwt = require('express-jwt')
 const { secretKey } = require('../config')
+const rateLimit = require("express-rate-limit");
+
+
+const loginLimit = rateLimit({
+    max: 100, // max requests
+    windowMs: 15 * 60 * 1000, // 15 minutes,
+    message: 'You have attempted too many time. Please try again in 15 minutes ' // message to send
+});
+
+const limit = rateLimit({
+    max: 100, // max requests
+    windowMs: 20 * 60 * 1000, // 15 minutes,
+    message: 'You have attempted too many time. Please try again later ' // message to send
+});
 
 /**
  * This handles setting
@@ -9,7 +23,7 @@ const { secretKey } = require('../config')
  */
 
 module.exports = function (app) {
-    app.use('/api/auth/', routes.UserRoute)
+    app.use('/api/auth/', loginLimit, routes.UserRoute)
     app.use('/api/public/', routes.PublicRoute)
     app.use('/api/admin/:userId', 
         expressJwt({

@@ -14,7 +14,10 @@ const { secretKey } = require('../config');
 const csrf = require('csurf');
 const redirectSSL = require('redirect-ssl')
 
-app.use(redirectSSL)
+
+// if (process.env.NODE_ENV === 'production'){
+//     app.use(redirectSSL)
+// }
  const csrfProtection = csrf({
   cookie: true,
   ignoreMethods:['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
@@ -26,8 +29,14 @@ app.use(csrfProtection);
 
 
 app.get('/api/csrf-token', (req, res) => {
-    loggerFunction('info', 'cs gotten' )
-    res.json({ csrfToken: req.csrfToken() });
+    try {
+        loggerFunction('info', 'cs gotten' )
+        res.json({ csrfToken: req.csrfToken() });
+    } catch (error) {
+        console.log(error)
+        
+    }
+
 });
 
 /**
