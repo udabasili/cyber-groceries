@@ -19,7 +19,9 @@ module.exports = {
   password: process.env.PASSWORD,
   user: process.env.USER,
   sendGrid: process.env.SENDGRID_API_KEY,
-  templateId: process.env.Template_ID,
+  templateIdPickUp: process.env.Template_ID_PICKUP,
+  templateIdDelivery: process.env.Template_ID_DELIVERY,
+
   paperTrailPort: process.env.PAPERTAIL_PORT,
   paperTrailHost: process.env.PAPERTAIL_HOST,
 

@@ -18,7 +18,6 @@ class Order extends Component {
     componentDidMount(){
         const order = {...this.props.order}
         let {currentUser, id} = order
-        console.log(currentUser.ageVerified)
     }
 
     onChange = (e) => {

@@ -15,7 +15,7 @@ import { toggleCartDropDown } from './redux/actions/cart.action'
 import { getAllProducts } from './redux/actions/product.action'
 import { removeError } from './redux/actions/error.action'
 import AccessDenied from './components/access-denied.component'
-import { AdminProtectedRoute, ProtectedRouteWithRedux} from './components/protected-route.component'
+import { AdminProtectedRoute, AdminProtectedRouteWithRedux, ProtectedRouteWithRedux} from './components/protected-route.component'
 import CheckConsent from './components/check-consent.component'
 import ChangePassword from './components/change-password.component';
 import ResetPassword from './pages/reset-password-page'
@@ -95,7 +95,7 @@ class MainRoute extends PureComponent {
                                     component={CheckOutPage}/>
                                 <Route  path='/products'  component={ProductPage}/>
                                 <Route exact path ='/contact' component = {AboutPage}/>
-                                <AdminProtectedRoute  
+                                <AdminProtectedRouteWithRedux  
                                     path='/admin' 
                                     currentUser={currentUser} 
                                     isAuthenticated={isAuthenticated}

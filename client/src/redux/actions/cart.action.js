@@ -33,11 +33,13 @@ export const clearItemFromCart = (id, size) => ({
       payload: hideDropdown
   });
 
-export const submitOrder = (email, cartItems, total) => {
+export const submitOrder = (email, cartItems, total, completeAddress, deliveryMethod) => {
     const data = {
         email,
         cartItems,
-        total
+        total,
+        completeAddress,
+        deliveryMethod
     }
     return dispatch =>{
     return new Promise((resolve, reject) =>{

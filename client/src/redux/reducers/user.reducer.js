@@ -17,7 +17,7 @@ export default function userReducer(state=INITIAL_STATE, action){
                 ...state,
                 currentUser: action.payload,
                 isAuthenticated: !!Object.keys(action.payload).length > 0,
-                isAdmin: action.payload.isAdmin,
+                isAdmin: !!Object.keys(action.payload).length > 0 ? action.payload.isAdmin : false,
                 ageVerified: action.payload.ageVerified,
 
             }

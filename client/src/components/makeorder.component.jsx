@@ -10,13 +10,15 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const MakeOrder = ({
-    total,
     onClose,
     currentUser,
     submitOrder,
     cartItems,
-    clearCart
+    onSubmitOrder,
+    clearCart,
+    ...otherProps
   }) => {
+  let {total, completeAddress, deliveryMethod} = otherProps
   const [email, setEmail] = useState('')
   const [ordering, setOrdering] = useState(false)
   const [orderedSuccessful, setOrderedSuccessful] = useState(false)
@@ -31,25 +33,26 @@ const MakeOrder = ({
       alert('Email field cannot be empty')
     }
     setOrdering(true)
-    submitOrder(email, cartItems, total)
+    submitOrder(email, cartItems, total, completeAddress, deliveryMethod)
       .then((result) => {
         if(result === 'success'){
           clearCart()
           setOrdering(false)
           setOrderedSuccessful(true)
+          onSubmitOrder()
 
         }
       }).catch((err) => {
-        toast.error(err)
+        setOrdering(false)
+        setOrderedSuccessful(false)
+        toast.error("Something went wrong. Please try again later")
       });
 
   }
 
   const onCloseHandler = () =>{
-    setOrdering(false)
-    setOrderedSuccessful(false)
     onClose()
-    if(orderSubmit === true){
+    if(orderedSuccessful === true){
         history.push('/')
     }
 

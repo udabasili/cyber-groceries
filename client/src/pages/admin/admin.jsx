@@ -32,7 +32,7 @@ function AdminRoute({
 				Promise.all([getAllUsersOrder(), getAllUsers(id)])
 					.then(() => {
 					}).catch(() => {
-						toast.error('Something went wrong. Try again letter')
+						console.log('')
 				});
 
 			}, [currentUser, getAllUsers, getAllUsersOrder])

@@ -30,7 +30,7 @@ class Admin {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
-        await adminRef.child(`${monthNames[d.getMonth()]}-${d.getFullYear()}`).set({
+        await adminRef.child(`${monthNames[d.getMonth()]}-${d.getFullYear()}`).update({
             numberOfUser : childCount,
             date: {
                 time: Date.now(),

@@ -34,11 +34,11 @@ export default class NewUsersGraphs extends React.Component {
                     let values ;
                     if(data !== undefined){
                         values = monthNames.map((month, index) => (
-                             data.map((d) => (
+                            Math.max(...data.map((d) => (
                                  d.month === month ? d.numberOfUser : 0
-                             ))[0]
+                             )))
                          ))
-                         
+                            
                     }else{
                         values = monthNames.map((month, index) => (
                             0

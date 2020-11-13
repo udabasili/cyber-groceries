@@ -8,13 +8,13 @@ const rateLimit = require("express-rate-limit");
 const loginLimit = rateLimit({
     max: 10, // max requests
     windowMs: 15 * 60 * 1000, // 15 minutes,
-    message: 'You have attempted too many time. Please try again later ' // message to send
+    message: 'You have attempted too many times. Please try again later ' // message to send
 });
 
 const limit = rateLimit({
     max: 100, // max requests
-    windowMs: 20 * 60 * 1000, // 15 minutes,
-    message: 'You have attempted too many time. Please try again later ' // message to send
+    windowMs: 30 * 60 * 1000, // 20 minutes,
+    message: 'You have attempted too many times. Please try again later ' // message to send
 });
 
 /**
@@ -26,11 +26,13 @@ module.exports = function (app) {
     app.use('/api/auth/', loginLimit , routes.UserRoute)
     app.use('/api/public/', routes.PublicRoute)
     app.use('/api/admin/:userId', 
+
         expressJwt({
             secret: secretKey,
             getToken: req => req.cookies.token,
             algorithms: ['HS256']
         }),
+        limit,
         middleware.adminHandler.checkIfAdmin, 
         middleware.userCheck.protectedRoute, 
         middleware.userCheck.setCurrentUser,
@@ -41,6 +43,7 @@ module.exports = function (app) {
             getToken: req => req.cookies.token,
             algorithms: ['HS256']
         }),
+        limit,
      middleware.userCheck.confirmUser)
     app.use('/api/products/', 
      expressJwt({
@@ -57,6 +60,7 @@ module.exports = function (app) {
             getToken: req => req.cookies.token,
             algorithms: ['HS256']
         }),
+        limit,
         middleware.userCheck.protectedRoute,
         middleware.userCheck.setCurrentUser,
         routes.CartRoute)

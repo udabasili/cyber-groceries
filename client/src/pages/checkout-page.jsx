@@ -1,42 +1,85 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CheckOutItem from '../components/checkout-item.component';
+import DeliveryModeComponent from '../components/delivery-mode.component';
 import MakeOrder from '../components/makeorder.component';
 import { clearAllItemsFromCart } from '../redux/actions/cart.action';
 
 class CheckOut extends Component {
-  state = {
-    makeOrder: false,
+  constructor(props){
+    super (props);
+    this.state = {
+      loadOrderModal: false,
+      loadDeliveryModal: false,
+      completeAddress: null,
+      total: props.total,
+      deliveryMethod: null
   
   }
-  ;
-  makeOrderHandler = () =>{
-    this.setState({makeOrder: true})
   }
+  
+  ;
+  loadOrderModalHandler = () =>{
+    this.setState((prevState) => ({
+      ...prevState,
+      loadOrderModal: true
+    }))
+  }
+
+  deliveryModalHandler = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      loadDeliveryModal: true 
+    }))
+  }
+
+  onSubmitDelivery = (completeAddress, total, deliveryMethod) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      completeAddress,
+      loadDeliveryModal: false,
+      loadOrderModal: true,
+      total,
+      deliveryMethod
+    }))
+  }
+
+  onSubmitOrder = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      total: 0,
+      
+    }))
+  }
+
 
   
 
   onClose = () =>{
     this.setState({
-      makeOrder: false
+      loadOrderModal: false,
+      loadDeliveryModal: false
     })
   }
 
   render() {
-    const { items, total, clearAllItemsFromCart, tax } = this.props;
-    const {makeOrder} = this.state
+    const { items, clearAllItemsFromCart, tax } = this.props;
+    const {loadOrderModal, loadDeliveryModal, total } = this.state
     return (
       <div className="checkout">
         {
-          makeOrder && < MakeOrder onClose = {
-            this.onClose
-          }
-          clearCart = {
-            clearAllItemsFromCart
-          }
-          total = {
-            total
-          }
+          loadOrderModal && <MakeOrder 
+          onClose = {this.onClose}
+            onSubmitOrder={this.onSubmitOrder}
+          clearCart = {clearAllItemsFromCart}
+          {...this.state}
+          />}
+        {
+          loadDeliveryModal && 
+          <DeliveryModeComponent 
+            onClose={this.onClose}
+            onSubmitDelivery={this.onSubmitDelivery}
+            total={total}
           />}
         <div className="checkout__header">
             <span>CheckOut</span>
@@ -53,7 +96,7 @@ class CheckOut extends Component {
             TOTAL: ${total}
           </span>
         </div>
-        <div className='btn' onClick={this.makeOrderHandler} price={total}>Complete Order</div>
+        <div className='btn' onClick={this.deliveryModalHandler} price={total}>Complete Order</div>
       </div>
     );
   }

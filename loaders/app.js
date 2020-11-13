@@ -42,12 +42,6 @@ app.get('/api/csrf-token', (req, res) => {
 /**
  * SECURITY MIDDLEWARE
  */
-// app.use(helmet())
-const limit = rateLimit({
-    max: 100, // max requests
-    windowMs: 60 * 60 * 1000, // 1 Hour
-    message: 'Too many requests' // message to send
-});
 
 //middleware
 app.use(bodyParser.json({limit: '40kb'}));
@@ -56,7 +50,6 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use(cors());
-app.use(limit)
 app.use(xss())
 app.use(mongoSanitize());
 

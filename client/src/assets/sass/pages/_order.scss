@@ -40,12 +40,21 @@
         width: 80%;
 
         .total{
-            font-size: 2rem;
-            padding-top: 2rem;
+            font-size: 1.6rem;
+            padding-top: 1rem;
         }
 
         .form{
             padding-top: 1rem;
+
+            &__select{
+                    align-items: center;
+                    margin: 0;
+                select{
+                    width: 20rem;
+                }
+                
+            }
         }
     }
 

@@ -18,6 +18,7 @@ function ProtectedRoute({
     }, (error) => {
       if (error.response.status === 401) {
         sessionStorage.removeItem('userId');
+        error.response.data = 'Please login again'
         setCurrentUser({})
         history.push('/auth/login')
       }
@@ -67,16 +68,25 @@ export function AdminProtectedRoute({
 
         }, (error) => {
           if (error.response.status === 403) {
-            history.push('/403')
+            setCurrentUser({})
+            history.push('/auth/login')
+            error.response.data = 'Please login again'
+
+
           }
 
           if (error.response.status === 401) {
             sessionStorage.removeItem('userId');
             setCurrentUser({})
             history.push('/auth/login')
+            error.response.data = 'Please login again'
+
+
+
+
           }
           if (error.response.data.toLowerCase().includes('ECONNREFUSED'.toLowerCase())) {
-            error.response.data = 'Something went wrong. Try again later'
+            error.response.data = 'Something went wrong. Try again'
           }
           return new Promise((resolve, reject) => {
             reject(error);

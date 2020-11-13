@@ -1,17 +1,19 @@
 const { db } = require("../loaders/firebase");
 const loggerFunction = require("../loaders/logger");
 const purchaseRef = db.ref('orders');
-const { sendGrid, templateId } = require("../config");
+const { sendGrid, templateIdDelivery, templateIdPickUp } = require("../config");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(sendGrid);
 const productsRef = db.ref('/products')
 
 class CartService{
-    constructor(email, currentUser, cartItems, total) {
+    constructor(email, currentUser, cartItems, total, deliveryType, address=null) {
         this.email = email,
         this.currentUser = currentUser,
         this.cartItems = cartItems,
-        this.total = total
+        this.total = total,
+        this.deliveryType = deliveryType,
+        this.address = address
     }
 
     async removeItemsFromStock(id, quantity){
@@ -35,29 +37,30 @@ class CartService{
      * @memberof CartService
      */
     async confirmOrder(){
+        let templateId;
+        let dynamicTemplateData ;
         var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        const template_params = {
-            "toName": this.currentUser.username,
-            "userEmail": this.email,
-            "total": this.total,
-            "userId": this.currentUser.userId,
-            "currentDate": date
+        var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+      if (this.deliveryType === 'pickup'){
+        templateId = templateIdPickUp
+        dynamicTemplateData = {
+          username: this.currentUser.username,
+          userId: this.currentUser.userId,
+          total: this.total,
+          currentDate: date,
         }
-        const msg = {
-          to: this.email,
-          from: "juliannapeterpaul@highway420canna.ca", // Use the email address or domain you verified above
-          subject: "Sending with Twilio SendGrid is Fun",
-          text: "and easy to do anywhere, even with Node.js",
-          html: "<strong>and easy to do anywhere, even with Node.js</strong>",
-        };
-        var today = new Date();
-        var date =
-          today.getFullYear() +
-          "-" +
-          (today.getMonth() + 1) +
-          "-" +
-          today.getDate();
+      }else{
+        templateId = templateIdDelivery
+        dynamicTemplateData = {
+          username: this.currentUser.username,
+          userId: this.currentUser.userId,
+          total: this.total,
+          currentDate: date,
+          address: `${this.address.address} ,${this.address.province}`
+
+        }
+      }
+       
         const response = await sgMail.send({
           from: "juliannapeterpaul@highway420canna.ca",
           personalizations: [
@@ -67,12 +70,7 @@ class CartService{
                   email: this.email,
                 },
               ],
-              dynamicTemplateData: {
-                username: this.currentUser.username,
-                userId: this.currentUser.userId,
-                total: this.total,
-                currentDate: date,
-              },
+              dynamicTemplateData
             },
           ],
           templateId: templateId
