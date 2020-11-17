@@ -18,6 +18,11 @@ router.post('/register',celebrate({
             generateUserToken,
             newUser
         } = await UserService.signUp();
+        res.cookie('token', generateUserToken, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24, // 24 HOURS,
+            secure: true
+        });
         return res.status(200).json({
             message: {
                 newUser,

@@ -113,7 +113,7 @@ const DeliveryMode = ({
 											id="province"
 											onChange={setProvinceHandler}
 										>
-											<option disabled selected value>Chose Province</option>
+											<option disabled selected value>Chose Area</option>
 											<option value="Miramichi">Miramichi</option>
 											<option value="Sunny Corner">Sunny Corner</option>
 											<option value="others">Others</option>
