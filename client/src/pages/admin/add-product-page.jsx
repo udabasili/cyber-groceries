@@ -101,10 +101,6 @@ class AddProduct extends Component {
 
 	onSubmitHandler = (e) => {
 		e.preventDefault()
-		if(!this.state.imageUploaded){
-			toast.error('Image must be uploaded')
-			return;
-		}
 		this.setState((prevState) =>({
 			...prevState,
 			isLoading: true
@@ -165,7 +161,10 @@ class AddProduct extends Component {
 			
         
 		}else{
-			
+			if (!this.state.imageUploaded) {
+				toast.error('Image must be uploaded')
+				return;
+			}
 			this.props.addProduct(data, image)
 				.then((result) => {
 					this.setState((prevState) => ({
