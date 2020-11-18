@@ -8,6 +8,7 @@ import AuthImage from '../assets/images/slides/weed1.jpg'
 import { Authenticate } from '../redux/actions/user.action';
 import { removeError } from '../redux/actions/error.action';
 import Loading from '../components/loading.componet';
+import { toast } from 'react-toastify';
 
 /**
  * Class representing authentication form for user
@@ -178,11 +179,12 @@ class Auth extends Component {
             }))
             this.props.history.push(path)
 		})
-		.catch(() =>{
+		.catch((error) =>{
 			this.setState((prevState) => ({
 				...prevState,
 				isLoading: false
-			}))
+      }))
+      toast.error(error)
 		})
 		
     }
@@ -243,7 +245,6 @@ class Auth extends Component {
                 <form className="form" onSubmit={this.onSubmitHandler}>
                   {auth === "register" ? (
                     <div className="form__inner">
-                      <div className="alert-error">{error && error}</div>
                       <div className="form__component">
                         <i className="form__group__icon">
                           <FontAwesomeIcon icon={faUser} />
@@ -399,7 +400,6 @@ class Auth extends Component {
                     </div>
                   ) : (
                     <div className="form__inner">
-                      <div className="alert-error">{error && error}</div>
                       <div className="form__component">
                         <i className="form__group__icon">
                           <FontAwesomeIcon icon={faEnvelope} />

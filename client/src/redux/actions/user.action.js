@@ -46,7 +46,6 @@ export const Authenticate = (userData, authPath) => {
         return new Promise((resolve, reject) => {
             return apiHandler(`/api/auth/${authPath}`, 'post', userData)
                 .then((response) => {
-                    dispatch(removeError())
                     let currentUser = response.newUser
                     sessionStorage.setItem('userId', currentUser._id);
                     dispatch(setCurrentUser(currentUser));
@@ -56,7 +55,6 @@ export const Authenticate = (userData, authPath) => {
                     }
                     return resolve()
                 }).catch((err) => {
-                    dispatch(addError(err.message))
                     dispatch(setCurrentUser({}));
                     sessionStorage.removeItem('userId')
                     sessionStorage.removeItem('validator')

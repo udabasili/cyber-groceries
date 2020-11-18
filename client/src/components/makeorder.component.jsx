@@ -45,6 +45,7 @@ const MakeOrder = ({
       }).catch((err) => {
         setOrdering(false)
         setOrderedSuccessful(false)
+        console.log(err)
         toast.error("Something went wrong. Please try again later")
       });
 

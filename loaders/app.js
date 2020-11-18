@@ -15,9 +15,9 @@ const csrf = require('csurf');
 const redirectSSL = require('redirect-ssl')
 
 
-// if (process.env.NODE_ENV === 'production'){
-//     app.use(redirectSSL)
-// }
+if (process.env.NODE_ENV === 'production'){
+    app.use(redirectSSL)
+}
  const csrfProtection = csrf({
   cookie: true,
   ignoreMethods:['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
