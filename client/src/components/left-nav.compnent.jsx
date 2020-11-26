@@ -68,7 +68,7 @@ function LeftNav(props) {
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Clothing/Accessories
+                 Clothing
                </NavLink>
              </li>
              

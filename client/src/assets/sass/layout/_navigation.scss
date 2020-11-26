@@ -23,7 +23,9 @@
         
 
          @include response(mobile) {
-             justify-content: unset;
+            justify-content: unset;
+            padding: 0 .6rem;
+
          }
 
     }
@@ -47,6 +49,11 @@
         }
         .logo{
             margin: 10px 2rem;
+
+            @include response(mobile) {
+                margin: 0;
+
+            }
             
             img{
                 width: 5rem;
@@ -431,6 +438,8 @@
             justify-content: center;
             align-items: center;
             width: 100%;
+            flex-wrap: wrap;
+
             
         }
     }
