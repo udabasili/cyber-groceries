@@ -7,7 +7,6 @@ export default class NewUsersGraphs extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
-                isMobile: window.innerWidth <= 800,
                 loading: true,
                 options: {
                     chart: {
@@ -25,7 +24,6 @@ export default class NewUsersGraphs extends React.Component {
         }
 
         componentDidMount(){
-            window.addEventListener('resize', this.setIsMobile)
             const monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
             ];
@@ -69,19 +67,8 @@ export default class NewUsersGraphs extends React.Component {
                 
         }
 
-        componentWillUnmount(){
-            window.removeEventListener('resize', this.setIsMobile)
-        }
-
-        setIsMobile = () => {
-            this.setState((prevState) =>({
-                ...prevState,
-                isMobile: window.innerWidth <= 800
-            }))
-
-        }
+      
         render() {
-            const {isMobile} = this.state
             return ( 
                 <div className='chart'>
                     {this.state.loading ?
@@ -95,8 +82,8 @@ export default class NewUsersGraphs extends React.Component {
                                 options = {this.state.options}
                                 series = {this.state.series}
                                 type = "bar"
-                                width = {isMobile? '90%': "90%"}
-                                height = {isMobile? '90%': "60%"}
+                                width={400}
+                                height={400}
                             />
                         </React.Fragment>
                     }

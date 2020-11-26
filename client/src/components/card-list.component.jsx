@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from './card.component';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 /**
  *
  * 
@@ -18,11 +18,6 @@ export default function CardList({products, isAdmin=null}) {
 	}
     return (
       <React.Fragment>
-        <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={true}
-        />
         <div className="card-list">
           {products &&
             products.map((data, index) => (

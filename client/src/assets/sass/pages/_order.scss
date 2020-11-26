@@ -1,6 +1,9 @@
 .order{
     &__header {
         @include modalHeader;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .heading-secondary {
             color: black;
@@ -24,6 +27,8 @@
             }
 
             .logo {
+                margin: 10px 2rem;
+                
                 img {
                     width: 5rem;
                     height: 5rem;

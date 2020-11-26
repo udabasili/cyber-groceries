@@ -13,15 +13,20 @@ class OrdersPage extends Component {
         searchString: '',
         order: null,
         isLoading: false,
-        orders: null
+        orders: null,
+        _id: null,
+        ageVerified: false
 
     }
 
-    modalHandler = (value, order=null) => {
+    modalHandler = (value, order=null, userId) => {
+        const currentUser = this.props.allUsers.find(user => user.userId === userId)
         this.setState((prevState) =>({
             ...prevState,
             showModal: value,
-            order
+            order,
+            _id: currentUser._id,
+            ageVerified: currentUser.ageVerified
         }))
     }
 
@@ -102,7 +107,7 @@ class OrdersPage extends Component {
     
 
     render() {
-        const {orders, isLoading} = this.state
+        const {orders, isLoading, ageVerified, _id} = this.state
         let filteredOrders = []
         const {showModal, items,  searchString} = this.state
         if(orders !== null && orders !== undefined){
@@ -123,6 +128,8 @@ class OrdersPage extends Component {
                     <Order 
                         items={items} 
                         order={this.state.order}
+                        ageVerified={ageVerified}
+                        _id={_id}
                         setCheckedValue={this.setCheckedValue}
                         />
                 }
@@ -144,7 +151,8 @@ class OrdersPage extends Component {
                             <tr key={order.id} id={order.id} onClick={() => (
                                 this.modalHandler(
                                     true, 
-                                    order
+                                    order,
+                                    order.userId
                                 ))}>
                                 <td>
                                     <input 
@@ -155,7 +163,7 @@ class OrdersPage extends Component {
                                         }
                                         id={order.id} checked={order.orderFulfilled}/>
                                 </td>
-                                <td>{order.currentUser.userId.split('_')[1]}</td>
+                                <td>{order.userId.split('_')[1]}</td>
                                 <td>{order.currentUser.username}</td>
                                 <td>{order.cartItems.length}</td>
                                 <td>${order.total}</td>
@@ -174,12 +182,10 @@ class OrdersPage extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    orders: state.admin.orders
-})
+
 
 const mapDispatchToProps = {
     setAllUsersOrder
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrdersPage)
+export default connect(null, mapDispatchToProps)(OrdersPage)

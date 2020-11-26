@@ -12,12 +12,8 @@
 
         &::before{
             content:  '';
-            background-image: url('../../images/HWY420.png');
             display: flex;
             height: 50vh;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
             opacity: .2;
             position: absolute;
             align-self: center;

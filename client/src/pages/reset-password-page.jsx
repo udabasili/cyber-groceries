@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { sentPasswordReset } from '../redux/actions/user.action'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 
 export default function ResetPassword() {
     const [email, setEmail] = useState('')
@@ -22,10 +22,6 @@ export default function ResetPassword() {
     }
     return (
         <div className="change-password">
-            <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                />
             <h2 className='heading-tertiary'>Forgot Password</h2>
             {!emailSent ?
                 <React.Fragment>

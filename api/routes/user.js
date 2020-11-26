@@ -69,7 +69,7 @@ router.post('/login', celebrate({
                 error.message = 'Sorry, this email/password combination is incorrect';
             }
             if (error.code === 'auth/user-not-found') {
-                error.message = "Sorry, this email isn't located in our account.Please register";
+                error.message = "Sorry, this email isn't registered yet.Please register";
             }
             return next({
                 message: error.message,

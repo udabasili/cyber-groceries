@@ -13,11 +13,11 @@ import { toggleCartDropDown } from '../../redux/actions/cart.action'
 import { toggleUserDropdown } from '../../redux/actions/user.action'
 import { removeError } from '../../redux/actions/error.action'
 import OrdersPage from './orders-page'
-import { toast } from 'react-toastify'
 
 function AdminRoute({
 	match, 
 	getAllUsers, 
+	orders,
 	allUsers, 
 	getAllUsersOrder,
 	products, 
@@ -56,7 +56,7 @@ function AdminRoute({
           />
 		  <Route
             path={`${match.url}/orders`}
-            render={(props) => <OrdersPage title="Add product" type='millimeter' {...props} />}
+            render={(props) => <OrdersPage title="Add product" orders={orders} type='millimeter' allUsers={allUsers} {...props} />}
           />
 		  
           <Route
@@ -100,7 +100,9 @@ function AdminRoute({
 const mapStateToProps = (state) => ({
 	allUsers: state.admin.allUsers,
 	products: state.product.products,
-	currentUser: state.user.currentUser
+	currentUser: state.user.currentUser,
+	orders: state.admin.orders
+
 });
 
 const mapDispatchToProps = (dispatch) =>({

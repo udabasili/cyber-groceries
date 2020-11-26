@@ -11,19 +11,19 @@ class Order extends Component {
         super (props);
         this.state = {
             orderFulfilled: props.order.orderFulfilled,
-            isLoading: false
+            isLoading: false,
+            _id:props._id,
+            ageVerified: props.ageVerified
         }
     }
 
-    componentDidMount(){
-        const order = {...this.props.order}
-        let {currentUser, id} = order
-    }
+ 
 
     onChange = (e) => {
         const order = {...this.props.order}
-        let {currentUser, id} = order
-        if(!currentUser.ageVerified){
+        const {ageVerified, _id} = this.state
+        let {id} = order
+        if(!ageVerified){
             toast.error("Current user's age has not been verified");
             return;
         }
@@ -34,7 +34,7 @@ class Order extends Component {
             isLoading: true,
             orderFulfilled
         }))
-        this.props.setOrderById(currentUser._id, order)
+        this.props.setOrderById(_id, order)
             .then((result) => {
                 this.setState(prevState => ({
                     ...prevState,
@@ -49,7 +49,7 @@ class Order extends Component {
                 }))
                 toast.success('Something went wrong. Try again later')
 
-        });
+        })
     }
 
      onCloseHandler = () =>{

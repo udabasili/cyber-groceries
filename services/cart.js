@@ -77,10 +77,14 @@ class CartService{
         });
         if (response[0].statusCode === 202) {
           await purchaseRef.child(this.currentUser._id).push({
-            currentUser: this.currentUser,
+            currentUser: {
+              username: this.currentUser.username,
+              _id: this.currentUser._id
+            }
+              ,
             cartItems: this.cartItems,
             orderDate: date,
-            userId: this.currentUser._id,
+            userId: this.currentUser.userId,
             total: this.total,
             orderFulfilled: false
           });

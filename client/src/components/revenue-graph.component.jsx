@@ -4,7 +4,6 @@ import Chart from 'react-apexcharts'
 export default class RevenueGraph extends Component {
     state={
         total: 0,
-        isMobile: window.innerWidth <= 800,
         loading: true,
         options: {
             plotOptions: {
@@ -38,7 +37,6 @@ export default class RevenueGraph extends Component {
     }
     
     componentDidMount(){
-        window.addEventListener('resize', this.setIsMobile)
         getTotalCost()
             .then(data => {
                 if (data || data !== undefined){
@@ -69,20 +67,9 @@ export default class RevenueGraph extends Component {
             })
 
         }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.setIsMobile)
-    }
-
-    setIsMobile = () => {
-        this.setState((prevState) => ({
-            ...prevState,
-            isMobile: window.innerWidth <= 800
-        }))
-
-    }
+ 
     
     render() {
-        const {isMobile} = this.state
         return (
             <div className='chart'>
                 {this.state.loading ?
@@ -95,12 +82,8 @@ export default class RevenueGraph extends Component {
                                     options={this.state.options} 
                                     series={this.state.series} 
                                     type='donut' 
-                                    width = {
-                                        isMobile ? '90%' : "80%"
-                                    }
-                                    height = {
-                                        isMobile ? '90%' : "70%"
-                                    }
+                                    width = { 400}
+                                    height = {400}
                                     />
                         </React.Fragment>
                 }

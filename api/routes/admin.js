@@ -174,6 +174,7 @@ router.post("/set-users-orders", async (req, res, next) => {
             message: orders
         })
     } catch (error) {
+        console.log(error)
         return next({
             message: error.message,
             status: 500

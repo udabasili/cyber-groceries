@@ -53,6 +53,24 @@ function LeftNav(props) {
                  Topicals
                </NavLink>
              </li>
+             <li className="left-nav__item">
+               <NavLink
+                 to="/products/cbd"
+                 className="left-nav__link"
+                 activeClassName="left-nav-active"
+               >
+                 CBD
+               </NavLink>
+             </li>
+             <li className="left-nav__item">
+               <NavLink
+                 to="/products/clothing"
+                 className="left-nav__link"
+                 activeClassName="left-nav-active"
+               >
+                 Clothing/Accessories
+               </NavLink>
+             </li>
              
              
            </ul>

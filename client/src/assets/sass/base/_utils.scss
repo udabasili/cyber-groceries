@@ -30,9 +30,23 @@
     margin-top: 10rem !important;
 }
 
+
+.Toastify__toast-container{
+    width: 40%;
+}
+
 .Toastify__toast-body {
+    font-size: 1.7rem;
     text-align: center;
-    font-size: 2rem;
     text-transform: uppercase;
     color: white;
+    @include response(mobile){
+        font-size: 1.2rem;
+    }
+
+    @include response(tab-land) {
+    }
+
+    @include response(tab-port) {
+    }
 }

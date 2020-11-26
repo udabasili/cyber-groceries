@@ -14,7 +14,7 @@ const { secretKey } = require('../config');
 const csrf = require('csurf');
 const redirectSSL = require('redirect-ssl')
 
-
+console.log(process.env.NODE_ENV )
 if (process.env.NODE_ENV === 'production'){
     app.use(redirectSSL)
 }

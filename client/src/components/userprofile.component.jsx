@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import Modal from './modal.component';
 import EditProfile from './edit-profile.component';
 import ChangeEmail from './change-email.component';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { deleteUser, disableUser, getUserOrderById } from '../redux/actions/admin.action';
 import UserOrders from './user-orders.component';
 import { logOut } from '../redux/actions/user.action';
@@ -193,11 +193,6 @@ class UserProfile extends Component {
             return (
                 <React.Fragment>
                     {this.state.isLoading && <Loading/>}
-                    <ToastContainer
-                        position="top-center"
-                        autoClose={2000}
-                        hideProgressBar={true}
-                        />
                     {showModal &&
                         <Modal onClose={this.closeModal}>
                             {showEmailWindow && (

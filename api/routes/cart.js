@@ -16,9 +16,9 @@ router.post(
             cartItems: Joi.array().required(),
             total: Joi.number().required(),
             completeAddress: Joi.object({
-                address: Joi.string().required(),
-                province: Joi.string().required()
-            }).required(),
+                address: Joi.string().empty('').default(null),
+                province: Joi.string().empty('').default(null)
+            }),
             deliveryMethod: Joi.string().required()
         }),
     }),
