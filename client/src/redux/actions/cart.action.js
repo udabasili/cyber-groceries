@@ -44,16 +44,12 @@ export const submitOrder = (email, cartItems, total, completeAddress, deliveryMe
     return dispatch =>{
     return new Promise((resolve, reject) =>{
         const userId = sessionStorage.getItem('userId')
-        try {
             apiHandler(`/api/cart/${userId}/order`,'post',data)
-            .then((result) => {
-                return resolve(result)
-                
+                .then((result) => {
+                    return resolve(result)
+                    
             }).catch((err) => {
-                reject(err)
+                return reject(err)
             });
-        } catch (error) {
-            
-        }
     })}
 }

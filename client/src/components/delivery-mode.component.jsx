@@ -17,7 +17,7 @@ const DeliveryMode = ({
   const [address, setAddress] = useState('')
 
   const setProvinceHandler = (e) => {
-    const {name, value} = e.target
+    const {value} = e.target
     if(value === 'others'){
       toast.error('Sorry delivery is allowed to miramichi and sunny corner')
       setDeliveryMethod('pickup')
@@ -92,7 +92,6 @@ const DeliveryMode = ({
 										type="text"
 										name="address"
 										title='Please put in address'
-										type='address'
 										value={address}
 										onChange={e => setAddress(e.target.value)}
 										id='address'

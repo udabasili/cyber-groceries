@@ -23,10 +23,10 @@ function ProtectedRoute({
         history.push('/auth/login')
       }
       return new Promise((resolve, reject) => {
-
         reject(error);
       })
-    })
+	})
+	
     return (
         <Route {...otherProps} render={(props) => (
             isAuthenticated ?
@@ -71,8 +71,6 @@ export function AdminProtectedRoute({
             setCurrentUser({})
             history.push('/auth/login')
             error.response.data = 'Please login again'
-
-
           }
 
           if (error.response.status === 401) {
@@ -80,10 +78,6 @@ export function AdminProtectedRoute({
             setCurrentUser({})
             history.push('/auth/login')
             error.response.data = 'Please login again'
-
-
-
-
           }
           if (error.response.data.toLowerCase().includes('ECONNREFUSED'.toLowerCase())) {
             error.response.data = 'Something went wrong. Try again'
@@ -94,18 +88,17 @@ export function AdminProtectedRoute({
         })
         useEffect(() => {
             setCheckIfAdmin(isAdmin)
-            
-        });
-  return (
-    <Route
-      {...otherProps}
-      render={(props) =>
-        checkIfAdmin && isAuthenticated ? (
-          <Component currentUser={currentUser} {...props} />
-        ) : (
-          <Redirect to="/403" />
-        )
-      }
+        },[isAdmin]);
+	return (
+		<Route
+			{...otherProps}
+			render={(props) =>
+				checkIfAdmin && isAuthenticated ? (
+				<Component currentUser={currentUser} {...props} />
+				) : (
+				<Redirect to="/403" />
+			)
+		}
     />
   );
 }

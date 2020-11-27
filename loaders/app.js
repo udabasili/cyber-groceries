@@ -2,19 +2,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const helmet = require('helmet');
 const app = express();
 const path = require('path');
 const loggerFunction = require('./logger');
-const rateLimit = require("express-rate-limit");
 const xss = require("xss-clean")
 const mongoSanitize = require('express-mongo-sanitize')
 const cookieParser = require('cookie-parser');
-const { secretKey } = require('../config');
 const csrf = require('csurf');
 const redirectSSL = require('redirect-ssl')
 
-console.log(process.env.NODE_ENV )
 if (process.env.NODE_ENV === 'production'){
     app.use(redirectSSL)
 }

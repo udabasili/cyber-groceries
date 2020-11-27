@@ -2,9 +2,9 @@ import actionType from '../actionTypes'
 import {
     apiHandler
 } from '../../services/api'
-import { addError, removeError } from './error.action'
 import { setAllOrders, setAllUsers } from './admin.action'
 import axios from 'axios'
+
 export const setCurrentUser = (user) => ({
     type: actionType.SET_CURRENT_USER,
     payload: user
@@ -30,13 +30,12 @@ export const logOut = () => {
             return apiHandler(`/api/auth/${userId}/logout`, 'get')
                 .then((result) => {
                     sessionStorage.removeItem('userId')
-                    sessionStorage.removeItem('validator')
                     dispatch(setCurrentUser({}));
                     dispatch(setAllUsers([]))
                     dispatch(setAllOrders([]))
                     return resolve(result)
                 }).catch((err) => {
-                    reject(err)
+                    return reject(err)
                 })
             })
     }
@@ -57,8 +56,7 @@ export const Authenticate = (userData, authPath) => {
                 }).catch((err) => {
                     dispatch(setCurrentUser({}));
                     sessionStorage.removeItem('userId')
-                    sessionStorage.removeItem('validator')
-                    reject(err.message)
+                    return reject(err.message)
                 });
         })
         
@@ -71,8 +69,6 @@ export const confirmUserToken = () => {
         return new Promise((resolve, reject) => {
             return apiHandler(`/api/confirmUser`, 'get')
                 .then((response) => {
-                    console.log('here')
-                    dispatch(removeError())
                     let currentUser = response.user
                     sessionStorage.setItem('userId', currentUser._id);
                     dispatch(setCurrentUser(currentUser));
@@ -80,7 +76,6 @@ export const confirmUserToken = () => {
                 }).catch((err) => {
                     sessionStorage.removeItem('userId');
                     dispatch(setCurrentUser({}));
-                    dispatch(addError('Please Login Again'))
                     return reject(err)
                 });
         })
@@ -122,7 +117,7 @@ export const getCsrfToken = async () => {
         const { data } = await axios.get('/api/csrf-token');
         axios.defaults.headers.post['X-CSRF-Token'] = data.csrfToken;
     } catch (error) {
-        console.log(error)
+        console.log("")
     }
     
    };

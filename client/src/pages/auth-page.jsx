@@ -183,8 +183,7 @@ class Auth extends Component {
 			this.setState((prevState) => ({
 				...prevState,
 				isLoading: false
-      }))
-      toast.error(error)
+      }), () => toast.error(error))
 		})
 		
     }
@@ -214,11 +213,10 @@ class Auth extends Component {
     }
 
     render() {
-        const { error } = this.props;
         const { auth, registerData, loginData, isMobile, disableSubmitButton, isLoading,errors } = this.state;
         return (
           <div className="auth-page">
-        {isLoading && <Loading/>}
+            {isLoading && <Loading/>}
               <div className="auth-page__left-section">
                 <nav className="form-nav">
                   <ul className="form-nav__list">

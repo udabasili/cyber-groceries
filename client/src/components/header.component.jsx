@@ -11,7 +11,6 @@ const slideImages = [
     Image,
     Image2,
     Image3,
-    
 ]
 
 
@@ -39,8 +38,7 @@ function Header({history, products}) {
 				setIndex(index)
 			}
 		},
-		[],
-	)
+		[])
 
 	useEffect(() => {
 		let intervalHandler = setInterval(hoverAction,1000)

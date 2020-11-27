@@ -1,7 +1,7 @@
 import actionType from '../actionTypes'
 import { apiHandler } from '../../services/api'
-import { removeError } from './error.action'
 import axios from 'axios'
+
 export const setProducts = (products) => ({
     type: actionType.SET_PRODUCTS,
     payload: products
@@ -42,11 +42,10 @@ export const addProduct = (product, imageUrl) =>{
                 }
 
             }).then((result) => {
-                    dispatch(removeError())
                     dispatch(setProducts(result.data.message))
-                    resolve()
+                    return resolve()
                 }).catch((err) => {
-                    reject(err.response.data)
+                    return reject(err.response.data)
                 });
         })
         
@@ -73,11 +72,10 @@ export const editProduct = (product, imageUrl, productId) => {
                 }
 
             }).then((result) => {
-                dispatch(removeError())
                 dispatch(setProducts(result.data.message))
-                resolve()
+                return resolve()
             }).catch((err) => {
-                reject(err.response.data)
+                return reject(err.response.data)
             });
         })
 
@@ -93,11 +91,10 @@ export const editProductWithUrl = (product, productId) => {
         return new Promise((resolve, reject) => {
             return apiHandler(`/api/products/edit-product-with-url/${productId}`, 'put', product)
                 .then((result) => {
-                    dispatch(removeError())
                     dispatch(setProducts(result))
-                    resolve()
+                    return resolve()
                 }).catch((err) => {
-                    reject(err)
+                    return reject(err)
                 });
         })
 
@@ -112,11 +109,10 @@ export const deleteProduct = (productId) => {
         return new Promise((resolve, reject) => {
             return apiHandler(`/api/products/delete-product/${productId}`, 'delete')
                 .then((result) => {
-                    dispatch(removeError())
                     dispatch(setProducts(result))
-                    resolve()
+                    return resolve()
                 }).catch((err) => {
-                    reject(err)
+                    return reject(err)
                 });
         })
         
