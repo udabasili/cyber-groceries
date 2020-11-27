@@ -342,9 +342,8 @@ class AddProduct extends Component {
 							<option value="buds">Buds</option>
 							<option value="extracts">Extracts</option>
 							<option value="cbd">CBD</option>
-							<option value="clothing">Clothing/Accessories</option>
-
-
+							<option value="clothing">Clothing</option>
+							<option value="accessories">Accessories</option>
 						</select>
 						</div>
 						<div className="form__select">

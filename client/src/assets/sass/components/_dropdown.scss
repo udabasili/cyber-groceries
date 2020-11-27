@@ -76,7 +76,7 @@
     }
 
     &__list{
-        height: 65%;
+        height: 20vh;
         width: 80%;
         border: 1px black solid;
         margin: 2rem auto 0 auto;
@@ -140,6 +140,8 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            align-items: center;
+            width: 70%;
             padding: 0 1rem;
 
             &__name{
@@ -149,9 +151,19 @@
             }
 
             &__quantity{
+                display: flex;
+                flex-direction: column;
                 
-                .price{
-                    margin: 0 10px 0 0;
+                .price, .quantity{
+                    margin: 1px;
+
+                    @include response(tab-port){
+                        font-size: 1.1rem;
+                    }
+
+                    @include response(tab-land){
+                        font-size: 1.1rem;
+                    }
 
                 }
 
