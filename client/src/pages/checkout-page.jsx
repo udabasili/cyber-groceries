@@ -14,8 +14,7 @@ class CheckOut extends Component {
       completeAddress: null,
       total: props.total,
       deliveryMethod: null
-  
-  }
+    }
   }
   
   ;
@@ -63,7 +62,7 @@ class CheckOut extends Component {
   }
 
   render() {
-    const { items, clearAllItemsFromCart, tax } = this.props;
+    const { items, clearAllItemsFromCart } = this.props;
     const {loadOrderModal, loadDeliveryModal, total } = this.state
     return (
       <div className="checkout">
@@ -89,9 +88,6 @@ class CheckOut extends Component {
             <CheckOutItem key={cartItem.id} item={cartItem} />
           ))}
         <div className="checkout__total">
-          <span className='tax'>
-            Tax: {(tax)  }
-          </span>
           <span  className='total'>
             TOTAL: ${total}
           </span>
@@ -107,13 +103,7 @@ const mapStateToProps = (state) => ({
   total: (state.cart.cart.reduce(
     (previous, current) => (
       (previous + (current.quantity * current.price * current.size))
-    ), 0,
-  ) * 1.15).toFixed(2),
-  tax: (state.cart.cart.reduce(
-    (previous, current) => (
-      (previous + (current.quantity * current.price * current.size))
-    ), 0,
-  ) * .15).toFixed(2),
+    ), 0)).toFixed(2),
 });
 
 const mapDispatchToProps = (dispatch) => ({
