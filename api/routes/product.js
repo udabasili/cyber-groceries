@@ -8,7 +8,7 @@ const {
 	Joi
 } = require('celebrate');
 const Service = require('../../services/');
-const {storage, bucketRef} = require('../../loaders/firebase');
+const {storage} = require('../../loaders/firebase');
 const multer = require("multer");
 const upload = multer({
   storage: multer.memoryStorage(),

@@ -1,5 +1,4 @@
 const { db } = require("../loaders/firebase");
-const loggerFunction = require("../loaders/logger");
 const purchaseRef = db.ref('orders');
 const { sendGrid, templateIdDelivery, templateIdPickUp } = require("../config");
 const sgMail = require("@sendgrid/mail");

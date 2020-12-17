@@ -1,26 +1,24 @@
 const winston = require("winston");
 const { paperTrailHost, paperTrailPort } = require("../config");
-require('winston-papertrail').Papertrail;
+const os = require('os');
+require('winston-syslog');
+
+
 
 let winstonTransport = []
 
 if (process.env.NODE_ENV ===  'production'){
-    let winstonPaperTrail = new winston.transports.Papertrail({ 
+    const winstonPaperTrail = new winston.transports.Syslog({
         host: paperTrailHost,
         port: paperTrailPort,
-        logFormat: function(level, message) {
-            let mess = `${dateFormat()} | ${level.toUpperCase()} | loggers.log | ${message} | `
-            return mess
-        }
+        protocol: 'tls4',
+        localhost: os.hostname(),
+        eol: '\n',
     })
-    winstonPaperTrail.on('error', function(err) {
-        // Handle, report, or silently ignore connection errors and failures
-    });
+ 
     winstonTransport.push(winstonPaperTrail)
 } else {
-    const winstonTransports = new winston.transports.File({
-        filename: `./logs/logger.log`
-    })
+    const winstonTransports = new winston.transports.Console()
     winstonTransport.push(winstonTransports)
 
 }
@@ -31,7 +29,6 @@ dateFormat = () => {
 
 const logger = winston.createLogger({
     transports: [
-        new winston.transports.Console(),
         ...winstonTransport
     ],
     format: winston.format.printf((info) => {

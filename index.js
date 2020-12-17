@@ -1,5 +1,5 @@
 const {
-    port, secretKey
+    port
 } = require("./config");
 const functions = require('firebase-functions');
 const app = require("./loaders/app");

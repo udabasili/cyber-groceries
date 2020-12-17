@@ -86,7 +86,7 @@ class UserService{
 
     static async  signOut(userId) {
         await auth.signOut()
-        loggerFunction('info', `user ${userId} has successfully  logged out`)
+        loggerFunction('info', `user has successfully  logged out`)
         return 'Successfully Logged Out'
     }
 
