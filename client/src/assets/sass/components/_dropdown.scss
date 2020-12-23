@@ -60,9 +60,7 @@
              height: 2rem;
              color: gray;
 
-            @include response(mobile) {
-                display: none;
-            }
+            
         }
         
     }

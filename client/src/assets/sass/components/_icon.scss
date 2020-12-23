@@ -6,13 +6,15 @@
 
     @include response(mobile){
         margin-right: 0;
-        left: 32%;
+        left: unset;
+        order: 4;
 
     }
 
     @include response(tab-port) {
         margin-right: 0;
-        left: 25%;
+        left: unset;
+        order: 4;
 
     }
 

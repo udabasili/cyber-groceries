@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
 import productReducer from './reducers/product.reducer'
-import storage from "redux-persist/lib/storage";
+import storageSession from 'redux-persist/lib/storage/session'
 import {
     persistReducer
 } from "redux-persist";
@@ -18,17 +18,31 @@ const encryptor = encryptTransform({
     },
 })
 
+
+
+
+const authPersistConfig = {
+    key: 'auth',
+    storage: storageSession,
+    transforms: [encryptor]
+}
+
+const adminPersistConfig = {
+    key: 'admin',
+    storage: storageSession,
+    transforms: [encryptor]
+}
+
 const persistConfig = {
     key: 'root',
-    storage,
-    transforms : [encryptor],
-    blacklist: ['product'] 
+    storage: storageSession ,
+    blacklist: ['user', 'admin']
 }
 const rootReducer = combineReducers({
     product: productReducer,
-    user: userReducer,
+    user: persistReducer(authPersistConfig, userReducer),
     cart: cartReducer,
-    admin: adminReducer,
+    admin: persistReducer(adminPersistConfig, adminReducer),
     error: errorReducer,
     acceptTerms: acceptTermsReducer
 })
