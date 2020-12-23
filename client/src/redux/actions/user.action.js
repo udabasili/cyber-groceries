@@ -29,7 +29,8 @@ export const logOut = () => {
            return new Promise((resolve, reject) => {
             return apiHandler(`/api/auth/${userId}/logout`, 'get')
                 .then((result) => {
-                    sessionStorage.removeItem('userId')
+                    localStorage.clear()
+                    sessionStorage.clear()
                     dispatch(setCurrentUser({}));
                     dispatch(setAllUsers([]))
                     dispatch(setAllOrders([]))

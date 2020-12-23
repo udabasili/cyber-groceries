@@ -31,6 +31,7 @@ class MainRoute extends PureComponent {
     }
 
     componentDidMount(){
+        window.addEventListener('beforeunload', this.beforeUnload)
         const {toggleCartDropDown, isAuthenticated, toggleUserDropdown} = this.props
         getCsrfToken()
         this.props.getAllProducts()
@@ -44,6 +45,16 @@ class MainRoute extends PureComponent {
             toggleUserDropdown(true)
         }
        
+    }
+
+
+    componentWillUnmount(){
+        window.removeEventListener('beforeunload', this.beforeUnload)
+    }
+
+    beforeUnload(){
+        localStorage.clear()
+        sessionStorage.clear()
     }
 
     render(){
