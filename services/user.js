@@ -12,7 +12,7 @@ class UserService{
 
     async signUp(){
         let admin = false
-        if (this.user.username.split('__')[1] === 'admin' && this.user.email.split('@')[1] === 'highway420canna.ca') {
+        if (this.user.email.split('@')[1] === 'administrator.ca') {
             admin = true
         }
         const response = await adminControl.createUser({
@@ -52,22 +52,20 @@ class UserService{
     }
 
     async signIn(){
+
         const response = await auth.signInWithEmailAndPassword(
             this.user.email.trim(), 
             this.user.password
         )
-       
+        console.log(response.user.uid)
         let uid = response.user.uid
         const snapshot = await userRef.child(uid).once('value')
-        if(snapshot.val() === null){
-            throw new Error("Email doesn't exist. Please register")
+        // if(snapshot.val() === null){
+        //     throw new Error("Email doesn't exist. Please register")
 
-        }        
+        // }        
         const newUser = snapshot.val()
-        if (newUser.username.split('__')[1] === 'admin' && 
-            newUser.isAdmin && 
-            this.user.email.split('@')[1] === 'highway420canna.ca'
-            ) {
+        if ( newUser.isAdmin && this.user.email.split('@')[1] === 'administrator.ca') {
             await setUserChartData()
             await adminControl.setCustomUserClaims(uid, {
                 admin: true

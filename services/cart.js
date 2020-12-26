@@ -1,6 +1,6 @@
 const { db } = require("../loaders/firebase");
 const purchaseRef = db.ref('orders');
-const { sendGrid, templateIdDelivery, templateIdPickUp } = require("../config");
+const { sendGrid,  templateId } = require("../config");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(sendGrid);
 const productsRef = db.ref('/products')
@@ -36,32 +36,21 @@ class CartService{
      * @memberof CartService
      */
     async confirmOrder(){
-        let templateId;
+        let id;
         let dynamicTemplateData ;
         var today = new Date();
         var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-      if (this.deliveryType === 'pickup'){
-        templateId = templateIdPickUp
+     
+        id = templateId
         dynamicTemplateData = {
           username: this.currentUser.username,
-          userId: this.currentUser.userId,
-          total: this.total,
-          currentDate: date,
-        }
-      }else{
-        templateId = templateIdDelivery
-        dynamicTemplateData = {
-          username: this.currentUser.username,
-          userId: this.currentUser.userId,
           total: this.total,
           currentDate: date,
           address: `${this.address.address} ,${this.address.province}`
 
-        }
-      }
-       
+      }       
         const response = await sgMail.send({
-          from: "juliannapeterpaul@highway420canna.ca",
+          from: "udbasili@acumendevelopers.com",
           personalizations: [
             {
               to: [
@@ -72,7 +61,7 @@ class CartService{
               dynamicTemplateData
             },
           ],
-          templateId: templateId
+          templateId: id
         });
         if (response[0].statusCode === 202) {
           await purchaseRef.child(this.currentUser._id).push({

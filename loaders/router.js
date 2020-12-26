@@ -1,7 +1,7 @@
 const routes = require('../api/routes')
 const middleware = require('../api/middleware')
 const expressJwt = require('express-jwt')
-const { secretKey } = require('../config')
+const { secretKey } = require('../config/index')
 const rateLimit = require("express-rate-limit");
 
 

@@ -21,6 +21,7 @@ import ChangePassword from './components/change-password.component';
 import ResetPassword from './pages/reset-password-page'
 import { toast, ToastContainer } from 'react-toastify'
 
+getCsrfToken()
 class MainRoute extends PureComponent {
     constructor(props){
         super(props);
@@ -33,7 +34,6 @@ class MainRoute extends PureComponent {
     componentDidMount(){
         
         const {toggleCartDropDown, isAuthenticated, toggleUserDropdown} = this.props
-        getCsrfToken()
         this.props.getAllProducts()
             .then((result) => {
               

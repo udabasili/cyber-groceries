@@ -118,6 +118,9 @@ export const getCsrfToken = async () => {
         const { data } = await axios.get('/api/csrf-token');
         axios.defaults.headers.post['X-CSRF-Token'] = data.csrfToken;
     } catch (error) {
+        const { data } = await axios.get('/api/csrf-token');
+        axios.defaults.headers.post['X-CSRF-Token'] = data.csrfToken;
+
         console.log("")
     }
     

@@ -21,7 +21,7 @@ function ProductOverview({products}) {
     return (
       <div className="product-overview">
         <SortItems setValue={sortHandler} />
-        {products.length > 0  ? (
+        {products.length > 0 || products !== undefined ? (
           <CardList products={productsValue} />
         ) : (
           <div className="empty-list">No Item</div>

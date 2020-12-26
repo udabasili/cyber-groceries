@@ -23,10 +23,6 @@ class Order extends Component {
         const order = {...this.props.order}
         const {ageVerified, _id} = this.state
         let {id} = order
-        if(!ageVerified){
-            toast.error("Current user's age has not been verified");
-            return;
-        }
         let orderFulfilled = e.target.checked;
         order.orderFulfilled = true
         this.setState(prevState =>({

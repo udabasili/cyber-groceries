@@ -1,7 +1,7 @@
 import React, {useState } from "react";
 import { connect } from "react-redux";
 import Modal from "./modal.component"
-import logo from '../assets/images/HWY420.png'
+import logo from '../assets/images/icons8-cannabis-100.png'
 import { submitOrder } from "../redux/actions/cart.action";
 import { toast } from "react-toastify";
 

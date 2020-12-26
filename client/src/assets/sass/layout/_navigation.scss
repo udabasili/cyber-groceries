@@ -126,6 +126,7 @@
         flex-basis: 100%;
         position: sticky;
         height: 10vh;
+        z-index: 30;
         background-color: white;
         align-items: center;
         justify-content: center;
@@ -135,17 +136,20 @@
         @include response(mobile){
             display: none;
             left: 0;
-            position: absolute;
+            position: fixed;
+            top: 0;
             background-color: white;
-            height: 85vh;
+            height: 100vh;
             width: 100vw;
         }
 
         @include response(tab-port){
             display: none;
-            position: absolute;
+            top: 0;
+            left: 0;
+            position: fixed;
             background-color: white;
-            height: 85vh;
+            height: 100vh;
             width: 100vw;
 
         }
@@ -244,7 +248,10 @@
 
               }
 
-            
+              @include response(tab-land) {
+                font-size: 1.4rem;
+            }
+
         }
 
         &:hover{
@@ -266,6 +273,7 @@
         width: 3rem;
         height: 3rem;
         text-align: center;
+        z-index: 40;
         color: red;
         cursor: pointer;
 
@@ -331,6 +339,7 @@
     }
 
     &__checkbox:checked ~ &__nav{
+        display: flex;
          @include response(mobile) {
              display: flex;
          }
@@ -479,6 +488,7 @@
             font-size: 1rem;
         }
 
+        
         &:hover {
             background-color: $color-primary-dark;
 

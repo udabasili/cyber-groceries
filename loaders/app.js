@@ -1,7 +1,6 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const app = express();
 const path = require('path');
 const loggerFunction = require('./logger');
@@ -45,7 +44,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-app.use(cors());
 app.use(xss())
 app.use(mongoSanitize());
 
@@ -56,10 +54,7 @@ require('./router')(app)
 
 /**STATIC FILES */
 if (process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, '../client/build')))
-    app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'))
-    })
+    
 }
     
 

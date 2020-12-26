@@ -19,12 +19,12 @@ export default class ContactPage extends Component {
                     <h3 className="contact__header">Communication</h3>
                     <span className="email">
 							<FontAwesomeIcon icon={faEnvelopeOpen} color='black' className='communication__icon' size='1x'/>
-                            info@highway420canna.ca
+                            xxxxxxxx
                         </span>
                      <div>
                         <span className="phone">
                             <FontAwesomeIcon icon={faPhone} color='black' className='communication__icon' size='1x'/>
-                            5066252894
+                            xxxxxxxxxx
                         </span>
                         
                   </div>
@@ -41,19 +41,10 @@ export default class ContactPage extends Component {
               </div>
               <div className="location">
                 <h3 className="contact__header">Location</h3>
-                < p className = 'address' > 212 Indian garden road Red bank New Brunswick</p>
+                < p className = 'address' > xxxxxxxxxxxx</p>
               </div>
               <div className="social-media">
                 <h3 className="contact__header">Social Media</h3>
-                <div>
-                    <a href='https://www.facebook.com/Highway-420-Canna-104529511359416' target='face' className='media-link'>
-                        <FontAwesomeIcon icon={faFacebookSquare} size="3x" color='green' />
-                    </a>
-                    <a href='https://www.instagram.com/highway420.canna/' target='instagram'  className='media-link'>
-                        <FontAwesomeIcon icon={faInstagramSquare} size="3x"  color='green'/>
-                    </a>
-                </div>
-                
               </div>
             </div>
           </div>

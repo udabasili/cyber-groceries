@@ -17,11 +17,11 @@
             0 90%);
 
         @include response(mobile) {
-            background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(126, 213, 111, 0.8)),
-                to(rgba(40, 180, 133, 0.8))),
+            background-image: -webkit-gradient(linear, left top, right bottom, from($color-primary-light),
+                to($color-primary-dark)),
                 url('../../images/slides/weed1.jpg');
-            background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), 
-                rgba(40, 180, 133, 0.8)), 
+            background-image: linear-gradient(to right bottom, $color-primary-light, 
+                $color-primary-dark), 
                 url('../../images/slides/weed1.jpg');
             background-size: cover;
             background-position: top;
@@ -30,11 +30,11 @@
         }
 
         @include response(tab-port) {
-            background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(126, 213, 111, 0.8)),
-                    to(rgba(40, 180, 133, 0.8))),
+            background-image: -webkit-gradient(linear, left top, right bottom, from($color-primary-light),
+                    to($color-primary-dark)),
                 url('../../images/slides/weed1.jpg');
-            background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8),
-                    rgba(40, 180, 133, 0.8)),
+            background-image: linear-gradient(to right bottom, $color-primary-light,
+                    $color-primary-dark),
                 url('../../images/slides/weed1.jpg');
             background-size: cover;
             background-position: top;

@@ -8,7 +8,7 @@ export default function Categories() {
 			<div className="u-center-text u-margin-bottom-big">
 				<h2 className="heading-secondary">Categories</h2>
 				<div className="heading-secondary-underline">
-					<FontAwesomeIcon icon={faCannabis} color='green' size='2x' />
+					<FontAwesomeIcon icon={faCannabis} color='#286481' size='2x' />
 				</div>
 			</div>
 			<div className="row">

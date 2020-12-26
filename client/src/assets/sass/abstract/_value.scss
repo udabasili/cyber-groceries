@@ -11,30 +11,16 @@ $default-font-size: 1.6rem;
 
 
 /**COLOR **/
-$color-primary-light: #a2eca2;
-$color-primary-dark: #339933;
-$color-secondary: #ff8800;
+$color-primary-light: #84CEEB;
+$color-primary-dark: #286481;
+$color-secondary: #8c00ff;
 $color-background: rgb(243, 242, 242);
 $color-grey: rgb(197, 197, 197);
 
 /**OTHERS **/
 $box-shadow: 0 1.5rem 4rem rgba(black, .15);
 $left-nav: 20vw;
-$default-margin-top: 26vh;
-
-@include response(mobile) {
-    $default-margin-top: 16vh;
-
-}
-
-@include response(tab-port) {
-    $default-margin-top: 16vh;
+$default-margin-top: 16vh;
 
 
-}
-@include response(tab-land) {
-    $default-margin-top: 16vh;
-
-
-}
   

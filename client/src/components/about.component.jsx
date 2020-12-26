@@ -11,7 +11,7 @@ export default function About() {
 						Why buy from us
 				</h2>
 				<div className="heading-secondary-underline">
-					<FontAwesomeIcon icon={faCannabis} color='green' size='2x'/>
+					<FontAwesomeIcon icon={faCannabis} color='#286481' size='2x'/>
 				</div>
 			</div>
 			<div className="row">

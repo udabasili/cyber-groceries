@@ -1,6 +1,7 @@
 import React from 'react'
 import noImage from '../assets/images/no-image-icon-23494(1).png'
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 /**
  *
@@ -20,9 +21,9 @@ function BestProduct({products}) {
                     <p className="best-products-box__text">
                         Some of our Products
                     </p>
-                    <a href={`/products/`} className="best-products-box__button">
-                        View More
-                    </a>
+                    <NavLink to={`/products/`} className="best-products-box__button">
+                           View More
+                    </NavLink>
                 </div>
                 <div className="best-products-box">
                     { products[0] !== undefined ? 

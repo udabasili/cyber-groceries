@@ -8,7 +8,7 @@ import UserDropDown from './user-dropdown.component';
 import { connect } from 'react-redux'
 import { toggleCartDropDown } from '../redux/actions/cart.action';
 import { toggleUserDropdown, logOut } from '../redux/actions/user.action';
-import logo from '../assets/images/HWY420.png'
+import logo from '../assets/images/icons8-cannabis-100.png'
 import { toast } from 'react-toastify';
 
 function Navigation({
@@ -58,12 +58,13 @@ function Navigation({
 				<div className="logo-box">
 					<div className="logo"><img src={logo} alt='weblogo'/> </div>
 						<NavLink to='/' className="app-name">
-							<span>HIGHway</span>
+							<span>Marij</span>
 							<span>420</span>
-							<span>Canna</span>
 						</NavLink>
 					
 				</div>
+				<input type="checkbox" className="navigation__checkbox" id="toggle" />
+
 				<label htmlFor="toggle" className="navigation__button">
 					<span className="navigation__icon">&nbsp;</span>
 				</label>
@@ -91,27 +92,25 @@ function Navigation({
 				{!hideCartDropDown &&
 					<CartDropDown />
 				}
-			</div>
-			<input type="checkbox" className="navigation__checkbox" id="toggle" />
-			<nav className="navigation__nav">
-					
-				<ul className="navigation__list">
-					<li className="navigation__item">
-						<NavLink
-						exact
-						to="/"
-						className="navigation__link"
-						activeClassName="navigation__active"
-						>
-						<FontAwesomeIcon
-							icon={faCannabis}
-							size="1x"
-							className="navigation__i"
-						/>
+				<nav className="navigation__nav">
+
+					<ul className="navigation__list">
+						<li className="navigation__item">
+							<NavLink
+								exact
+								to="/"
+								className="navigation__link"
+								activeClassName="navigation__active"
+							>
+								<FontAwesomeIcon
+									icon={faCannabis}
+									size="1x"
+									className="navigation__i"
+								/>
 						home
 						</NavLink>
-					</li>
-						{ isAdmin && <li className="navigation__item">
+						</li>
+						{isAdmin && <li className="navigation__item">
 							<NavLink
 								to="/admin"
 								className="navigation__link"
@@ -123,65 +122,67 @@ function Navigation({
 								/>
 							admin
 						</NavLink>
-					</li>
-					}  
-					<li className="navigation__item">
-						<NavLink
-						to="/products"
-						className="navigation__link"
-						activeClassName="navigation__active"
-						>
-						<FontAwesomeIcon
-							icon={faCannabis}
-							size="1x"
-							className="navigation__i"
-						/>
+						</li>
+						}
+						<li className="navigation__item">
+							<NavLink
+								to="/products"
+								className="navigation__link"
+								activeClassName="navigation__active"
+							>
+								<FontAwesomeIcon
+									icon={faCannabis}
+									size="1x"
+									className="navigation__i"
+								/>
 						products
 						</NavLink>
-					</li>
-					<li className="navigation__item">
-						<NavLink
-						to="/contact"
-						className="navigation__link"
-						activeClassName="navigation__active"
-						>
-						<FontAwesomeIcon
-							icon={faCannabis}
-							size="1x"
-							className="navigation__i"
-						/>
+						</li>
+						<li className="navigation__item">
+							<NavLink
+								to="/contact"
+								className="navigation__link"
+								activeClassName="navigation__active"
+							>
+								<FontAwesomeIcon
+									icon={faCannabis}
+									size="1x"
+									className="navigation__i"
+								/>
 						contact
 						</NavLink>
-					</li>
-					{isAuthenticated ?
-						<li className="navigation__item">
-							<NavLink
-								to="/"
-								className="navigation__link"
-								onClick={logoutHandler}
+						</li>
+						{isAuthenticated ?
+							<li className="navigation__item">
+								<NavLink
+									to="/"
+									className="navigation__link"
+									onClick={logoutHandler}
 								>
-								<FontAwesomeIcon
-									icon={faCannabis}
-									size="1x"
-									className="navigation__i"/>
+									<FontAwesomeIcon
+										icon={faCannabis}
+										size="1x"
+										className="navigation__i" />
 								signout
 							</NavLink>
-						</li> :
-						<li className="navigation__item">
-							<NavLink
-								to="/auth/register"
-								className="navigation__link"
-								activeClassName="navigation__active">
-								<FontAwesomeIcon
-									icon={faCannabis}
-									size="1x"
-									className="navigation__i"/>
+							</li> :
+							<li className="navigation__item">
+								<NavLink
+									to="/auth/register"
+									className="navigation__link"
+									activeClassName="navigation__active">
+									<FontAwesomeIcon
+										icon={faCannabis}
+										size="1x"
+										className="navigation__i" />
 								signin
 							</NavLink>
-						</li>
-					}
-				</ul>
-			</nav>
+							</li>
+						}
+					</ul>
+				</nav>
+			</div>
+			
 		</div>
 	);
 }

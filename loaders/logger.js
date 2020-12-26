@@ -1,22 +1,17 @@
-const winston = require("winston");
-const { paperTrailHost, paperTrailPort } = require("../config");
-const os = require('os');
-require('winston-syslog');
-
-
+const winston = require("winston")
 
 let winstonTransport = []
 
 if (process.env.NODE_ENV ===  'production'){
-    const winstonPaperTrail = new winston.transports.Syslog({
-        host: paperTrailHost,
-        port: paperTrailPort,
-        protocol: 'tls4',
-        localhost: os.hostname(),
-        eol: '\n',
-    })
+    let winstonPaperTrail = new winston.transports.File({
+        filename: `./logs/logger.log`
+    })  
  
     winstonTransport.push(winstonPaperTrail)
+
+    const winstonTransports = new winston.transports.Console()
+    winstonTransport.push(winstonTransports)
+
 } else {
     const winstonTransports = new winston.transports.Console()
     winstonTransport.push(winstonTransports)
