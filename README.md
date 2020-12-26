@@ -9,8 +9,7 @@ It was built with node, Firebase and React
 ![Screenshot_2](https://user-images.githubusercontent.com/33573587/103155564-7d12da80-4777-11eb-837c-2ce0d51242d4.png)
 ![Screenshot_3](https://user-images.githubusercontent.com/33573587/103155565-7dab7100-4777-11eb-96e6-2df069d186ab.png)
 ![Screenshot_4](https://user-images.githubusercontent.com/33573587/103155566-7e440780-4777-11eb-8b9f-4f78bb6e2420.png)
-![Simply-chat sample](https://user-images.githubusercontent.com/33573587/72227768-ae01fb80-3576-11ea-9c45-893c6c9bf21a.png
-)
+
 
 ### To Run
 
