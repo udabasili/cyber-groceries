@@ -1,22 +1,8 @@
 .cart-icon{
     position: relative;
-    margin-right: 3rem;
+    margin-right: 0;
     cursor: pointer;
-    order: 3;
-
-    @include response(mobile){
-        margin-right: 0;
-        left: unset;
-        order: 4;
-
-    }
-
-    @include response(tab-port) {
-        margin-right: 0;
-        left: unset;
-        order: 4;
-
-    }
+    order: 4;
 
     .icon{
         font-size: 3rem;
