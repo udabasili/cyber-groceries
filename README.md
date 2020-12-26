@@ -1,8 +1,8 @@
 # Marij420
 
-This is the demo of a marijuana store I built  for a client. It possesses both an administrative section and the other users section.
+This is the demo of a marijuana store I built for a client. It possesses both an administrative section and the other user's section.With the administrator section, you get to see manipulate everything related to users like removing / disabling account, completing orders, visualizing user data with Graphs amongst other things
 
-It was built with node, Firebase and React
+It was built with Node, Firebase, and React
 
 ### Screenshots
 ![Screenshot_1](https://user-images.githubusercontent.com/33573587/103155562-7be1ad80-4777-11eb-8edf-318845706e8b.png)
