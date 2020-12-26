@@ -2,7 +2,7 @@
     position: relative;
     margin-right: 3rem;
     cursor: pointer;
-    left: 30%;
+    order: 3;
 
     @include response(mobile){
         margin-right: 0;
