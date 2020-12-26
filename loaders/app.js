@@ -1,6 +1,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const path = require('path');
 const loggerFunction = require('./logger');
@@ -10,12 +11,12 @@ const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const redirectSSL = require('redirect-ssl')
 
-if (process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
     app.use(redirectSSL)
 }
- const csrfProtection = csrf({
-  cookie: true,
-  ignoreMethods:['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
+const csrfProtection = csrf({
+    cookie: true,
+    ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE']
 });
 
 
@@ -25,11 +26,11 @@ app.use(csrfProtection);
 
 app.get('/api/csrf-token', (req, res) => {
     try {
-        loggerFunction('info', 'cs gotten' )
+        loggerFunction('info', 'cs gotten')
         res.json({ csrfToken: req.csrfToken() });
     } catch (error) {
         console.log(error)
-        
+
     }
 
 });
@@ -39,11 +40,12 @@ app.get('/api/csrf-token', (req, res) => {
  */
 
 //middleware
-app.use(bodyParser.json({limit: '40kb'}));
+app.use(bodyParser.json({ limit: '40kb' }));
 app.use(bodyParser.urlencoded({
     extended: false
 }))
 
+app.use(cors());
 app.use(xss())
 app.use(mongoSanitize());
 
@@ -53,10 +55,13 @@ require('./router')(app)
 
 
 /**STATIC FILES */
-if (process.env.NODE_ENV === 'production'){
-    
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')))
+    app.get('/*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/build/index.html'))
+    })
 }
-    
+
 
 
 
