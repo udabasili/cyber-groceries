@@ -52,7 +52,7 @@ class UserService{
     }
 
     async signIn(){
-
+        
         const response = await auth.signInWithEmailAndPassword(
             this.user.email.trim(), 
             this.user.password

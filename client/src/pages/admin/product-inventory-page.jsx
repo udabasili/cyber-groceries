@@ -46,7 +46,6 @@ import { connect } from 'react-redux';
 						<th>Name</th>
 						<th>Price</th>
 						<th>Category</th>
-						<th>Strain</th>
 						<th>Quantity</th>
 						<th>{"  "}</th>
 					</tr>
@@ -66,7 +65,6 @@ import { connect } from 'react-redux';
 						<td>{product.name}</td>
 						<td>${product.price}</td>
 						<td>{product.category}</td>
-						<td>{product.strain}</td>
 						<td>{product.quantity}</td>
 						<td>
 							<FontAwesomeIcon icon={faTimesCircle} color='red' onClick={() => this.deleteProductHandler(product._id) }/>

@@ -3,6 +3,7 @@ const firebase = require('firebase/app');
 const { projectId, storageBucket, databaseUrl } = require('../config/index');
 require('firebase/auth');
 require('firebase/storage')
+require('firebase/database')
 
 const firebaseConfig = {
     apiKey: "AIzaSyDq0rnZ44Wn8tdLlxBnZhySMIFvp8tZ7nU",
@@ -19,13 +20,12 @@ firebase.initializeApp(firebaseConfig);
 admin.initializeApp({
     projectId,
     credential: admin.credential.applicationDefault(),
-    databaseURL: databaseUrl,
     storageBucket
 
 });
 
 
-const db = admin.database()
+const db = firebase.database()
 const auth = firebase.auth()
 const adminControl = admin.auth()
 const storage = admin.storage().bucket()

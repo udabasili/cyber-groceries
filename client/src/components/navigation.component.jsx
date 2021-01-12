@@ -8,7 +8,7 @@ import UserDropDown from './user-dropdown.component';
 import { connect } from 'react-redux'
 import { toggleCartDropDown } from '../redux/actions/cart.action';
 import { toggleUserDropdown, logOut } from '../redux/actions/user.action';
-import logo from '../assets/images/icons8-cannabis-100.png'
+import logo from '../assets/logo/app-icon.png'
 import { toast } from 'react-toastify';
 
 function Navigation({
@@ -58,8 +58,8 @@ function Navigation({
 				<div className="logo-box">
 					<div className="logo"><img src={logo} alt='weblogo'/> </div>
 						<NavLink to='/' className="app-name">
-							<span>Marij</span>
-							<span>420</span>
+							<span>Cyber</span>
+							<span>Groceries</span>
 						</NavLink>
 					
 				</div>

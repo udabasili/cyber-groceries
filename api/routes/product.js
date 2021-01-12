@@ -142,7 +142,6 @@ router.put(
 		body: Joi.object({
 			name: Joi.string().required(),
 			price: Joi.number().required(),
-			strain: Joi.string().required(),
 			type: Joi.string().required(),
 			category: Joi.string().required(),
 			quantity: Joi.number().required(),
@@ -158,6 +157,7 @@ router.put(
 			message: products
 		})
 		} catch (error) {
+			console.log(error.message)
 			return next({
 				message: error.message,
 				status: error.status

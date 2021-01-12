@@ -13,9 +13,8 @@ class AddProduct extends Component {
 			data:{
 				name:'',
 				price:'',
-				category:'edibles',
+				category:'dairy',
 				type:props.type,
-				strain: 'hybrid',
 				quantity: '',
 				
 			},
@@ -48,7 +47,6 @@ class AddProduct extends Component {
 						price: item.price,
 						category: item.category,
 						type: item.type,
-						strain: item.strain,
 						quantity: item.quantity,
 					},
 					imageUrl: item.imageUrl,
@@ -116,6 +114,7 @@ class AddProduct extends Component {
 					data,
 					this.props.match.params.itemId
 				).then((result) => {
+					console.log(result)
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
@@ -264,8 +263,8 @@ class AddProduct extends Component {
 						</div>
 					</div>
 					{ type === 'grams' ?
-					<div className="form__component">
-						<div className="form__group">
+					<div className="form__component quantity">
+						<div className="form__group ">
 								<input
 									type="number"
 									name="quantity"
@@ -282,11 +281,27 @@ class AddProduct extends Component {
 							Quantity
 						</label>
 						</div>
+						<div className="form__select">
+						<select
+							className="card__select"
+							name="category"
+							value={data.category}
+							id="category"
+							onChange={this.onChangeHandler}
+						>
+							<option value="dairy">Dairy</option>
+							<option value="beverage">Beverage </option>
+							<option value="meat">Meat</option>
+							<option value="produce">Produce</option>
+							<option value="bakery">Bakery </option>
+							<option value="others">Others</option>
+						</select>
+						</div>
 					</div> 
 					:
-					<div className='form__component'>
-						<div className="form__group">
-							<div className="form__select">
+					<div className='form__component '>
+						<div className="form__group quantity">
+							<div className="form__select ">
 							<select
 								className="card__select"
 								name="quantity"
@@ -302,7 +317,24 @@ class AddProduct extends Component {
 							Quantity
 						</label>
 						</div>
+						<div className="form__select">
+						<select
+							className="card__select"
+							name="category"
+							value={data.category}
+							id="category"
+							onChange={this.onChangeHandler}
+						>
+							<option value="dairy">Dairy</option>
+							<option value="beverages">Beverages </option>
+							<option value="meat">Meats</option>
+							<option value="produce">Produce</option>
+							<option value="bakery">Bakery </option>
+							<option value="others">Others</option>
+						</select>
+						</div>
 					</div>
+					
 					</div>
 					
 					}
@@ -327,40 +359,6 @@ class AddProduct extends Component {
 						{" "}
 						Browse
 						</button>
-					</div>
-					<div className="form__divide">
-						<div className="form__select">
-						<select
-							className="card__select"
-							name="category"
-							value={data.category}
-							id="category"
-							onChange={this.onChangeHandler}
-						>
-							<option value="edibles">Edibles</option>
-							<option value="topicals">Topicals</option>
-							<option value="buds">Buds</option>
-							<option value="extracts">Extracts</option>
-							<option value="cbd">CBD</option>
-							<option value="clothing">Clothing</option>
-							<option value="accessories">Accessories</option>
-						</select>
-						</div>
-						<div className="form__select">
-						<select
-							className="card__select"
-							name="strain"
-							value={data.strain}
-							id="strain"
-							onChange={this.onChangeHandler}
-						>
-							<option value="hybrid">Hybrid</option>
-							<option value="indica">Indica</option>
-							<option value="sativa">Sativa</option>
-						</select>
-						</div>
-						<div className="form__select">
-						</div>
 					</div>
 					<input type="submit" className="btn" value="Submit" />
 				</form>

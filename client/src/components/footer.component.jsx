@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/images/icons8-cannabis-100.png'
+import logo from '../assets/logo/app-icon.png'
 
 export default function Footer() {
     return (

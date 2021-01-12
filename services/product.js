@@ -23,7 +23,6 @@ class Product {
             price: this.product.price,
             type: this.product.type,
             imageUrl: this.product.imageUrl,
-            strain: this.product.strain,
             category: this.product.category,
             quantity: this.product.quantity
         })
@@ -44,7 +43,6 @@ class Product {
             price: this.product.price,
             type: this.product.type,
             imageUrl: this.product.imageUrl,
-            strain: this.product.strain,
             category: this.product.category,
             quantity: this.product.quantity
         })

@@ -18,70 +18,59 @@ function LeftNav(props) {
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/buds"
+                 to="/products/dairy"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Buds
+                 Dairy
                </NavLink>
              </li>
              <li className="left-nav__item">
 
                <NavLink
-                 to="/products/edibles"
+                 to="/products/beverage"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Edibles
+                 Beverage
                </NavLink>
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/extracts"
+                 to="/products/meat"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Extracts
+                 Meat
                </NavLink>
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/topicals"
+                 to="/products/produce"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Topicals
+                 Produce
                </NavLink>
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/cbd"
+                 to="/products/bakery"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 CBD
+                 Bakery
                </NavLink>
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/clothing"
+                 to="/products/others"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Clothing
+                 Others
                </NavLink>
-             </li>
-             <li className="left-nav__item">
-               <NavLink
-                 to="/products/accessories"
-                 className="left-nav__link"
-                 activeClassName="left-nav-active"
-               >
-                 Accessories
-               </NavLink>
-             </li>
-             
-             
+             </li>             
            </ul>
          </nav>
        </div>

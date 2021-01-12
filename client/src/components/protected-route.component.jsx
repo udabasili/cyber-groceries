@@ -23,6 +23,7 @@ function ProtectedRoute({
         history.push('/auth/login')
       }
       return new Promise((resolve, reject) => {
+        console.log(error.response)
         reject(error);
       })
 	})

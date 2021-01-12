@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Modal from './modal.component'
-import logo from '../assets/images/icons8-cannabis-100.png'
+import logo from '../assets/logo/app-icon.png'
 import { setConsent } from '../redux/actions/user.action'
 import PropTypes from 'prop-types'
 

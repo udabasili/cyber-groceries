@@ -83,10 +83,6 @@ function Card({
             <span className="label">Category: </span>
             <span className="value">{item.category}</span>
           </div>
-          <div className="strain item">
-            <span className="label">Strain: </span>
-            <span className="value">{item.strain}</span>
-          </div>
         </div>
         {!isAdmin && (
           <div className="card__purchase">

@@ -12,7 +12,7 @@
 
 .card{
     text-align: center;
-    height: 70vh;
+    height: 60vh;
     position: relative;
     background-color: white;
     box-shadow: $box-shadow;
@@ -104,6 +104,7 @@
     &__purchase{
         display: flex;
         justify-content: space-around;
+        margin-top: 3rem;
     }
 
     &__icon{
