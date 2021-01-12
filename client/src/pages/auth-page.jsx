@@ -406,7 +406,7 @@ class Auth extends Component {
                           <input
                             type="email"
                             placeholder={isMobile ? "Email" : ""}
-                            onChange={this.onChangeHandlerLogin}
+                            onInput={this.onChangeHandlerLogin}
                             value={loginData.email}
                             name="email"
                             className="form__input"
@@ -425,7 +425,7 @@ class Auth extends Component {
                             type="password"
                             name="password"
                             placeholder={isMobile ? "Password" : ""}
-                            onChange={this.onChangeHandlerLogin}
+                            onInput={this.onChangeHandlerLogin}
                             value={loginData.password}
                             className="form__input"
                           />

@@ -71,52 +71,45 @@ class MainRoute extends PureComponent {
             toggleUserDropdown(true)
         })
         return (
-                <React.Fragment>
-                    {!acceptedTerm ? 
-                        <CheckConsent/> :
-                        <React.Fragment>
-                            <ToastContainer
-                                position="top-center"
-                                autoClose={3000}
-                            />
-                            <Navigation currentUser={currentUser} isAdmin={isAdmin} isAuthenticated={isAuthenticated}/>
-                            <Switch>
-                                <Route exact path='/' component={HomePage}/>
-                                <Route exact path='/reset-password' component={ChangePassword}/>
-                                <Route exact path='/forgot-password' component={ResetPassword}/>
-                                <Route exact path ='/auth/login' render={(props) =>(
-                                    isAuthenticated && sessionStorage.getItem('validator') ?
-                                    <Redirect to='/'/> :
-                                    <AuthPage auth='login' {...props}/>
-                                )} />
-                                <Route exact path ='/auth/register' render={(props) =>(
-                                    isAuthenticated && sessionStorage.getItem('validator') ?
-                                    <Redirect to='/'/> :
-                                    <AuthPage auth='register' {...props}/>
-                                )} />
-                                <ProtectedRouteWithRedux 
-                                    exact path ='/checkout' 
-                                    currentUser={currentUser}  
-                                    isAuthenticated={isAuthenticated}
-                                    component={CheckOutPage}/>
-                                <Route  path='/products'  component={ProductPage}/>
-                                <Route exact path ='/contact' component = {AboutPage}/>
-                                <AdminProtectedRouteWithRedux  
-                                    path='/admin' 
-                                    currentUser={currentUser} 
-                                    isAuthenticated={isAuthenticated}
-                                    isAdmin={isAdmin} 
-                                    component={AdminRoute}/>
-                                <Route  path="/404" component={NotFoundPage} />
-                                <Route  path="/403" component={AccessDenied} />
-                                <Redirect to='/404'/>
-                            </Switch>
-                            <Footer/>
-                        </React.Fragment>
-                        
-                    }
-                    
-        </React.Fragment>
+            <React.Fragment>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={3000}
+                />
+                <Navigation currentUser={currentUser} isAdmin={isAdmin} isAuthenticated={isAuthenticated}/>
+                <Switch>
+                    <Route exact path='/' component={HomePage}/>
+                    <Route exact path='/reset-password' component={ChangePassword}/>
+                    <Route exact path='/forgot-password' component={ResetPassword}/>
+                    <Route exact path ='/auth/login' render={(props) =>(
+                        isAuthenticated && sessionStorage.getItem('validator') ?
+                        <Redirect to='/'/> :
+                        <AuthPage auth='login' {...props}/>
+                    )} />
+                    <Route exact path ='/auth/register' render={(props) =>(
+                        isAuthenticated && sessionStorage.getItem('validator') ?
+                        <Redirect to='/'/> :
+                        <AuthPage auth='register' {...props}/>
+                    )} />
+                    <ProtectedRouteWithRedux 
+                        exact path ='/checkout' 
+                        currentUser={currentUser}  
+                        isAuthenticated={isAuthenticated}
+                        component={CheckOutPage}/>
+                    <Route  path='/products'  component={ProductPage}/>
+                    <Route exact path ='/contact' component = {AboutPage}/>
+                    <AdminProtectedRouteWithRedux  
+                        path='/admin' 
+                        currentUser={currentUser} 
+                        isAuthenticated={isAuthenticated}
+                        isAdmin={isAdmin} 
+                        component={AdminRoute}/>
+                    <Route  path="/404" component={NotFoundPage} />
+                    <Route  path="/403" component={AccessDenied} />
+                    <Redirect to='/404'/>
+                </Switch>
+                <Footer/>
+            </React.Fragment>
         )
     }
 }
