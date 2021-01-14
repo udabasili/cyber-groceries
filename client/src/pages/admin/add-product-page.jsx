@@ -265,18 +265,17 @@ class AddProduct extends Component {
 					{ type === 'grams' ?
 					<div className="form__component quantity">
 						<div className="form__group ">
-								<input
-									type="number"
-									name="quantity"
-									onChange={this.onChangeHandler}
-									value={data.quantity}
-									pattern="[0-9]"
-									placeholder='Total amount in grams'
-									id="quantity"
-									className="form__input"
-									required
-								/> 
-						
+							<input
+								type="number"
+								name="quantity"
+								onChange={this.onChangeHandler}
+								value={data.quantity}
+								pattern="[0-9]"
+								placeholder='Total amount in grams'
+								id="quantity"
+								className="form__input"
+								required
+							/> 
 						<label htmlFor="quantity" className="form__label">
 							Quantity
 						</label>
@@ -344,6 +343,7 @@ class AddProduct extends Component {
 						className="image-upload__input"
 						name="image"
 						accept="image/*"
+						required
 						/>
 						<input
 						type="text"
