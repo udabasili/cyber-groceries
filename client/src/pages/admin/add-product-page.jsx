@@ -326,8 +326,8 @@ class AddProduct extends Component {
 							onChange={this.onChangeHandler}
 						>
 							<option value="dairy">Dairy</option>
-							<option value="beverages">Beverages </option>
-							<option value="meat">Meats</option>
+							<option value="beverage">Beverage </option>
+							<option value="meat">Meat</option>
 							<option value="produce">Produce</option>
 							<option value="bakery">Bakery </option>
 							<option value="others">Others</option>
