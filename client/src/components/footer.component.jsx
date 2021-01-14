@@ -7,8 +7,8 @@ export default function Footer() {
             <div className="logo-box">
                 <div className="logo"><img src={logo} alt='weblogo'/> </div>
                 <div className="app-name">
-                <span>Marij</span>
-                <span>420</span>
+                <span>Cyber</span>
+                <span>Groceries</span>
                 </div>
             </div>
             <div className='footer__copyright'>
