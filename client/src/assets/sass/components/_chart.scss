@@ -14,7 +14,12 @@
     }
     @include response(mobile) {
         width: 100vw;
+        
 
 
     }
+}
+
+.chart > div{
+    transform: scale(.8);
 }
