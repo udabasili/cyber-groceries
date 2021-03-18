@@ -14,11 +14,9 @@ class AddProduct extends Component {
 				name:'',
 				price:'',
 				category:'dairy',
-				type:props.type,
 				quantity: '',
 				
 			},
-			type: props.type,
 			imageFile:'',
 			imageUrl: null,
 			imageUploaded: false,
@@ -32,7 +30,6 @@ class AddProduct extends Component {
 			let filePath = document.querySelector(".image-upload__message");
 			let item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
 			const imageFileName = item.imageUrl.slice(item.imageUrl.lastIndexOf('/')+ 1)
-			filePath.value = imageFileName;
 			if(this.props.history.location.state){
 				this.setState((prevState) =>({
 					...prevState,
@@ -40,13 +37,13 @@ class AddProduct extends Component {
 				}))
 			}
 			if(item){
+				filePath.value = item.imageUrl;
 				this.setState((prevState) => ({
 					...prevState,
 					data: {
 						name: item.name,
 						price: item.price,
 						category: item.category,
-						type: item.type,
 						quantity: item.quantity,
 					},
 					imageUrl: item.imageUrl,
@@ -56,15 +53,7 @@ class AddProduct extends Component {
 			}
 		}
   }
-  	componentDidUpdate(prevProps, prevState){
-		  if(prevProps.type !== this.props.type ){
-			this.setState((prevState) => ({
-				...prevState,
-				type: this.props.type
 
-			}))
-		  }
-	  }
 
 	onImageUploadHandler = () => {
 		let fileUpload = document.querySelector(".image-upload__input");
@@ -114,7 +103,6 @@ class AddProduct extends Component {
 					data,
 					this.props.match.params.itemId
 				).then((result) => {
-					console.log(result)
 					this.setState((prevState) => ({
 						...prevState,
 						isLoading: false
@@ -189,9 +177,8 @@ class AddProduct extends Component {
 
 	render() {
 		const {data} = this.state
-		const type = this.props.type
 		const {title, editing} = this.props
-		let item
+		let item;
 		if (this.props.products !== null){
 			item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
 
@@ -201,34 +188,6 @@ class AddProduct extends Component {
 			{this.state.isLoading && <Loading/>}
 			<h2 className="heading-secondary">{title}</h2>
 			<form className="form " onSubmit={this.onSubmitHandler}>
-				<nav className="form-nav">
-                <ul className="form-nav__list">
-                  <li className="form-nav__item">
-                    <NavLink
-                      className="form-nav__link"
-                      activeClassName="active-auth"
-					  to={ editing ?
-						`/admin/edit-product/grams/${item._id}`:
-						  "/admin/add-product/grams"
-						}
-                    >
-                      grams{" "}
-                    </NavLink>
-                  </li>
-                  <li className="form-nav__item">
-                    <NavLink
-                      className="form-nav__link"
-                      activeClassName="active-auth"
-					  to={ editing ?
-						`/admin/edit-product/millimeter/${item._id}`:
-					  "/admin/add-product/millimeter"
-					  }
-                    >
-                      millimeter{" "}
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
 				<div className="form__component">
 					<div className="form__group">
 						<input
@@ -262,7 +221,6 @@ class AddProduct extends Component {
 						</label>
 						</div>
 					</div>
-					{ type === 'grams' ?
 					<div className="form__component quantity">
 						<div className="form__group ">
 							<input
@@ -271,7 +229,7 @@ class AddProduct extends Component {
 								onChange={this.onChangeHandler}
 								value={data.quantity}
 								pattern="[0-9]"
-								placeholder='Total amount in grams'
+								placeholder='Total amount in item'
 								id="quantity"
 								className="form__input"
 								required
@@ -289,61 +247,22 @@ class AddProduct extends Component {
 							onChange={this.onChangeHandler}
 						>
 							<option value="dairy">Dairy</option>
-							<option value="beverage">Beverage </option>
-							<option value="meat">Meat</option>
-							<option value="produce">Produce</option>
+							<option value="vegetable">Vegetable </option>
+							<option value="fruit">Fruit</option>
 							<option value="bakery">Bakery </option>
-							<option value="others">Others</option>
+							<option value="vegan">Vegan</option>
+							<option value="meat">Meat</option>
 						</select>
 						</div>
 					</div> 
-					:
-					<div className='form__component '>
-						<div className="form__group quantity">
-							<div className="form__select ">
-							<select
-								className="card__select"
-								name="quantity"
-								value={data.quantity}
-								id="quantity"
-								onChange={this.onChangeHandler}
-							>
-								<option value="100">50ml</option>
-								<option value="150">150ml</option>
-								<option value="450">250ml</option>
-							</select>
-						<label htmlFor="quantity" className="form__label">
-							Quantity
-						</label>
-						</div>
-						<div className="form__select">
-						<select
-							className="card__select"
-							name="category"
-							value={data.category}
-							id="category"
-							onChange={this.onChangeHandler}
-						>
-							<option value="dairy">Dairy</option>
-							<option value="beverage">Beverage </option>
-							<option value="meat">Meat</option>
-							<option value="produce">Produce</option>
-							<option value="bakery">Bakery </option>
-							<option value="others">Others</option>
-						</select>
-						</div>
-					</div>
-					
-					</div>
-					
-					}
+				
+				
 					<div className="form__group-image">
 						<input
 						type="file"
 						className="image-upload__input"
 						name="image"
 						accept="image/*"
-						required
 						/>
 						<input
 						type="text"

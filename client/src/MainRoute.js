@@ -32,7 +32,6 @@ class MainRoute extends PureComponent {
     }
 
     componentDidMount(){
-        
         const {toggleCartDropDown, isAuthenticated, toggleUserDropdown} = this.props
         this.props.getAllProducts()
             .then((result) => {

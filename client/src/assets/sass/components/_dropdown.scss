@@ -4,7 +4,7 @@
     z-index: 40;
     top: 16vh;
     right: 0;
-    width: 30vw;
+    width: 40vw;
     min-height: 30vh;
     text-align: center;
     background-color: white;
@@ -24,29 +24,26 @@
     }
 
     &--1{
-        right: 12vw;
+        left: 0;
         top: 16vh;
         height: 20vh;
-        width: 20vw;
+        width: 30vw;
         position: fixed;
         padding: 3rem;
 
 
         @include response(mobile) {
             width: 50vw !important;
-            right: 3vw;
             height: 20vh;
         }
 
         
         @include response(tab-port) {
             width: 35vw !important;
-            right: 8vw;
         }
 
         @include response(tab-land) {
-            right: 11vw;
-            width: 23vw !important;
+            width: 30vw !important;
         }
 
         .close-button{
@@ -75,7 +72,7 @@
 
     &__list{
         height: 20vh;
-        width: 80%;
+        width: 95%;
         border: 1px black solid;
         margin: 2rem auto 0 auto;
         list-style: none;
@@ -137,7 +134,7 @@
         .detail{
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             width: 70%;
             padding: 0 1rem;
@@ -150,10 +147,10 @@
 
             &__quantity{
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 
                 .price, .quantity{
-                    margin: 1px;
+                    margin: 8px;
 
                     @include response(tab-port){
                         font-size: 1.1rem;

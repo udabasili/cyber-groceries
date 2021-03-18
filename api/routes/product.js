@@ -142,7 +142,6 @@ router.put(
 		body: Joi.object({
 			name: Joi.string().required(),
 			price: Joi.number().required(),
-			type: Joi.string().required(),
 			category: Joi.string().required(),
 			quantity: Joi.number().required(),
 			imageUrl: Joi.string().required()

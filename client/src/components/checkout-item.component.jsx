@@ -16,11 +16,11 @@ import PropTypes from "prop-types";
 
 
 const CheckOutItem = ({item, removeItem, addItem, clearItemFromCart}) => {
-  const {_id, name, imageUrl, price, quantity, size} = item;
+  const {_id, name, imageUrl, price, quantity} = item;
   return (
     <div className="checkout-item">
       <div
-        onClick={() => clearItemFromCart(_id, size)}
+        onClick={() => clearItemFromCart(_id, quantity)}
         className="checkout-item__remove-button"
       >
         <FontAwesomeIcon size="2x" icon={faTimes}/>
@@ -29,22 +29,19 @@ const CheckOutItem = ({item, removeItem, addItem, clearItemFromCart}) => {
         <img src={imageUrl} alt="item" />
       </div>
       <span className="checkout-item__name">{name}</span>
-      <span className="size">
-        {`${size} grams`}
-      </span>
       <span className="unit-price">
-        {`$${price}/gram`}
+        {`$${price}`}
       </span>
       <span className="checkout-item__quantity">
         <div
-          onClick={() => removeItem(item, size)}
+          onClick={() => removeItem(item, quantity)}
           className="checkout-item__button"
         >
           <FontAwesomeIcon size="1x" icon={faMinus}/>
         </div>
         <span className="value">{quantity}</span>
         <div
-          onClick={() => addItem(item, size)}
+          onClick={() => addItem(item, quantity)}
           className="checkout-item__button"
         >
           <FontAwesomeIcon size="1x" icon={faPlus}/>
@@ -52,7 +49,7 @@ const CheckOutItem = ({item, removeItem, addItem, clearItemFromCart}) => {
       </span>
 
       <span className="price">
-        ${price * quantity * size}
+        ${(price * quantity).toFixed(2)}
       </span>
 
     </div>
@@ -61,9 +58,9 @@ const CheckOutItem = ({item, removeItem, addItem, clearItemFromCart}) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  clearItemFromCart: (id, size) => dispatch(clearItemFromCart(id, size)),
-  removeItem: (cartItem, size) => dispatch(removeItemFromCart(cartItem, size)),
-  addItem: (cartItem, size) => dispatch(addItemToCart(cartItem, size)),
+  clearItemFromCart: (id) => dispatch(clearItemFromCart(id)),
+  removeItem: (cartItem) => dispatch(removeItemFromCart(cartItem)),
+  addItem: (cartItem) => dispatch(addItemToCart(cartItem)),
 
 });
 

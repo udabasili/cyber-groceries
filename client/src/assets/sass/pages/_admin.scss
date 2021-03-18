@@ -6,15 +6,18 @@
 
 }
 .admin-home{
-    width: 100vw;
     min-height: 100vh;
     display: grid;
     padding-left: $left-nav;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     grid-template-rows: repeat(2, 1fr);
 
     @include response(mobile){
         padding-left: 0;
+
+    }
+
+    @include response(tab-port){
+        padding-left: 20vw;
 
     }
 

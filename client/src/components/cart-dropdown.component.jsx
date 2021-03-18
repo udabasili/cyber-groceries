@@ -18,8 +18,7 @@ function CartDropDown({cartItems}) {
                                 {item.name}
                             </div>
                             <div className="detail__quantity">
-                                <span className='price'>{`$${item.price}/gram`}</span>
-                                <span className='price'>{`Size:${item.size} grams`}</span>
+                                <span className='price'>{`$${item.price}`}</span>
                                 <span className='quantity'>{`Quantity :${item.quantity}`}</span>
                             </div>
                         </div>

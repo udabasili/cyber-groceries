@@ -6,22 +6,37 @@
         box-shadow: $box-shadow;
         width: 80%;
         margin: 0 auto;
-        grid-template-columns: repeat(auto-fit, minmax(36rem, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         justify-content: center;
 
         @include response(mobile){
-            width: 90%;
+            grid-template-columns: 1fr;
             justify-content: unset;
         }
+
+        
+        @include response(tab-land){
+            grid-template-columns: repeat(auto-fit, minmax(34rem, 1fr));
+
+        }
+
+        @include response(tab-port){
+                        grid-template-columns: repeat(auto-fit, minmax(34rem, 1fr));
+
+
+        }
+        
        
     }
 
     .best-products-box{
-        text-align: center;
-        height: 50vh;
         background-color: white;
         border: .6px solid rgb(224, 221, 221);
-        padding-top: 4rem;
+        padding: 4rem;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         @include response(mobile){
             width: 100%;

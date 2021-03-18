@@ -9,32 +9,25 @@
     .row {
         display: grid;
         width: 90%;
-        grid-template-columns: repeat(3, 1fr);
-        column-gap: 8rem;
+        grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+        column-gap: 3rem;
         margin: 0 auto;
+        row-gap: 2rem;
         justify-content: center;
         align-items: center;
 
         @include response(mobile){
-            grid-template-columns: 1fr;
             column-gap: 2rem ;
-            width: 80%;
             row-gap: 2rem;
         }
 
         @include response(tab-port) {
             column-gap: 2rem;
-            width: 90%;
-            grid-template-columns: 1fr;
-            height: 80vh;
             row-gap: 2rem;
         }
 
         @include response(tab-land) {
             column-gap: 2rem;
-            width: 50%;
-            grid-template-columns: 1fr;
-            height: 80vh;
             row-gap: 2rem;
         }
     }
@@ -50,20 +43,7 @@
         justify-content: center;
 
 
-         @include response(mobile) {
-             margin: 2rem auto;
-             width: 100%;
-             justify-content: center;
-             height: 50vh;
-
-         }
-        @include response(tab-port) {
-            margin: 2rem auto;
-            width: 70%;
-            justify-content: center;
-            height: 50vh;
-
-        }
+       
 
         .icon-box{
             width: 17rem;

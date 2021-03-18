@@ -1,28 +1,32 @@
-export const addToCart = (addedItem , size, cartItems) =>{
+export const addToCart = (addedItem , addedQuantity, cartItems) =>{
     try {
         const existingItem = cartItems.find((item) =>(
-            item._id === addedItem._id && item.size === size
+            item._id === addedItem._id 
         ))
 
         if(existingItem ){
-            if(addedItem.type === 'grams'){
-                
+                if (addedQuantity) {
+                    return cartItems.map((item) =>(
+                        item._id === addedItem._id  ?
+                        ({...item,  quantity: (item.quantity + addedQuantity)}) :
+                        item
+                    ))
+                }
                 return cartItems.map((item) =>(
-                    item._id === addedItem._id && item.size === size ?
-                        ({...item, size, quantity: (item.quantity + 1)}) :
+                    item._id === addedItem._id  ?
+                        ({...item,  quantity: (item.quantity + 1)}) :
                     item
             ))
-            }
+            
             
         }
-        console.log(existingItem)
-        return [...cartItems, {...addedItem, size, quantity: 1}]
+        return [...cartItems, {...addedItem, quantity: addedQuantity}]
     } catch (error) {
         console.error(error)
     }
 }
 
-export const removeFromCart = (removedItem , size, cartItems) =>{
+export const removeFromCart = (removedItem , cartItems) =>{
     try {
         const existingItem = cartItems.find((item) =>(
             item._id === removedItem._id
@@ -30,11 +34,10 @@ export const removeFromCart = (removedItem , size, cartItems) =>{
         
         if(existingItem.quantity === 1 ){
             return cartItems.filter((item) =>(
-                item._id !== removedItem._id && item.size === size
+                item._id !== removedItem._id
             ))
 
         }
-        console.log(existingItem.quantity)
         return cartItems.map((item) => (
             item._id === removedItem._id ?
             ({

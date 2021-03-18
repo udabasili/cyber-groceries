@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {NavLink} from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import {NavLink, useHistory, useLocation} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faCannabis,  faAngleDown, faUser } from '@fortawesome/free-solid-svg-icons'
 import CartIcon from './cart-icon.component';
@@ -11,6 +11,8 @@ import { toggleUserDropdown, logOut } from '../redux/actions/user.action';
 import logo from '../assets/logo/app-icon.png'
 import { toast } from 'react-toastify';
 
+
+
 function Navigation({
 		isAdmin, 
 		logOut,
@@ -21,10 +23,21 @@ function Navigation({
 		hideUserCart, 
 		hideCartDropDown
 	}) {
-	const [isMobile, setMobile] = useState(window.innerWidth <= 600);
-
+	const [isMobile, setMobile] = useState(window.innerWidth <= 900);
+	const history = useHistory()
+	const location = useLocation()
+	let listener = useRef(null)
 	const setIsMobile = () => {
-		setMobile(window.innerWidth <= 600)
+		let mobile = window.innerWidth <= 900
+		setMobile(mobile)
+		const nav = document.querySelector(".navigation__nav")
+		//always show nav if it above 900px
+		if (!mobile) {
+			nav.style.display = 'flex'
+		} else {
+			hideNavigationHandler()
+
+		}
 
 	}
 
@@ -40,17 +53,45 @@ function Navigation({
 
 	useEffect(() => {
 		window.addEventListener('resize', setIsMobile)
-		const navLinks = document.querySelectorAll(".navigation__link");
-		const checkbox = document.querySelector(".navigation__checkbox");
-		navLinks.forEach((navLink) => (
-			navLink.addEventListener('click', function(){
-				checkbox.checked = false
+		if (listener.current) {
+			listener.current()
+		}
+		if (isMobile) {
+			listener.current = history.listen(() => {
+				hideNavigationHandler()
 			})
-		))
+		}
+
+
+		const nav = document.querySelector(".navigation__nav");
+		const checkbox = document.querySelector(".navigation__checkbox");
+
+		if (isMobile) {
+			checkbox.addEventListener('change', function (e) {
+				toggleCartDropDown(true)
+				toggleUserDropdown(true)
+				if (e.target.checked && isMobile) {
+					nav.style.display = 'flex'
+				} else {
+					nav.style.display = 'none'
+
+				}
+			})
+		}
+
 		return () => {
 			window.removeEventListener('resize', setIsMobile)
+
 		}
-	}, [])
+	}, [isMobile])
+
+	function hideNavigationHandler() {
+		document.querySelector(".navigation__nav").style.display = 'none'
+		document.querySelector(".navigation__checkbox").checked = false;
+		toggleCartDropDown(true)
+		toggleUserDropdown(true)
+
+	}
 
 	return (
 		<div className="navigation">
@@ -92,7 +133,9 @@ function Navigation({
 				{!hideCartDropDown &&
 					<CartDropDown />
 				}
-				<nav className="navigation__nav">
+				
+			</div>
+			<nav className="navigation__nav">
 
 					<ul className="navigation__list">
 						<li className="navigation__item">
@@ -181,7 +224,6 @@ function Navigation({
 						}
 					</ul>
 				</nav>
-			</div>
 			
 		</div>
 	);

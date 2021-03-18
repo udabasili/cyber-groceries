@@ -1,30 +1,28 @@
 import actionType from '../actionTypes'
 import { apiHandler } from '../../services/api';
 
-export const addItemToCart = (cartItem, size) =>({
+export const addItemToCart = (cartItem, quantity) =>({
     type: actionType.ADD_TO_CART,
     payload: {
         cartItem,
-        size
+        quantity
     }
 })
 
 export const clearAllItemsFromCart = () => ({
     type: actionType.CLEAR_ALL_ITEMS_FROM_CART,
 })
-export const removeItemFromCart = (cartItem, size) => ({
+export const removeItemFromCart = (cartItem) => ({
     type: actionType.REMOVE_FROM_CART,
     payload: {
-        cartItem,
-        size
+        cartItem
     }
 })
 
-export const clearItemFromCart = (id, size) => ({
+export const clearItemFromCart = (cartItemId) => ({
     type: actionType.CLEAR_CART,
     payload: {
-        cartItemId: id,
-        size
+        cartItemId
     }
 })
 

@@ -4,6 +4,10 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import {deleteProduct} from '../redux/actions/product.action';
 import { addItemToCart } from '../redux/actions/cart.action';
+import {
+  faMinus,
+  faPlus
+} from '@fortawesome/free-solid-svg-icons';
 
 /**
  *
@@ -23,15 +27,28 @@ function Card({
     isAdmin,
     setToastMessage,
   }) {
-    const [size, setSize] = useState(item.type !== 'millimeter'? '3.5':'50')
+    const [quantity, setQuantity] = useState(0)
     const [itemUnavailable, setItemUnavailable] = useState(item.quantity <= 0 )
     useEffect(() => {
       setItemUnavailable(item.quantity <= 0 )
       
     }, [item.quantity])
-    const setSizeHandler = (e) =>{
-      const {value} = e.target;
-      setSize(value)
+
+
+    const setQuantityHandler = (type) =>{
+      let value = quantity
+      if(type === 'increase'){
+        value = value + 1
+        
+      }else if(type === 'decrease'){
+        if(value === 0){
+          setQuantity(0)
+          return;
+        }
+        value = value - 1;
+      }
+      console.log(value)
+      setQuantity(value)
     }
     const deleteProductHandler = (id) =>{
       deleteProduct(id)
@@ -49,7 +66,7 @@ function Card({
         return;
       }
       try {
-        addItemToCart(id, size)
+        addItemToCart(id, quantity)
         setToastMessage('Item added to Cart', 'success')
 
       } catch (error) {
@@ -73,11 +90,6 @@ function Card({
           <div className="price item">
             <span className="label">Price: </span>
             <span className="value">${item.price}</span>
-
-            {item.type !== 'millimeter' &&
-              <span className="value">/gram</span>
-             
-            }
           </div>
           <div className="category item">
             <span className="label">Category: </span>
@@ -89,29 +101,27 @@ function Card({
               <div className="card__icon" onClick={()=>addItemToCartHandler(item)}>
                 <FontAwesomeIcon icon={faCartPlus}  className="icon"  />
               </div>
-            {item.type !== 'millimeter' ?
-              <select type="text" className="card__select" value={size} onChange={setSizeHandler}>
-                <option value="1">1g</option>
-                <option value="2">2g</option>
-                <option value="3.5">3.5g</option>
-                <option value="7">7g</option>
-                <option value="14">14g</option>
-                <option value="28">28g</option>
-              </select> :
-            <select type="text" className="card__select" value={size} onChange={setSizeHandler}>
-              <option value="50">50ml</option>
-              <option value="150">150ml</option>
-              <option value="250">250ml</option>
-            </select>
-             
-            }
-            
+             <span className="checkout-item__quantity">
+              <div
+                className="checkout-item__button"
+                onClick={()=>setQuantityHandler('decrease')}
+              >
+                <FontAwesomeIcon size="1x" icon={faMinus}/>
+              </div>
+              <span className="value">{quantity}</span>
+              <div
+                className="checkout-item__button"
+                onClick={()=>setQuantityHandler('increase')}
+              >
+                <FontAwesomeIcon size="1x" icon={faPlus}/>
+              </div>
+            </span>
           </div>
         )}
 
         {isAdmin && (
           <div className="button-container">
-            <a className="btn"  href={`/admin/edit-product/${item.type}/${item._id}`}>
+            <a className="btn"  href={`/admin/edit-product/${item._id}`}>
               Edit
             </a>
             <p className="btn" onClick={() => deleteProductHandler(item._id)}>

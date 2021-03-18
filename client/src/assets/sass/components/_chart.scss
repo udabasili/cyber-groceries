@@ -1,6 +1,5 @@
 .chart{
     background-color: white;
-    border: 1px solid $color-primary-light;
     display: flex;
     height: 70vh;
     padding-top: 5rem;
@@ -12,14 +11,15 @@
         text-align: center;
         padding-bottom: 2rem;
     }
+ 
+}
+
+.chart > div{
     @include response(mobile) {
-        width: 100vw;
+            transform: scale(.8);
+
         
 
 
     }
-}
-
-.chart > div{
-    transform: scale(.8);
 }

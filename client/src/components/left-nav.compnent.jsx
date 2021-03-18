@@ -25,32 +25,32 @@ function LeftNav(props) {
                  Dairy
                </NavLink>
              </li>
+              <li className="left-nav__item">
+               <NavLink
+                 to="/products/vegetable"
+                 className="left-nav__link"
+                 activeClassName="left-nav-active"
+               >
+                 Vegetable
+               </NavLink>
+             </li>
              <li className="left-nav__item">
 
                <NavLink
-                 to="/products/beverage"
+                 to="/products/vegan"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Beverage
+                 Vegan
                </NavLink>
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/meat"
+                 to="/products/fruit"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Meat
-               </NavLink>
-             </li>
-             <li className="left-nav__item">
-               <NavLink
-                 to="/products/produce"
-                 className="left-nav__link"
-                 activeClassName="left-nav-active"
-               >
-                 Produce
+                 Fruit
                </NavLink>
              </li>
              <li className="left-nav__item">
@@ -64,11 +64,11 @@ function LeftNav(props) {
              </li>
              <li className="left-nav__item">
                <NavLink
-                 to="/products/others"
+                 to="/products/meat"
                  className="left-nav__link"
                  activeClassName="left-nav-active"
                >
-                 Others
+                 Meat
                </NavLink>
              </li>             
            </ul>

@@ -17,7 +17,14 @@ class CheckOut extends Component {
     }
   }
   
-  ;
+  componentDidUpdate(prevProps, prevState){
+    if(prevState.total !== this.props.total ){
+        this.setState((prevState) => ({
+          ...prevState,
+          total: this.props.total
+        }))
+    }
+  }
   loadOrderModalHandler = () =>{
     this.setState((prevState) => ({
       ...prevState,
@@ -102,7 +109,7 @@ const mapStateToProps = (state) => ({
   items: state.cart.cart,
   total: (state.cart.cart.reduce(
     (previous, current) => (
-      (previous + (current.quantity * current.price * current.size))
+      (previous + (current.quantity * current.price))
     ), 0)).toFixed(2),
 });
 

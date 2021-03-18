@@ -21,7 +21,6 @@ class Product {
         await productsRef.push({
             name: this.product.name,
             price: this.product.price,
-            type: this.product.type,
             imageUrl: this.product.imageUrl,
             category: this.product.category,
             quantity: this.product.quantity
@@ -41,7 +40,6 @@ class Product {
         await productsRef.child(this.productId).update({
             name: this.product.name,
             price: this.product.price,
-            type: this.product.type,
             imageUrl: this.product.imageUrl,
             category: this.product.category,
             quantity: this.product.quantity

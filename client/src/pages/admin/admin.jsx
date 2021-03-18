@@ -47,12 +47,8 @@ function AdminRoute({
         <Switch>
           <Route exact path={`${match.url}`} component={AdminHome} currentUser={currentUser} />
           <Route
-            path={`${match.url}/add-product/grams`}
-            render={(props) => <AddProduct title="Add product" type='grams' {...props} />}
-          />
-		  <Route
-            path={`${match.url}/add-product/millimeter`}
-            render={(props) => <AddProduct title="Add product" type='millimeter' {...props} />}
+            path={`${match.url}/add-product`}
+            render={(props) => <AddProduct title="Add product" {...props} />}
           />
 		  <Route
             path={`${match.url}/orders`}
@@ -61,16 +57,9 @@ function AdminRoute({
 		  
           <Route
 		  exact
-            path={`${match.url}/edit-product/grams/:itemId`}
+            path={`${match.url}/edit-product/:itemId`}
             render={(props) => (
-              <AddProduct title="Edit product" editing type='grams' {...props} />
-            )}
-          />
-		  <Route
-		  exact
-            path={`${match.url}/edit-product/millimeter/:itemId`}
-            render={(props) => (
-              <AddProduct title="Edit product" type='millimeter' editing {...props} />
+              <AddProduct title="Edit product" editing  {...props} />
             )}
           />
           <Route
