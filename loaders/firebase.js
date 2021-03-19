@@ -16,7 +16,9 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 if (process.env.NODE_ENV === 'development'){
+    const serviceAccount = require("../config/highway420.json")
 
     admin.initializeApp({
         projectId,
@@ -25,7 +27,6 @@ if (process.env.NODE_ENV === 'development'){
 
     });
 }else{
-    const serviceAccount = require("../config/highway420.json")
     admin.initializeApp({
         projectId,
         credential: admin.credential.applicationDefault(),
