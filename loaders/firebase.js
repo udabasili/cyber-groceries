@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
 const firebase = require('firebase/app');
-const serviceAccount = require("../config/highway420.json")
 const { projectId, storageBucket, databaseUrl } = require('../config/index');
 require('firebase/auth');
 require('firebase/storage')
@@ -26,6 +25,7 @@ if (process.env.NODE_ENV === 'development'){
 
     });
 }else{
+    const serviceAccount = require("../config/highway420.json")
     admin.initializeApp({
         projectId,
         credential: admin.credential.applicationDefault(),
