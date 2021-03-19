@@ -16,7 +16,6 @@ import { getAllProducts } from './redux/actions/product.action'
 import { removeError } from './redux/actions/error.action'
 import AccessDenied from './components/access-denied.component'
 import { AdminProtectedRouteWithRedux, ProtectedRouteWithRedux} from './components/protected-route.component'
-import CheckConsent from './components/check-consent.component'
 import ChangePassword from './components/change-password.component';
 import ResetPassword from './pages/reset-password-page'
 import { toast, ToastContainer } from 'react-toastify'
@@ -61,7 +60,6 @@ class MainRoute extends PureComponent {
             history,
             toggleUserDropdown,
             toggleCartDropDown,
-            acceptedTerm
         } = this.props;
 
         history.listen(()=>{
@@ -118,7 +116,6 @@ const mapStateToProps = (state) => ({
     currentUser: state.user.currentUser,
     isAdmin: state.user.isAdmin,
     isAuthenticated: state.user.isAuthenticated,
-    acceptedTerm: state.acceptTerms.hasAcceptedTerms,
 
 })
 

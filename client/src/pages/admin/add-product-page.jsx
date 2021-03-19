@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { addProduct, editProduct, editProductWithUrl } from '../../redux/actions/product.action';
 import { connect } from 'react-redux'
-import { NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { addError } from '../../redux/actions/error.action';
 import Loading from '../../components/loading.componet';
 import { toast } from 'react-toastify';
@@ -29,7 +29,6 @@ class AddProduct extends Component {
 		if(this.props.editing){
 			let filePath = document.querySelector(".image-upload__message");
 			let item = this.props.products.find((item) => item._id === this.props.match.params.itemId);
-			const imageFileName = item.imageUrl.slice(item.imageUrl.lastIndexOf('/')+ 1)
 			if(this.props.history.location.state){
 				this.setState((prevState) =>({
 					...prevState,

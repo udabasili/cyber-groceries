@@ -56,7 +56,7 @@ import { connect } from 'react-redux';
 					<tr key={product._id}>
 						<td>
 							<FontAwesomeIcon icon={faPencilAlt} onClick={() => history.push({
-								pathname: `/admin/edit-product/${product.type}/${product._id}`,
+								pathname: `/admin/edit-product/${product._id}`,
 								state: {
 									location: history.location.pathname
 								}

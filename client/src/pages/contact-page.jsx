@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
     FontAwesomeIcon
 } from '@fortawesome/react-fontawesome';
-import {faFacebookSquare, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelopeOpen, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 export default class ContactPage extends Component {

@@ -13,7 +13,6 @@ class Order extends Component {
             orderFulfilled: props.order.orderFulfilled,
             isLoading: false,
             _id:props._id,
-            ageVerified: props.ageVerified
         }
     }
 
@@ -21,7 +20,7 @@ class Order extends Component {
 
     onChange = (e) => {
         const order = {...this.props.order}
-        const {ageVerified, _id} = this.state
+        const { _id} = this.state
         let {id} = order
         let orderFulfilled = e.target.checked;
         order.orderFulfilled = true

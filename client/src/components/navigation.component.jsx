@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {NavLink, useHistory, useLocation} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faCannabis,  faAngleDown, faUser } from '@fortawesome/free-solid-svg-icons'
 import CartIcon from './cart-icon.component';
@@ -25,13 +25,11 @@ function Navigation({
 	}) {
 	const [isMobile, setMobile] = useState(window.innerWidth <= 900);
 	const history = useHistory()
-	const location = useLocation()
 	let listener = useRef(null)
 	const setIsMobile = () => {
 		let mobile = window.innerWidth <= 900
 		setMobile(mobile)
 		const nav = document.querySelector(".navigation__nav")
-		//always show nav if it above 900px
 		if (!mobile) {
 			nav.style.display = 'flex'
 		} else {
