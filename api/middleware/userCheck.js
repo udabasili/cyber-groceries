@@ -1,8 +1,9 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const { secretKey } = require('../../config')
 const {db, adminControl} = require('../../loaders/firebase');
 const loggerFunction = require('../../loaders/logger');
 const expressJwt = require('express-jwt');
+
 
 exports.protectedRoute = function(req, res, next){
     try {
@@ -48,7 +49,6 @@ exports.setCurrentUser = function (req, res, next) {
             req.user = user
             req.isAdmin = user.isAdmin
             loggerFunction('info', ` current user is set as user ${user.username}`)
-
             return next()
         })
     } catch (error) {

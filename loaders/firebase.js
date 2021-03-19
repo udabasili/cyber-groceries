@@ -16,25 +16,33 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+let firebaseApp;
 if (process.env.NODE_ENV === 'development'){
     const serviceAccount = require("../config/highway420.json")
 
-    admin.initializeApp({
+    firebaseApp = admin.initializeApp({
         projectId,
         credential: admin.credential.cert(serviceAccount),
         storageBucket
 
     });
-}else{
-    admin.initializeApp({
+} else if (process.env.NODE_ENV === 'production') {
+    firebaseApp = admin.initializeApp({
         projectId,
         credential: admin.credential.applicationDefault(),
         storageBucket
 
     });
-}
+} else{
+    const serviceAccount = require("../config/highway420.json")
 
+    firebaseApp = admin.initializeApp({
+        projectId,
+        credential: admin.credential.cert(serviceAccount),
+        storageBucket
+
+    });
+}
 
 
 const db = firebase.database()
@@ -43,6 +51,8 @@ const adminControl = admin.auth()
 const storage = admin.storage().bucket()
 module.exports = {
     auth,
+    firebaseApp,
+    firebaseConfig,
     firebase,
     storage,
     adminControl,

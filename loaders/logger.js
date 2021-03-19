@@ -12,10 +12,15 @@ if (process.env.NODE_ENV ===  'production'){
     const winstonTransports = new winston.transports.Console()
     winstonTransport.push(winstonTransports)
 
-} else {
+} else if (process.env.NODE_ENV === 'development') {
     const winstonTransports = new winston.transports.Console()
     winstonTransport.push(winstonTransports)
 
+} else{
+    let winstonPaperTrail = new winston.transports.File({
+        filename: `./logs/logger.log`
+    })
+    winstonTransport.push(winstonPaperTrail)
 }
 
 dateFormat = () => {

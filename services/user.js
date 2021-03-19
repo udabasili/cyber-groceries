@@ -57,13 +57,12 @@ class UserService{
             this.user.email.trim(), 
             this.user.password
         )
-        console.log(response.user.uid)
         let uid = response.user.uid
         const snapshot = await userRef.child(uid).once('value')
-        // if(snapshot.val() === null){
-        //     throw new Error("Email doesn't exist. Please register")
+        if(snapshot.val() === null){
+            throw new Error("Email doesn't exist. Please register")
 
-        // }        
+        }        
         const newUser = snapshot.val()
         if ( newUser.isAdmin && this.user.email.split('@')[1] === 'administrator.ca') {
             await setUserChartData()

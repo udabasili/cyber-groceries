@@ -229,7 +229,7 @@ class AddProduct extends Component {
 								onChange={this.onChangeHandler}
 								value={data.quantity}
 								pattern="[0-9]"
-								placeholder='Total amount in item'
+								placeholder='Total amount of item'
 								id="quantity"
 								className="form__input"
 								required

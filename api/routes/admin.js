@@ -1,10 +1,11 @@
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
 const Service = require('../../services/');
+
 
 router.get("/all-users", async (req, res, next) =>{
     try {
-        const allUsers = await Service.AdminService.getAllUsers()
+        const allUsers = await Service.AdminService.getAllUsers();
         return res.status(200).json({
             message:allUsers
         })
@@ -18,8 +19,8 @@ router.get("/all-users", async (req, res, next) =>{
 
 router.put("/edit-user-email/:uid", async (req, res, next) => {
     try {
-        const userId =  req.params.uid
-        const allUsers = await Service.AdminService.editUserEmail(req.body.email, userId)
+        const userId =  req.params.uid;
+        const allUsers = await Service.AdminService.editUserEmail(req.body.email, userId);
         return res.status(200).json({
             message: allUsers
         })
@@ -33,8 +34,8 @@ router.put("/edit-user-email/:uid", async (req, res, next) => {
 
 router.put("/update/:uid", async (req, res, next) => {
     try {
-        const userId = req.params.uid
-        const allUsers = await Service.AdminService.updateUserById(userId, req.body)
+        const userId = req.params.uid;
+        const allUsers = await Service.AdminService.updateUserById(userId, req.body);
         return res.status(200).json({
             message: allUsers
         })
@@ -123,10 +124,10 @@ router.get("/get-user-order/:userId", async (req, res, next) => {
 
 router.post("/set-user-orders/:userId", async (req, res, next) => {
     try {
-        const userId = req.params.userId
-        const order = req.body
-        const AdminService = new Service.AdminService()
-        const orders = await AdminService.setOrderById(userId, order)
+        const userId = req.params.userId;
+        const order = req.body;
+        const AdminService = new Service.AdminService();
+        const orders = await AdminService.setOrderById(userId, order);
         return res.status(200).json({
             message: orders
         })
@@ -140,7 +141,7 @@ router.post("/set-user-orders/:userId", async (req, res, next) => {
 
 router.get("/get-user-chart-data", async (req, res, next) => {
     try {
-        const chartData = await Service.AdminService.getUserChartData()
+        const chartData = await Service.AdminService.getUserChartData();
         return res.status(200).json({
             message: chartData
         })
@@ -154,7 +155,7 @@ router.get("/get-user-chart-data", async (req, res, next) => {
 
 router.get("/get-users-orders", async (req, res, next) => {
     try {
-        const orders = await Service.AdminService.getAllOrders()
+        const orders = await Service.AdminService.getAllOrders();
         return res.status(200).json({
             message: orders
         })
@@ -169,12 +170,11 @@ router.get("/get-users-orders", async (req, res, next) => {
 router.post("/set-users-orders", async (req, res, next) => {
     try {
         const ordersRecord = req.body.orders
-        const orders = await Service.AdminService.setAllOrders(ordersRecord)
+        const orders = await Service.AdminService.setAllOrders(ordersRecord);
         return res.status(200).json({
             message: orders
         })
     } catch (error) {
-        console.log(error)
         return next({
             message: error.message,
             status: 500

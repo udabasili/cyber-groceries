@@ -11,10 +11,10 @@ const Service = require('../../services/');
 const {storage} = require('../../loaders/firebase');
 const multer = require("multer");
 const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 5 * 1024 * 1024, 
-  },
+  	storage: multer.memoryStorage(),
+	limits: {
+		fileSize: 13 * 1024 * 1024, 
+	},
 })
 
 
@@ -34,6 +34,7 @@ router.post(
 		try {
 			const image = req.files.imageUrl[0]
 			let productData = JSON.parse(req.body.productData)
+			console.log(req.body.productData, image)
 			const blob = storage.file(image.originalname);
 			const blobWriter = blob.createWriteStream({
 				metadata: {
@@ -42,26 +43,20 @@ router.post(
 			});
 			blobWriter.on('error', (err) => next(err));
 			blobWriter.on('finish', async () => {
-				// Assembling public URL for accessing the file via HTTP
-				await storage.file(image.originalname).makePublic()
-
+				await storage.file(image.originalname).makePublic();
 				const publicUrl = format(
 					`https://storage.googleapis.com/${storage.name}/${blob.name}`
 				);
-				productData.imageUrl = publicUrl
-
+				productData.imageUrl = publicUrl;
 				const ProductService = new Service.ProductService(productData);
-				const products = await ProductService.addProduct()
+				const products = await ProductService.addProduct();
 					return res.status(200).json({
 						status: 200,
 						message: products
 					})
-				
-	
 			});
 
 			blobWriter.end(image.buffer);
-
 			
 		} catch (error) {
 				return next({
@@ -109,7 +104,6 @@ router.put(
 			blobWriter.on('finish', async () => {
 				try {
 					await storage.file(image.originalname).makePublic()
-
 					const publicUrl = format(
 						`https://storage.googleapis.com/${storage.name}/${blob.name}`
 					);
@@ -122,9 +116,7 @@ router.put(
 					})
 				} catch (error) {
 					throw new Error(error)
-				}
-				// Assembling public URL for accessing the file via HTTP
-				
+				}				
 			})
 			blobWriter.end(image.buffer);
 			
@@ -135,7 +127,8 @@ router.put(
 			})
       }
   }
-);
+)
+
 router.put(
   "/edit-product-with-url/:itemId",
 	celebrate({
