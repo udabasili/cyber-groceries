@@ -4,17 +4,16 @@ describe('Auth middleware', () => {
 
     beforeEach(() =>{
         server = require('../loaders/app')
- 
     })
-    test('should return no user record corresponding message if user doesnt exist', async () => {
+
+    test("should return no user record corresponding message if user doesn't exist", async () => {
         try {
-             let user = {
+            let user = {
                  email: 'test@yahoo.ca',
                  password: '12345678'
-             }
-             const User = new UserService(user)
-             const response = await User.signIn();
-             console.log("length" + response.length)
+            }
+            const User = new UserService(user)
+            await User.signIn();
         } catch (error) {
             expect(error.message).toMatch(/no user record corresponding/)
 
@@ -29,7 +28,7 @@ describe('Auth middleware', () => {
                 password: '1234567'
             }
             const User = new UserService(user)
-            const response = await User.signIn();
+            await User.signIn();
         } catch (error) {
             expect(error.message).toMatch(/The password is invalid/)
 

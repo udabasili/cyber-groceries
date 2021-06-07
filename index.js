@@ -1,11 +1,10 @@
-const {
-    port
-} = require("./config");
+const { port } = require("./config");
 const functions = require('firebase-functions');
 const app = require("./loaders/app");
 const loggerFunction = require("./loaders/logger");
 const helmet = require('helmet');
 
+//MIDDLEWARE
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.expectCt());
 app.use(helmet.frameguard());
@@ -17,8 +16,8 @@ app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
 app.set('trust proxy', 1);
-app.disable('x-powered-by')
+app.disable('x-powered-by');
+
 app.listen(port, function () {
     loggerFunction("info", `Serving is running on PORT ${port}`);
-
 })
